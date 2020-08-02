@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\v1\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
@@ -27,7 +28,7 @@ class RegisterController extends Controller
         DB::beginTransaction();
         $validator = $this->validator($request->all());
         if ($validator->fails()) {
-            $user = response()->json(['error', $validator->errors()], 401);
+            return response()->json([$validator->errors()], 401);
         } else {
             $user = $this->createUser($request);
         }
@@ -46,9 +47,9 @@ class RegisterController extends Controller
     public function validator(array $data)
     {
         return Validator::make($data, [
-            'phone' => ['required', 'string', 'max:10'],
+            'phone' => ['required', 'integer', 'string', 'min:10', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'confirmed'],
         ]);
     }
 
@@ -65,12 +66,39 @@ class RegisterController extends Controller
         /**
          * @var User $user
          */
-            $user = User::create([
-                'phone' => $request->get('phone'),
-                'email' => $request->get('email'),
-                'password' => bcrypt($request->get('password')),
-            ]);
-            $user['token'] = $user->createToken('Cookrey')->accessToken;
+        $user = User::create([
+            'phone' => $request->get('phone'),
+            'email' => $request->get('email'),
+            'password' => bcrypt($request->get('password')),
+        ]);
+        $user['token'] = $user->createToken('Cookrey')->accessToken;
+
+        return $user;
+    }
+
+    public function update(Request $request)
+    {
+        $user = User::find(25);
+        $user->phone = $request->get('phone');
+        $user->email = $request->get('email');
+        $user->save();
+        $user['token'] = $user->createToken('Cookrey')->accessToken;
+        return response()->json($user, $this->successStatus);
+    }
+
+    public function socialRegister(Request $request): User
+    {
+        /**
+         * Check if details are valid
+         */
+        /**
+         * @var User $user
+         */
+        $user = User::create([
+            'name' => $request->get('name'),
+            'phone' => $request->get('phone'),
+            'email' => $request->get('email'),
+        ]);
 
         return $user;
     }

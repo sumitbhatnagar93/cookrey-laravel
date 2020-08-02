@@ -20,6 +20,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('oauth/login', 'Api\v1\Auth\LoginController@login');
 Route::post('oauth/register', 'Api\v1\Auth\RegisterController@register');
+Route::post('oauth/social-register', 'Api\v1\Auth\RegisterController@socialRegister');
+Route::post('oauth/update', 'Api\v1\Auth\RegisterController@update');
 Route::group(['middleware' => 'auth:api'], function(){
     Route::post('details', 'Api\UserController@details');
 });
