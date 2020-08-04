@@ -78,9 +78,8 @@ class RegisterController extends Controller
 
     public function update(Request $request)
     {
-        $user = User::find(25);
+        $user = User::find($request->get('id'));
         $user->phone = $request->get('phone');
-        $user->email = $request->get('email');
         $user->save();
         $user['token'] = $user->createToken('Cookrey')->accessToken;
         return response()->json($user, $this->successStatus);
@@ -96,7 +95,6 @@ class RegisterController extends Controller
          */
         $user = User::create([
             'name' => $request->get('name'),
-            'phone' => $request->get('phone'),
             'email' => $request->get('email'),
         ]);
 
