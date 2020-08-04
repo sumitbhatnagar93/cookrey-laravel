@@ -82,7 +82,7 @@ class RegisterController extends Controller
         $user->phone = $request->get('phone');
         $user->save();
         $user['token'] = $user->createToken('Cookrey')->accessToken;
-        return response()->json($user, $this->successStatus);
+        return response()->json($request, $this->successStatus);
     }
 
     public function socialRegister(Request $request): User
