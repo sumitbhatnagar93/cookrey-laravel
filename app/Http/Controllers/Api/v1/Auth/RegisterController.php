@@ -78,7 +78,7 @@ class RegisterController extends Controller
 
     public function update(Request $request)
     {
-        $user = User::find($request->get('id'));
+        $user = User::find($request->get('email'));
         $user->phone = $request->get('phone');
         $user->save();
         $user['token'] = $user->createToken('Cookrey')->accessToken;
