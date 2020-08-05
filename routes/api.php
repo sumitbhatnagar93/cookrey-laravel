@@ -18,6 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('users/{email}', 'Api\v1\Auth\Users@getUser');
 Route::post('oauth/login', 'Api\v1\Auth\LoginController@login');
 Route::post('oauth/register', 'Api\v1\Auth\RegisterController@register');
 Route::post('oauth/social-register', 'Api\v1\Auth\RegisterController@socialRegister');
