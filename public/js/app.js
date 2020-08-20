@@ -1899,6 +1899,212 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AddFoodService.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AddFoodService.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "AddFoodService",
+  data: function data() {
+    return {
+      image: '',
+      adhar_pan: '',
+      fssai_certificate: ''
+    };
+  },
+  methods: {
+    selectImage: function selectImage() {
+      this.$refs.fileInput.click();
+    },
+    onFileSelectForAdhar: function onFileSelectForAdhar(e) {
+      var _this = this;
+
+      var adharCard = e.target.files || e.dataTransfer.files;
+      if (!adharCard.length) return;
+      var reader1 = new FileReader();
+
+      reader1.onload = function (e) {
+        _this.adhar_pan = e.target.result;
+      };
+
+      reader1.readAsDataURL(adharCard[0]);
+      console.log(this.adhar_pan);
+    },
+    onFileSelectForFssai: function onFileSelectForFssai(e) {
+      var _this2 = this;
+
+      var fssai_certificate = e.target.files || e.dataTransfer.files;
+      if (!fssai_certificate.length) return;
+      var reader2 = new FileReader();
+
+      reader2.onload = function (e) {
+        _this2.fssai_certificate = e.target.result;
+      };
+
+      reader2.readAsDataURL(fssai_certificate[0]);
+    },
+    onFileSelect: function onFileSelect(e) {
+      var _this3 = this;
+
+      var input = this.$refs.fileInput;
+      var file = input.files;
+
+      if (file && file[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+          _this3.image = e.target.result;
+        };
+
+        reader.readAsDataURL(file[0]);
+        this.$emit('input', file[0]);
+      }
+
+      console.log(this.image);
+    },
+    onSubmit: function onSubmit() {
+      var formData = new FormData(document.getElementById('serviceRegistrationForm'));
+      formData.append('business_image', this.image);
+      formData.append('adhar_pan', this.adhar_pan);
+      formData.append('fssai_certificate', this.fssai_certificate);
+      axios.post('add-business', formData).then(function (res) {
+        console.log(res);
+      });
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AddProductComponent.vue?vue&type=script&lang=js&":
 /*!******************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AddProductComponent.vue?vue&type=script&lang=js& ***!
@@ -1999,9 +2205,10 @@ __webpack_require__.r(__webpack_exports__);
         reader.readAsDataURL(file[0]);
         this.$emit('input', file[0]);
       }
+
+      console.log(this.image);
     },
     onSubmit: function onSubmit() {
-      console.log(this.gallery, this.image);
       var formData = new FormData(document.getElementById('productForm'));
       formData.append('image', this.image);
       axios.post('upload-product', formData).then(function (res) {
@@ -37623,6 +37830,418 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AddFoodService.vue?vue&type=template&id=1f136d41&scoped=true&":
+/*!*****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AddFoodService.vue?vue&type=template&id=1f136d41&scoped=true& ***!
+  \*****************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "container" }, [
+      _c("h1", [_vm._v("Add you restaurant or tfiifin service")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card" }, [
+        _c("div", { staticClass: "card-body" }, [
+          _c(
+            "form",
+            {
+              staticClass: "form-group",
+              attrs: { id: "serviceRegistrationForm" },
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.onSubmit()
+                }
+              }
+            },
+            [
+              _c("div", { staticClass: "row" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _vm._m(1),
+                _vm._v(" "),
+                _vm._m(2),
+                _vm._v(" "),
+                _vm._m(3),
+                _vm._v(" "),
+                _vm._m(4),
+                _vm._v(" "),
+                _vm._m(5),
+                _vm._v(" "),
+                _vm._m(6),
+                _vm._v(" "),
+                _vm._m(7),
+                _vm._v(" "),
+                _vm._m(8),
+                _vm._v(" "),
+                _vm._m(9),
+                _vm._v(" "),
+                _vm._m(10),
+                _vm._v(" "),
+                _vm._m(11),
+                _vm._v(" "),
+                _vm._m(12),
+                _vm._v(" "),
+                _vm._m(13),
+                _vm._v(" "),
+                _vm._m(14),
+                _vm._v(" "),
+                _vm._m(15),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group col-md-6" }, [
+                  _c("label", { staticClass: "upload-button" }, [
+                    _vm._v(
+                      "Upload Docs(Aadhar/PAN)\n                                "
+                    ),
+                    _c("input", {
+                      attrs: { type: "file", name: "adhar_pan" },
+                      on: { input: _vm.onFileSelectForAdhar }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group col-md-6" }, [
+                  _c("label", { staticClass: "upload-button" }, [
+                    _vm._v(
+                      "Upload FSSAI certificate\n                                "
+                    ),
+                    _c("input", {
+                      attrs: { type: "file", name: "fssai_certificate" },
+                      on: { input: _vm.onFileSelectForFssai }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm._m(16),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group col-md-6" }, [
+                  _c("label", { staticClass: "upload-button mt-4" }, [
+                    _vm._v(
+                      "Restaurant Front Image\n                                "
+                    ),
+                    _c("input", {
+                      ref: "fileInput",
+                      attrs: { type: "file", name: "business_image" },
+                      on: { input: _vm.onFileSelect }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _vm.image
+                    ? _c("div", {
+                        staticClass: "imagePreviewWrapper",
+                        style: { "background-image": "url(" + _vm.image + ")" },
+                        on: { click: _vm.selectImage }
+                      })
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _vm._m(17),
+                _vm._v(" "),
+                _vm._m(18),
+                _vm._v(" "),
+                _vm._m(19)
+              ])
+            ]
+          )
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group col-md-6" }, [
+      _c("label", [_vm._v("Tiffin service name")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: {
+          type: "text",
+          required: "",
+          name: "business_name",
+          placeholder: "Product Title"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group col-md-6" }, [
+      _c("label", [_vm._v("Owner name")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: {
+          type: "text",
+          required: "",
+          name: "business_owner_name",
+          placeholder: "Product Title"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group col-12" }, [
+      _c("label", [_vm._v("Description")]),
+      _vm._v(" "),
+      _c("textarea", {
+        staticClass: "form-control",
+        attrs: { name: "description", cols: "30", rows: "10" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group col-md-6" }, [
+      _c("label", [_vm._v("Owner")]),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { type: "radio", name: "is_business_owner", value: "yes" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group col-md-6" }, [
+      _c("label", [_vm._v("Manager")]),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { type: "radio", name: "is_business_owner", value: "no" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group col-md-6" }, [
+      _c("label", [_vm._v("Owner Contact Number")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "text", required: "", name: "business_owner_contact" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group col-md-6" }, [
+      _c("label", [_vm._v("Owner Email")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "text", required: "", name: "business_owner_email" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group col-md-6" }, [
+      _c("label", [_vm._v("City")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "text", required: "", name: "business_city" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-12" }, [
+      _c("h4", [_vm._v("GSTIN Number?")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group col-md-6" }, [
+      _c("label", [_vm._v("Yes")]),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { type: "radio", name: "is_gstin_number", value: "yes" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group col-md-6" }, [
+      _c("label", [_vm._v("No")]),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { type: "radio", name: "is_gstin_number", value: "no" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group col-md-6" }, [
+      _c("label", [_vm._v("Provide GSTIN Number")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "text", required: "", name: "gstin_number" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group col-md-6" }, [
+      _c("label", [_vm._v("Address")]),
+      _vm._v(" "),
+      _c("textarea", {
+        staticClass: "form-control",
+        attrs: { name: "business_address" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group col-md-6" }, [
+      _c("label", [_vm._v("Postal Code")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "text", required: "", name: "postal_code" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group col-md-6" }, [
+      _c("label", [_vm._v("FSSAI registration name")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "text", required: "", name: "fssai_registered_name" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group col-md-6" }, [
+      _c("label", [_vm._v("Address on FSSAI")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "text", required: "", name: "fssai_address" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group col-md-6" }, [
+      _c("label", [_vm._v("Service Type")]),
+      _vm._v(" "),
+      _c(
+        "select",
+        { staticClass: "form-control", attrs: { name: "business_type" } },
+        [
+          _c("option", { attrs: { value: "none" } }, [_vm._v("Select type..")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "tiffin_service" } }, [
+            _vm._v("Tiffin Service")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "restaurant" } }, [
+            _vm._v("Restaurant")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "bar" } }, [_vm._v("Bar")])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group col-md-6" }, [
+      _c("label", [_vm._v("Latitute")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "text", required: "", name: "business_map_lat" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group col-md-6" }, [
+      _c("label", [_vm._v("Longitute")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "text", required: "", name: "business_map_lng" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group col-12" }, [
+      _c("button", { staticClass: "btn btn-success" }, [
+        _vm._v("Compete Registration")
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-default", attrs: { type: "reset" } },
+        [_vm._v("Cancel")]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AddProductComponent.vue?vue&type=template&id=6697e5f4&scoped=true&":
 /*!**********************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AddProductComponent.vue?vue&type=template&id=6697e5f4&scoped=true& ***!
@@ -50040,6 +50659,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
 Vue.component('add-product', __webpack_require__(/*! ./components/AddProductComponent.vue */ "./resources/js/components/AddProductComponent.vue")["default"]);
+Vue.component('add-service', __webpack_require__(/*! ./components/AddFoodService.vue */ "./resources/js/components/AddFoodService.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -50094,6 +50714,75 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/components/AddFoodService.vue":
+/*!****************************************************!*\
+  !*** ./resources/js/components/AddFoodService.vue ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AddFoodService_vue_vue_type_template_id_1f136d41_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AddFoodService.vue?vue&type=template&id=1f136d41&scoped=true& */ "./resources/js/components/AddFoodService.vue?vue&type=template&id=1f136d41&scoped=true&");
+/* harmony import */ var _AddFoodService_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AddFoodService.vue?vue&type=script&lang=js& */ "./resources/js/components/AddFoodService.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AddFoodService_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AddFoodService_vue_vue_type_template_id_1f136d41_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AddFoodService_vue_vue_type_template_id_1f136d41_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "1f136d41",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/AddFoodService.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/AddFoodService.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/AddFoodService.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddFoodService_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./AddFoodService.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AddFoodService.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddFoodService_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/AddFoodService.vue?vue&type=template&id=1f136d41&scoped=true&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/AddFoodService.vue?vue&type=template&id=1f136d41&scoped=true& ***!
+  \***********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddFoodService_vue_vue_type_template_id_1f136d41_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./AddFoodService.vue?vue&type=template&id=1f136d41&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AddFoodService.vue?vue&type=template&id=1f136d41&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddFoodService_vue_vue_type_template_id_1f136d41_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddFoodService_vue_vue_type_template_id_1f136d41_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ }),
 

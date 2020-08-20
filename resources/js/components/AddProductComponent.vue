@@ -85,9 +85,9 @@
                     reader.readAsDataURL(file[0])
                     this.$emit('input', file[0])
                 }
+                console.log(this.image);
             },
             onSubmit() {
-                console.log(this.gallery, this.image);
                 let formData = new FormData(document.getElementById('productForm'));
                 formData.append('image', this.image);
                 axios.post('upload-product', formData)

@@ -13,8 +13,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        header("Access-Control-Allow-Origin: *");
-       // $this->middleware('auth');
+        $this->middleware('auth');
     }
 
     /**
@@ -25,11 +24,5 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
-    }
-
-    public function registerByApp(Request $request)
-    {
-        $request['token'] = 'testtoken';
-        return response()->json($request);
     }
 }

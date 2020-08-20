@@ -26,3 +26,4 @@ Route::post('oauth/update', 'Api\v1\Auth\RegisterController@update');
 Route::group(['middleware' => 'auth:api'], function(){
     Route::post('details', 'Api\UserController@details');
 });
+

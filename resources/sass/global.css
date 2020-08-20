@@ -1,0 +1,10 @@
+.upload-button input[type="file"] {
+    display: none;
+}
+
+.upload-button {
+    background: whitesmoke;
+    padding: 8px;
+    border: 1px solid rebeccapurple;
+    cursor: pointer;
+}
