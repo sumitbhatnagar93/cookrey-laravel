@@ -2032,10 +2032,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AddFoodService",
   data: function data() {
     return {
+      successMsg: '',
+      errorMsg: '',
       image: '',
       adhar_pan: '',
       fssai_certificate: ''
@@ -2092,12 +2096,17 @@ __webpack_require__.r(__webpack_exports__);
       console.log(this.image);
     },
     onSubmit: function onSubmit() {
+      var _this4 = this;
+
       var formData = new FormData(document.getElementById('serviceRegistrationForm'));
       formData.append('business_image', this.image);
       formData.append('adhar_pan', this.adhar_pan);
       formData.append('fssai_certificate', this.fssai_certificate);
       axios.post('add-business', formData).then(function (res) {
         console.log(res);
+        _this4.successMsg = 'Business added successfully';
+      })["catch"](function (er) {
+        _this4.errorMsg = 'something went wrong.. ask sumit to solve this';
       });
     }
   }
@@ -37951,7 +37960,15 @@ var render = function() {
                 _vm._m(19)
               ])
             ]
-          )
+          ),
+          _vm._v(" "),
+          _c("strong", { staticClass: "text-success" }, [
+            _vm._v(_vm._s(this.successMsg))
+          ]),
+          _vm._v(" "),
+          _c("strong", { staticClass: "text-success" }, [
+            _vm._v(_vm._s(this.errorMsg))
+          ])
         ])
       ])
     ])

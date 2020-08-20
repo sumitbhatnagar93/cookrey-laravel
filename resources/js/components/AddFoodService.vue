@@ -116,6 +116,8 @@
                             </div>
                         </div>
                     </form>
+                    <strong class="text-success">{{ this.successMsg }}</strong>
+                    <strong class="text-success">{{ this.errorMsg }}</strong>
                 </div>
             </div>
         </div>
@@ -127,6 +129,8 @@ export default {
     name: "AddFoodService",
     data() {
         return {
+            successMsg: '',
+            errorMsg: '',
             image: '',
             adhar_pan: '',
             fssai_certificate: '',
@@ -178,7 +182,10 @@ export default {
             axios.post('add-business', formData)
                 .then(res => {
                     console.log(res);
-                })
+                    this.successMsg = 'Business added successfully';
+                }).catch(er => {
+                this.errorMsg = 'something went wrong.. ask sumit to solve this';
+            })
         }
     }
 }
