@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\DB;
 
 class AddFoodService extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('cors');
+    }
+
     public function addServiceView(Request $request)
     {
 
@@ -53,5 +58,11 @@ class AddFoodService extends Controller
             }
 
         }
+    }
+
+    public function getVendors()
+    {
+        $data = DB::table('services')->get();
+        return response()->json($data);
     }
 }

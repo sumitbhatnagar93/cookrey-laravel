@@ -30,11 +30,11 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label>Owner Contact Number</label>
-                                <input type="text" required name="business_owner_contact" class="form-control">
+                                <input type="text" required name="business_owner_contact" minlength="10" maxlength="10" class="form-control">
                             </div>
                             <div class="form-group col-md-6">
                                 <label>Owner Email</label>
-                                <input type="text" required name="business_owner_email" class="form-control">
+                                <input type="email" required name="business_owner_email" class="form-control">
                             </div>
                             <div class="form-group col-md-6">
                                 <label>City</label>

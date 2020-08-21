@@ -38057,7 +38057,13 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("input", {
         staticClass: "form-control",
-        attrs: { type: "text", required: "", name: "business_owner_contact" }
+        attrs: {
+          type: "text",
+          required: "",
+          name: "business_owner_contact",
+          minlength: "10",
+          maxlength: "10"
+        }
       })
     ])
   },
@@ -38070,7 +38076,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("input", {
         staticClass: "form-control",
-        attrs: { type: "text", required: "", name: "business_owner_email" }
+        attrs: { type: "email", required: "", name: "business_owner_email" }
       })
     ])
   },
