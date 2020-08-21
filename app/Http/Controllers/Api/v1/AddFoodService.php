@@ -20,23 +20,23 @@ class AddFoodService extends Controller
             return view('add-service');
         } else {
             if ($request->hasFile('business_image')) {
-
+                $providerID = date('His');
                 $file = $request->file('business_image');
                 $filename = $file->getClientOriginalName();
                 $extension = $file->getClientOriginalExtension();
-                $picture = date('His') . '-' . $filename;
+                $picture = $providerID . '-' . $filename;
 
 
                 $adharFile = $request->file('adhar_pan');
                 $filename2 = $adharFile->getClientOriginalName();
                 $extension = $adharFile->getClientOriginalExtension();
-                $picture2 = date('His') . '-' . $filename2;
+                $picture2 = $providerID . '-' . $filename2;
 
 
                 $file2 = $request->file('fssai_certificate');
                 $filename3 = $file2->getClientOriginalName();
                 $extension = $file2->getClientOriginalExtension();
-                $picture3 = $filename3;
+                $picture3 = $providerID . '-' . $filename3;
                 $uploadPath = public_path('/images/restaurants/' . date('His'));
 
                 $file->move($uploadPath, $picture);
@@ -44,6 +44,7 @@ class AddFoodService extends Controller
                 $adharFile->move($uploadPath, $picture3);
 
                 $data = $request->all();
+                $data['provider_id'] = $providerID;
                 $data['business_image'] = $picture;
                 $data['adhar_pan'] = $picture2;
                 $data['fssai_certificate'] = $picture3;
