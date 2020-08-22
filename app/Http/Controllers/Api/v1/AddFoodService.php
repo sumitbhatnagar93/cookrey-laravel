@@ -20,7 +20,7 @@ class AddFoodService extends Controller
             return view('add-service');
         } else {
             if ($request->hasFile('business_image')) {
-                $providerID = date('His');
+                $providerID = 'p'.date('His');
                 $file = $request->file('business_image');
                 $filename = $file->getClientOriginalName();
                 $extension = $file->getClientOriginalExtension();
@@ -37,7 +37,7 @@ class AddFoodService extends Controller
                 $filename3 = $file2->getClientOriginalName();
                 $extension = $file2->getClientOriginalExtension();
                 $picture3 = $providerID . '-' . $filename3;
-                $uploadPath = public_path('/images/restaurants/' . date('His'));
+                $uploadPath = public_path('/images/restaurants/' . $providerID);
 
                 $file->move($uploadPath, $picture);
                 $file2->move($uploadPath, $picture2);
