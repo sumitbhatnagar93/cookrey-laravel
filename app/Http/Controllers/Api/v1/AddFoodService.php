@@ -22,6 +22,7 @@ class AddFoodService extends Controller
             $providerID = 'p' . date('His');
             $uploadPath = public_path('/images/restaurants/' . $providerID);
 
+            $data = $request->all();
             if ($request->hasFile('business_image')) {
                 $file = $request->file('business_image');
                 $filename = $file->getClientOriginalName();
@@ -52,7 +53,6 @@ class AddFoodService extends Controller
                     $data['fssai_certificate'] = '';
                 }
 
-                $data = $request->all();
                 $data['provider_id'] = $providerID;
                 $postedData = DB::table('services')->insert($data);
                 if ($postedData) {
