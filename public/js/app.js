@@ -2190,19 +2190,40 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "addProductComponent",
   data: function data() {
     return {
-      image: ''
+      image: '',
+      vendors: []
     };
   },
+  created: function created() {
+    this.getVendors();
+  },
   methods: {
+    getVendors: function getVendors() {
+      var _this = this;
+
+      axios.get('getVendors').then(function (res) {
+        _this.vendors = res.data;
+        console.log(res.data);
+      });
+    },
     selectImage: function selectImage() {
       this.$refs.fileInput.click();
     },
     onFileSelect: function onFileSelect(e) {
-      var _this = this;
+      var _this2 = this;
 
       var input = this.$refs.fileInput;
       var file = input.files;
@@ -2211,7 +2232,7 @@ __webpack_require__.r(__webpack_exports__);
         var reader = new FileReader();
 
         reader.onload = function (e) {
-          _this.image = e.target.result;
+          _this2.image = e.target.result;
         };
 
         reader.readAsDataURL(file[0]);
@@ -38332,6 +38353,38 @@ var render = function() {
                 _vm._v(" "),
                 _vm._m(4),
                 _vm._v(" "),
+                _c("div", { staticClass: "form-group col-6" }, [
+                  _c("label", [_vm._v("Select Vendor")]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      staticClass: "form-control",
+                      attrs: { name: "provider_id" }
+                    },
+                    [
+                      _c("option", { attrs: { value: "none" } }, [
+                        _vm._v("Select type..")
+                      ]),
+                      _vm._v(" "),
+                      _vm._l(_vm.vendors, function(vendor, index) {
+                        return _c(
+                          "option",
+                          { domProps: { value: vendor.provider_id } },
+                          [
+                            _vm._v(
+                              "\n                                    " +
+                                _vm._s(vendor.business_name) +
+                                "\n                                "
+                            )
+                          ]
+                        )
+                      })
+                    ],
+                    2
+                  )
+                ]),
+                _vm._v(" "),
                 _vm._m(5),
                 _vm._v(" "),
                 _vm._m(6)
@@ -38419,13 +38472,17 @@ var staticRenderFns = [
     return _c("div", { staticClass: "form-group col-6" }, [
       _c("label", [_vm._v("Food Type")]),
       _vm._v(" "),
-      _c("select", { staticClass: "form-control", attrs: { name: "type" } }, [
-        _c("option", { attrs: { value: "none" } }, [_vm._v("Select type..")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "veg" } }, [_vm._v("Veg")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "non-veg" } }, [_vm._v("Non Veg")])
-      ])
+      _c(
+        "select",
+        { staticClass: "form-control", attrs: { name: "food_type" } },
+        [
+          _c("option", { attrs: { value: "none" } }, [_vm._v("Select type..")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "veg" } }, [_vm._v("Veg")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "non-veg" } }, [_vm._v("Non Veg")])
+        ]
+      )
     ])
   },
   function() {

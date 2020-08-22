@@ -70,6 +70,6 @@ class AddFoodService extends Controller
     public function getVendors()
     {
         $data = DB::table('services')->get();
-        return response()->json($data);
+        return json_encode($data);
     }
 }

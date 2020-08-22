@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\v1;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -21,7 +22,8 @@ class Product extends Controller
 
     public function addProductView()
     {
-        return view('add-product');
+        $data = DB::table('services')->get();
+        return view('add-product', $data);
     }
 
     public function onProductSubmit(Request $request)
@@ -31,17 +33,17 @@ class Product extends Controller
             $filename = $file->getClientOriginalName();
             $extension = $file->getClientOriginalExtension();
             $picture = date('His') . '-' . $filename;
-            $file->move(public_path('/images'), $picture);
             $data = $request->all();
+            $file->move(public_path('/images/restaurants/'.$data['provider_id'].'/food-images/'), $picture);
             $data['image'] = $picture;
             $postedData = DB::table('product')->insert($data);
             if ($postedData) {
                 return response()->json($data);
             } else {
-                return response()->json(["message" => "Something went wrong"]);
+                return response()->json(["message" => "Something went wrong"], 500);
             }
         } else {
-            return response()->json(["message" => "Select image first."]);
+            return response()->json(["message" => "Select image first."], 500);
         }
     }
 }

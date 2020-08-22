@@ -43,8 +43,17 @@
                                 </select>
                             </div>
                             <div class="form-group col-6">
+                                <label>Select Vendor</label>
+                                <select name="provider_id" class="form-control">
+                                    <option value="none">Select type..</option>
+                                    <option v-for="(vendor,index) of vendors" v-bind:value="vendor.provider_id">
+                                        {{ vendor.business_name }}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group col-6">
                                 <label>Food Type</label>
-                                <select name="type" class="form-control">
+                                <select name="food_type" class="form-control">
                                     <option value="none">Select type..</option>
                                     <option value="veg">Veg</option>
                                     <option value="non-veg">Non Veg</option>
@@ -63,40 +72,51 @@
 </template>
 
 <script>
-    export default {
-        name: "addProductComponent",
-        data() {
-            return {
-                image: '',
-            };
+export default {
+    name: "addProductComponent",
+    data() {
+        return {
+            image: '',
+            vendors: [],
+        };
+    },
+    created() {
+        this.getVendors();
+    },
+    methods: {
+        getVendors() {
+            axios.get('getVendors')
+                .then(res => {
+                    this.vendors = res.data;
+                    console.log(res.data);
+                })
         },
-        methods: {
-            selectImage() {
-                this.$refs.fileInput.click()
-            },
-            onFileSelect(e) {
-                let input = this.$refs.fileInput
-                let file = input.files
-                if (file && file[0]) {
-                    let reader = new FileReader
-                    reader.onload = e => {
-                        this.image = e.target.result
-                    }
-                    reader.readAsDataURL(file[0])
-                    this.$emit('input', file[0])
+        selectImage() {
+            this.$refs.fileInput.click()
+        },
+        onFileSelect(e) {
+            let input = this.$refs.fileInput
+            let file = input.files
+            if (file && file[0]) {
+                let reader = new FileReader
+                reader.onload = e => {
+                    this.image = e.target.result
                 }
-                console.log(this.image);
-            },
-            onSubmit() {
-                let formData = new FormData(document.getElementById('productForm'));
-                formData.append('image', this.image);
-                axios.post('upload-product', formData)
-                    .then(res => {
-                        console.log(res);
-                    })
+                reader.readAsDataURL(file[0])
+                this.$emit('input', file[0])
             }
+            console.log(this.image);
+        },
+        onSubmit() {
+            let formData = new FormData(document.getElementById('productForm'));
+            formData.append('image', this.image);
+            axios.post('upload-product', formData)
+                .then(res => {
+                    console.log(res);
+                })
         }
     }
+}
 </script>
 
 <style scoped>
