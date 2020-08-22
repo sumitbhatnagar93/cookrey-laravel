@@ -19,35 +19,41 @@ class AddFoodService extends Controller
         if (empty($request->all())) {
             return view('add-service');
         } else {
+            $providerID = 'p' . date('His');
+            $uploadPath = public_path('/images/restaurants/' . $providerID);
+
             if ($request->hasFile('business_image')) {
-                $providerID = 'p'.date('His');
                 $file = $request->file('business_image');
                 $filename = $file->getClientOriginalName();
                 $extension = $file->getClientOriginalExtension();
                 $picture = $providerID . '-' . $filename;
-
-
-                $adharFile = $request->file('adhar_pan');
-                $filename2 = $adharFile->getClientOriginalName();
-                $extension = $adharFile->getClientOriginalExtension();
-                $picture2 = $providerID . '-' . $filename2;
-
-
-                $file2 = $request->file('fssai_certificate');
-                $filename3 = $file2->getClientOriginalName();
-                $extension = $file2->getClientOriginalExtension();
-                $picture3 = $providerID . '-' . $filename3;
-                $uploadPath = public_path('/images/restaurants/' . $providerID);
-
                 $file->move($uploadPath, $picture);
-                $file2->move($uploadPath, $picture2);
-                $adharFile->move($uploadPath, $picture3);
+                $data['business_image'] = $picture;
+
+                if ($request->hasFile('adhar_pan')) {
+                    $adharFileRequestFile = $request->file('adhar_pan');
+                    $adharFileOriginalName = $adharFileRequestFile->getClientOriginalName();
+                    $adharFileExtension = $adharFileRequestFile->getClientOriginalExtension();
+                    $adharFile = $providerID . '-' . $adharFileOriginalName;
+                    $adharFileRequestFile->move($uploadPath, $adharFile);
+                    $data['adhar_pan'] = $adharFile;
+                } else {
+                    $data['adhar_pan'] = '';
+                }
+
+                if ($request->hasFile('fssai_certificate')) {
+                    $fssaiFileRequestFile = $request->file('fssai_certificate');
+                    $fssaiFileOriginalName = $fssaiFileRequestFile->getClientOriginalName();
+                    $fssaiFileExtension = $fssaiFileRequestFile->getClientOriginalExtension();
+                    $fssaiFile = $providerID . '-' . $fssaiFileOriginalName;
+                    $fssaiFileRequestFile->move($uploadPath, $fssaiFile);
+                    $data['fssai_certificate'] = $fssaiFile;
+                } else {
+                    $data['fssai_certificate'] = '';
+                }
 
                 $data = $request->all();
                 $data['provider_id'] = $providerID;
-                $data['business_image'] = $picture;
-                $data['adhar_pan'] = $picture2;
-                $data['fssai_certificate'] = $picture3;
                 $postedData = DB::table('services')->insert($data);
                 if ($postedData) {
                     return response()->json($data);
@@ -55,7 +61,7 @@ class AddFoodService extends Controller
                     return response()->json(["message" => "Something went wrong"]);
                 }
             } else {
-                return response()->json(["message" => "Select image first."]);
+                return response()->json(["message" => "Select image first."], 500);
             }
 
         }

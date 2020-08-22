@@ -30,7 +30,8 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label>Owner Contact Number</label>
-                                <input type="text" required name="business_owner_contact" minlength="10" maxlength="10" class="form-control">
+                                <input type="text" required name="business_owner_contact" minlength="10" maxlength="10"
+                                       class="form-control">
                             </div>
                             <div class="form-group col-md-6">
                                 <label>Owner Email</label>
@@ -117,7 +118,7 @@
                         </div>
                     </form>
                     <strong class="text-success">{{ this.successMsg }}</strong>
-                    <strong class="text-success">{{ this.errorMsg }}</strong>
+                    <strong class="text-danger">{{ this.errorMsg }}</strong>
                 </div>
             </div>
         </div>
@@ -182,8 +183,10 @@ export default {
             axios.post('add-business', formData)
                 .then(res => {
                     console.log(res);
+                    this.errorMsg = '';
                     this.successMsg = 'Business added successfully';
                 }).catch(er => {
+                this.successMsg = '';
                 this.errorMsg = 'something went wrong.. ask sumit to solve this';
             })
         }
