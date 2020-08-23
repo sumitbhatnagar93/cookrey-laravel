@@ -40,3 +40,4 @@ Route::get('add-service', 'Api\v1\AddFoodService@addServiceView');
 Route::post('add-business', 'Api\v1\AddFoodService@addServiceView');
 
 Route::get('getVendors', 'Api\v1\AddFoodService@getVendors');
+Route::get('getVendorById/{id}', 'Api\v1\AddFoodService@getVendorById');

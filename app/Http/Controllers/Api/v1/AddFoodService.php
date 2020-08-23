@@ -70,6 +70,12 @@ class AddFoodService extends Controller
     public function getVendors()
     {
         $data = DB::table('services')->get();
-        return json_encode($data);
+        return response()->json($data);
+    }
+
+    public function getVendorById($providerId)
+    {
+        $data = DB::table('services')->where('provider_id', $providerId)->get();
+        return response()->json($data);
     }
 }
