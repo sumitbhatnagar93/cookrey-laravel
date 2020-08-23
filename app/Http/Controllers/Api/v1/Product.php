@@ -50,7 +50,7 @@ class Product extends Controller
 
     public function getProductById($providerId)
     {
-        $data = DB::table('product')->where('provider_id', $providerId)->first();
+        $data = DB::table('product')->where('provider_id', $providerId)->get();
         if ($data) {
             return response()->json($data, 200);
         } else {
