@@ -26,6 +26,7 @@ Route::get('/home', 'HomeController@index')->name('home');
  * Product Related Routes
  */
 Route::get('/add-product', 'Api\v1\Product@addProductView');
+Route::get('getProductById/{providerId}', 'Api\v1\Product@getProductById');
 Route::post('/upload-product', 'Api\v1\Product@onProductSubmit');
 Route::post('byApp', 'HomeController@registerByApp');
 
