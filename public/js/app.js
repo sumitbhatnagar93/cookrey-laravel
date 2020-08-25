@@ -2035,6 +2035,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AddFoodService",
   data: function data() {
@@ -2043,10 +2057,78 @@ __webpack_require__.r(__webpack_exports__);
       errorMsg: '',
       image: '',
       adhar_pan: '',
-      fssai_certificate: ''
+      fssai_certificate: '',
+      lat: '',
+      lng: ''
     };
   },
+  mounted: function mounted() {
+    this.initMap();
+  },
   methods: {
+    initMap: function initMap() {
+      var address = document.getElementById('business_address').value;
+      console.log(address);
+
+      if (address === '') {
+        address = 'bahadrabad';
+      }
+
+      var geocoder = new google.maps.Geocoder();
+      geocoder.geocode({
+        address: address
+      }, function (results, status) {
+        // console.log(results);
+        var mapOptions = {
+          zoom: 16,
+          center: {
+            lat: results[0].geometry.location.lat(),
+            lng: results[0].geometry.location.lng()
+          }
+        };
+        var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+        var marker = new google.maps.Marker({
+          position: {
+            lat: results[0].geometry.location.lat(),
+            lng: results[0].geometry.location.lng()
+          },
+          map: map,
+          title: "Drag me!",
+          draggable: true
+        });
+        google.maps.event.addListener(marker, 'dragend', function (event) {
+          console.log(event.latLng.lat(), event.latLng.lng());
+          document.getElementById('lat').value = event.latLng.lat();
+          document.getElementById('lng').value = event.latLng.lng();
+          localStorage.setItem('latlng', JSON.stringify({
+            lat: event.latLng.lat(),
+            lng: event.latLng.lng
+          })); // marker.infoWindow.open(map, marker);
+          //this.getAddressByCoords(event.latLng.lat(), event.latLng.lng());
+
+          geocoder.geocode({
+            location: {
+              lat: parseFloat(event.latLng.lat()),
+              lng: parseFloat(event.latLng.lng())
+            }
+          }, function (results, status) {
+            console.log(results);
+            document.getElementById('business_address').value = results[0].formatted_address;
+          });
+        });
+      });
+    },
+    getAddressByCoords: function getAddressByCoords(lat, lng) {
+      var latlng = {
+        lat: lat,
+        lng: lng
+      };
+      geocoder.geocode({
+        location: latlng
+      }, function (results, status) {
+        console.log(results);
+      });
+    },
     selectImage: function selectImage() {
       this.$refs.fileInput.click();
     },
@@ -2272,15 +2354,53 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      mapName: "map"
+    };
+  },
   mounted: function mounted() {
-    console.log('Component mounted.');
+    this.initMap();
+  },
+  methods: {
+    // Iniitialize map without creating markers
+    initMap: function initMap() {
+      var mapOptions = {
+        zoom: 6,
+        center: {
+          lat: 34.652500,
+          lng: 135.506302
+        }
+      };
+      var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+      var geocoder = new google.maps.Geocoder();
+      geocoder.geocode({
+        address: 'bahadrabad'
+      }, function (results, status) {
+        console.log(results);
+      });
+    } // Helper method to insert markers
+    // insertMarkers: function () {
+    //     var marker = new google.maps.Marker({
+    //         map: map,
+    //         icon: 'imgs/marker.png',
+    //         url: "/pages/estates.id",
+    //         label: {
+    //             text: this.estates.price,
+    //             color: "#fff",
+    //         },
+    //         position: {
+    //             lat: this.estates.lat,
+    //             lng: this.estates.lng
+    //         }
+    //     });
+    //
+    //     google.maps.event.addListener(marker, 'click', function () {
+    //         window.location.href = this.url;
+    //     });
+    // }
+
   }
 });
 
@@ -37922,13 +38042,33 @@ var render = function() {
                 _vm._v(" "),
                 _vm._m(11),
                 _vm._v(" "),
+                _c("div", { staticClass: "form-group col-md-6" }, [
+                  _c("label", [_vm._v("Address")]),
+                  _vm._v(" "),
+                  _c("textarea", {
+                    staticClass: "form-control",
+                    attrs: { name: "business_address", id: "business_address" },
+                    on: { change: _vm.initMap }
+                  })
+                ]),
+                _vm._v(" "),
                 _vm._m(12),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-12" }, [
+                  _c("div", {
+                    ref: "map",
+                    staticStyle: { height: "400px" },
+                    attrs: { id: "map" }
+                  })
+                ]),
                 _vm._v(" "),
                 _vm._m(13),
                 _vm._v(" "),
                 _vm._m(14),
                 _vm._v(" "),
                 _vm._m(15),
+                _vm._v(" "),
+                _vm._m(16),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group col-md-6" }, [
                   _c("label", { staticClass: "upload-button" }, [
@@ -37954,7 +38094,7 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _vm._m(16),
+                _vm._m(17),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group col-md-6" }, [
                   _c("label", { staticClass: "upload-button mt-4" }, [
@@ -37977,11 +38117,11 @@ var render = function() {
                     : _vm._e()
                 ]),
                 _vm._v(" "),
-                _vm._m(17),
-                _vm._v(" "),
                 _vm._m(18),
                 _vm._v(" "),
-                _vm._m(19)
+                _vm._m(19),
+                _vm._v(" "),
+                _vm._m(20)
               ])
             ]
           ),
@@ -38167,11 +38307,11 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "form-group col-md-6" }, [
-      _c("label", [_vm._v("Address")]),
+      _c("label", [_vm._v("Postal Code")]),
       _vm._v(" "),
-      _c("textarea", {
+      _c("input", {
         staticClass: "form-control",
-        attrs: { name: "business_address" }
+        attrs: { type: "text", required: "", name: "postal_code" }
       })
     ])
   },
@@ -38180,11 +38320,24 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "form-group col-md-6" }, [
-      _c("label", [_vm._v("Postal Code")]),
+      _c("label", [_vm._v("longitude")]),
       _vm._v(" "),
       _c("input", {
         staticClass: "form-control",
-        attrs: { type: "text", required: "", name: "postal_code" }
+        attrs: { type: "text", required: "", name: "lat", id: "lat" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group col-md-6" }, [
+      _c("label", [_vm._v("latitude")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "text", required: "", name: "lng", id: "lng" }
       })
     ])
   },
@@ -38531,17 +38684,10 @@ var staticRenderFns = [
     return _c("div", { staticClass: "container" }, [
       _c("div", { staticClass: "row justify-content-center" }, [
         _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _vm._v("Example Component")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _vm._v(
-                "\n                    I'm an example component.\n                "
-              )
-            ])
-          ])
+          _c("div", {
+            staticStyle: { width: "100%", height: "100%" },
+            attrs: { id: "map" }
+          })
         ])
       ])
     ])

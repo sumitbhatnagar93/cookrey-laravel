@@ -75,5 +75,7 @@
             @yield('content')
         </main>
     </div>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places,geometry&key=AIzaSyD1fJmzwJMy35N0rfY_btipuz6f8_zFvZA"
+            type="text/javascript"></script>
 </body>
 </html>

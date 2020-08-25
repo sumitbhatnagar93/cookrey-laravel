@@ -58,12 +58,26 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label>Address</label>
-                                <textarea name="business_address" class="form-control"></textarea>
+                                <textarea name="business_address" id="business_address" class="form-control"
+                                          @change="initMap"></textarea>
                             </div>
                             <div class="form-group col-md-6">
                                 <label>Postal Code</label>
                                 <input type="text" required name="postal_code" class="form-control">
                             </div>
+                            <div class="col-md-12">
+                                <div id="map" ref="map" style="height: 400px;"></div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label>longitude</label>
+                                <input type="text" required name="lat" class="form-control" id="lat">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>latitude</label>
+                                <input type="text" required name="lng" class="form-control" id="lng">
+                            </div>
+
                             <div class="form-group col-md-6">
                                 <label>FSSAI registration name</label>
                                 <input type="text" required name="fssai_registered_name" class="form-control">
@@ -135,9 +149,69 @@ export default {
             image: '',
             adhar_pan: '',
             fssai_certificate: '',
+            lat: '',
+            lng: ''
         };
     },
+    mounted() {
+        this.initMap();
+    },
     methods: {
+        initMap: function () {
+            var address = document.getElementById('business_address').value;
+            console.log(address)
+            if (address === '') {
+                address = 'bahadrabad';
+            }
+            const geocoder = new google.maps.Geocoder();
+            geocoder.geocode({address: address}, (results, status) => {
+                // console.log(results);
+                var mapOptions =
+                    {
+                        zoom: 16,
+                        center: {
+                            lat: results[0].geometry.location.lat(),
+                            lng: results[0].geometry.location.lng()
+                        }
+                    };
+
+                var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+                var marker = new google.maps.Marker({
+                    position: {
+                        lat: results[0].geometry.location.lat(),
+                        lng: results[0].geometry.location.lng()
+                    },
+                    map,
+                    title: "Drag me!",
+                    draggable: true
+                });
+                google.maps.event.addListener(marker, 'dragend', function (event) {
+                    console.log(event.latLng.lat(), event.latLng.lng())
+                    document.getElementById('lat').value = event.latLng.lat();
+                    document.getElementById('lng').value = event.latLng.lng();
+                    localStorage.setItem('latlng', JSON.stringify({lat: event.latLng.lat(), lng: event.latLng.lng}));
+                    // marker.infoWindow.open(map, marker);
+                    //this.getAddressByCoords(event.latLng.lat(), event.latLng.lng());
+                    geocoder.geocode({
+                        location: {
+                            lat: parseFloat(event.latLng.lat()),
+                            lng: parseFloat(event.latLng.lng())
+                        }
+                    }, (results, status) => {
+                        console.log(results);
+                        document.getElementById('business_address').value = results[0].formatted_address;
+                    })
+                });
+            });
+
+        },
+        getAddressByCoords(lat, lng) {
+            var latlng = {lat: lat, lng: lng};
+            geocoder.geocode({location: latlng}, (results, status) => {
+                console.log(results);
+            })
+
+        },
         selectImage() {
             this.$refs.fileInput.click()
         },
