@@ -2,7 +2,7 @@
 @section('content')
 
     <div id="app">
-        <add-service></add-service>
+        <cookrey-vendors></cookrey-vendors>
     </div>
 
 @endsection

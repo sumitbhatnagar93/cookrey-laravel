@@ -37,27 +37,6 @@ export default {
                 console.log(results);
             });
         },
-
-        // Helper method to insert markers
-        // insertMarkers: function () {
-        //     var marker = new google.maps.Marker({
-        //         map: map,
-        //         icon: 'imgs/marker.png',
-        //         url: "/pages/estates.id",
-        //         label: {
-        //             text: this.estates.price,
-        //             color: "#fff",
-        //         },
-        //         position: {
-        //             lat: this.estates.lat,
-        //             lng: this.estates.lng
-        //         }
-        //     });
-        //
-        //     google.maps.event.addListener(marker, 'click', function () {
-        //         window.location.href = this.url;
-        //     });
-        // }
     },
 }
 </script>

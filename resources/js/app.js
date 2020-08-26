@@ -5,8 +5,10 @@
  */
 
 require('./bootstrap');
-
 window.Vue = require('vue');
+import DataTable from 'laravel-vue-datatable';
+
+Vue.use(DataTable);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -19,8 +21,13 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('add-product', require('./components/AddProductComponent.vue').default);
-Vue.component('add-service', require('./components/AddFoodService.vue').default);
+
+/**
+ * Vendor related templates
+ */
+Vue.component('add-product', require('./components/vendor/AddProductComponent.vue').default);
+Vue.component('add-service', require('./components/vendor/AddFoodService.vue').default);
+Vue.component('cookrey-vendors', require('./components/vendor/AllVendors.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

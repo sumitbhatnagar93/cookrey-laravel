@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\v1;
+namespace App\Http\Controllers\Api\v1\vendor;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -13,11 +13,16 @@ class AddFoodService extends Controller
         $this->middleware('cors');
     }
 
+    public function updateVendorView($id)
+    {
+        return view('vendors/add-service', ['action' => $id]);
+    }
+
     public function addServiceView(Request $request)
     {
 
         if (empty($request->all())) {
-            return view('add-service');
+            return view('vendors/add-service');
         } else {
             $providerID = 'p' . date('His');
             $uploadPath = public_path('/images/restaurants/' . $providerID);
@@ -71,6 +76,11 @@ class AddFoodService extends Controller
     {
         $data = DB::table('services')->get();
         return response()->json($data);
+    }
+
+    public function viewVendors()
+    {
+        return view('vendors/vendors');
     }
 
     public function getVendorById($providerId)

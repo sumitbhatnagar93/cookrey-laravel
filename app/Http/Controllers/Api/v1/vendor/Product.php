@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\v1;
+namespace App\Http\Controllers\Api\v1\vendor;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -24,7 +24,7 @@ class Product extends Controller
     public function addProductView()
     {
         $data = DB::table('services')->get();
-        return view('add-product', $data);
+        return view('vendors/add-product', $data);
     }
 
     public function onProductSubmit(Request $request)

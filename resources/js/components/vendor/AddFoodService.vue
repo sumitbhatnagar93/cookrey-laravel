@@ -1,69 +1,80 @@
 <template>
     <div>
         <div class="container">
-            <h1>Add you restaurant or tfiifin service</h1>
+            <h1 v-if="!slug">Add Vendor</h1>
+            <h1 v-if="slug">Update Vendor Details</h1>
             <div class="card">
                 <div class="card-body">
                     <form class="form-group" @submit.prevent="onSubmit()" id="serviceRegistrationForm">
                         <div class="row">
                             <div class="form-group col-md-6">
-                                <label>Tiffin service name</label>
+                                <label>Tiffin service name </label>
                                 <input type="text" required name="business_name" placeholder="Product Title"
+                                       v-bind:value="vendor.business_name"
                                        class="form-control">
                             </div>
                             <div class="form-group col-md-6">
                                 <label>Owner name</label>
                                 <input type="text" required name="business_owner_name" placeholder="Product Title"
-                                       class="form-control">
+                                       class="form-control" v-bind:value="vendor.business_owner_name">
                             </div>
                             <div class="form-group col-12">
                                 <label>Description</label>
-                                <textarea name="description" cols="30" rows="10" class="form-control"></textarea>
+                                <textarea name="description" cols="30" rows="10"
+                                          class="form-control">{{ vendor.description }}</textarea>
                             </div>
                             <div class="form-group col-md-6">
                                 <label>Owner</label>
-                                <input type="radio" name="is_business_owner" value="yes">
+                                <input type="radio" name="is_business_owner" value="yes"
+                                       :checked="vendor.is_business_owner">
                             </div>
                             <div class="form-group col-md-6">
                                 <label>Manager</label>
-                                <input type="radio" name="is_business_owner" value="no">
+                                <input type="radio" name="is_business_owner" value="no"
+                                       :checked="!vendor.is_business_owner">
                             </div>
                             <div class="form-group col-md-6">
                                 <label>Owner Contact Number</label>
                                 <input type="text" required name="business_owner_contact" minlength="10" maxlength="10"
-                                       class="form-control">
+                                       class="form-control" v-bind:value="vendor.business_owner_contact">
                             </div>
                             <div class="form-group col-md-6">
                                 <label>Owner Email</label>
-                                <input type="email" required name="business_owner_email" class="form-control">
+                                <input type="email" required name="business_owner_email" class="form-control"
+                                       v-bind:value="vendor.business_owner_email">
                             </div>
                             <div class="form-group col-md-6">
                                 <label>City</label>
-                                <input type="text" required name="business_city" class="form-control">
+                                <input type="text" required name="business_city" class="form-control"
+                                       v-bind:value="vendor.business_city">
                             </div>
                             <div class="col-md-12">
                                 <h4>GSTIN Number?</h4>
                             </div>
                             <div class="form-group col-md-6">
                                 <label>Yes</label>
-                                <input type="radio" name="is_gstin_number" value="yes">
+                                <input type="radio" name="is_gstin_number" value="yes"
+                                       :checked="vendor.is_gstin_number">
                             </div>
                             <div class="form-group col-md-6">
                                 <label>No</label>
-                                <input type="radio" name="is_gstin_number" value="no">
+                                <input type="radio" name="is_gstin_number" value="no"
+                                       :checked="!vendor.is_gstin_number">
                             </div>
                             <div class="form-group col-md-6">
                                 <label>Provide GSTIN Number</label>
-                                <input type="text" required name="gstin_number" class="form-control">
+                                <input type="text" required name="gstin_number" class="form-control"
+                                       v-bind:value="vendor.gstin_number">
                             </div>
                             <div class="form-group col-md-6">
                                 <label>Address</label>
                                 <textarea name="business_address" id="business_address" class="form-control"
-                                          @change="initMap"></textarea>
+                                          @change="initMap">{{ vendor.business_address }}</textarea>
                             </div>
                             <div class="form-group col-md-6">
                                 <label>Postal Code</label>
-                                <input type="text" required name="postal_code" class="form-control">
+                                <input type="text" required name="postal_code" class="form-control"
+                                       v-bind:value="vendor.postal_code">
                             </div>
                             <div class="col-md-12">
                                 <div id="map" ref="map" style="height: 400px;"></div>
@@ -71,20 +82,24 @@
 
                             <div class="form-group col-md-6">
                                 <label>longitude</label>
-                                <input type="text" required name="lat" class="form-control" id="lat">
+                                <input type="text" required name="lat" class="form-control" id="lat"
+                                       v-bind:value="vendor.lat">
                             </div>
                             <div class="form-group col-md-6">
                                 <label>latitude</label>
-                                <input type="text" required name="lng" class="form-control" id="lng">
+                                <input type="text" required name="lng" class="form-control" id="lng"
+                                       v-bind:value="vendor.lng">
                             </div>
 
                             <div class="form-group col-md-6">
                                 <label>FSSAI registration name</label>
-                                <input type="text" required name="fssai_registered_name" class="form-control">
+                                <input type="text" required name="fssai_registered_name" class="form-control"
+                                       v-bind:value="vendor.fssai_registered_name">
                             </div>
                             <div class="form-group col-md-6">
                                 <label>Address on FSSAI</label>
-                                <input type="text" required name="fssai_address" class="form-control">
+                                <input type="text" required name="fssai_address" class="form-control"
+                                       v-bind:value="vendor.fssai_address">
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="upload-button">Upload Docs(Aadhar/PAN)
@@ -100,9 +115,11 @@
                                 <label>Service Type</label>
                                 <select name="business_type" class="form-control">
                                     <option value="none">Select type..</option>
-                                    <option value="tiffin_service">Tiffin Service</option>
-                                    <option value="restaurant">Restaurant</option>
-                                    <option value="bar">Bar</option>
+                                    <option value="tiffin_service" :selected="vendor.business_type == 'tiffin_service'">
+                                        Tiffin Service
+                                    </option>
+                                    <option value="restaurant" :selected="vendor.business_type == 'restaurant'">Restaurant</option>
+                                    <option value="bar" :selected="vendor.business_type == 'bar'">Bar</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
@@ -116,14 +133,6 @@
                                     :style="{ 'background-image': `url(${image})` }"
                                     @click="selectImage">
                                 </div>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label>Latitute</label>
-                                <input type="text" required name="business_map_lat" class="form-control">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label>Longitute</label>
-                                <input type="text" required name="business_map_lng" class="form-control">
                             </div>
                             <div class="form-group col-12">
                                 <button class="btn btn-success">Compete Registration</button>
@@ -142,6 +151,7 @@
 <script>
 export default {
     name: "AddFoodService",
+    props: ['slug'],
     data() {
         return {
             successMsg: '',
@@ -150,13 +160,22 @@ export default {
             adhar_pan: '',
             fssai_certificate: '',
             lat: '',
-            lng: ''
+            lng: '',
+            vendor: ''
         };
     },
     mounted() {
         this.initMap();
+        console.log(this.slug)
+        this.getVendorById()
     },
     methods: {
+        getVendorById() {
+            axios('/getVendorById/' + this.slug).then((res) => {
+                this.vendor = res.data[0]
+                console.log(res.data)
+            })
+        },
         initMap: function () {
             var address = document.getElementById('business_address').value;
             console.log(address)
@@ -190,8 +209,6 @@ export default {
                     document.getElementById('lat').value = event.latLng.lat();
                     document.getElementById('lng').value = event.latLng.lng();
                     localStorage.setItem('latlng', JSON.stringify({lat: event.latLng.lat(), lng: event.latLng.lng}));
-                    // marker.infoWindow.open(map, marker);
-                    //this.getAddressByCoords(event.latLng.lat(), event.latLng.lng());
                     geocoder.geocode({
                         location: {
                             lat: parseFloat(event.latLng.lat()),
@@ -203,13 +220,6 @@ export default {
                     })
                 });
             });
-
-        },
-        getAddressByCoords(lat, lng) {
-            var latlng = {lat: lat, lng: lng};
-            geocoder.geocode({location: latlng}, (results, status) => {
-                console.log(results);
-            })
 
         },
         selectImage() {

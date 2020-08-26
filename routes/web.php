@@ -25,8 +25,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 /**
  * Product Related Routes
  */
-Route::get('/add-product', 'Api\v1\Product@addProductView');
-Route::get('getProductById/{providerId}', 'Api\v1\Product@getProductById');
+Route::get('/add-product', 'Api\v1\vendor\Product@addProductView');
+Route::get('getProductById/{providerId}', 'Api\v1\vendor\Product@getProductById');
 Route::post('/upload-product', 'Api\v1\Product@onProductSubmit');
 Route::post('byApp', 'HomeController@registerByApp');
 
@@ -36,8 +36,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 // Pages
-Route::get('add-service', 'Api\v1\AddFoodService@addServiceView');
-Route::post('add-business', 'Api\v1\AddFoodService@addServiceView');
+Route::get('add-service', 'Api\v1\vendor\AddFoodService@addServiceView');
+Route::get('add-service/{id}', 'Api\v1\vendor\AddFoodService@updateVendorView');
+Route::post('add-business', 'Api\v1\vendor\AddFoodService@addServiceView');
 
-Route::get('getVendors', 'Api\v1\AddFoodService@getVendors');
-Route::get('getVendorById/{id}', 'Api\v1\AddFoodService@getVendorById');
+Route::get('vendors', 'Api\v1\vendor\AddFoodService@viewVendors');
+Route::get('getVendors', 'Api\v1\vendor\AddFoodService@getVendors');
+Route::get('getVendorById/{id}', 'Api\v1\vendor\AddFoodService@getVendorById');
