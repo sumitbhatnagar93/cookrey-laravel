@@ -2109,6 +2109,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AddFoodService",
   props: ['slug'],
@@ -2125,7 +2145,10 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    this.initMap();
+    if (this.slug == undefined) {
+      this.initMap('haridwar');
+    }
+
     console.log(this.slug);
     this.getVendorById();
   },
@@ -2135,22 +2158,26 @@ __webpack_require__.r(__webpack_exports__);
 
       axios('/getVendorById/' + this.slug).then(function (res) {
         _this.vendor = res.data[0];
+
+        _this.initMap(_this.vendor.business_address);
+
         console.log(res.data);
       });
     },
-    initMap: function initMap() {
-      var address = document.getElementById('business_address').value;
-      console.log(address);
+    initMap: function initMap(address) {
+      var address2 = document.getElementById('business_address').value;
 
-      if (address === '') {
-        address = 'bahadrabad';
+      if (address2) {
+        address = address2;
       }
 
       var geocoder = new google.maps.Geocoder();
       geocoder.geocode({
         address: address
       }, function (results, status) {
-        // console.log(results);
+        document.getElementById('lat').value = results[0].geometry.location.lat();
+        document.getElementById('lng').value = results[0].geometry.location.lng(); // console.log(results);
+
         var mapOptions = {
           zoom: 16,
           center: {
@@ -2240,11 +2267,19 @@ __webpack_require__.r(__webpack_exports__);
     onSubmit: function onSubmit() {
       var _this5 = this;
 
+      var url = '';
+
+      if (this.vendor) {
+        url = '/update-service';
+      } else {
+        url = '/add-business';
+      }
+
       var formData = new FormData(document.getElementById('serviceRegistrationForm'));
       formData.append('business_image', this.image);
       formData.append('adhar_pan', this.adhar_pan);
       formData.append('fssai_certificate', this.fssai_certificate);
-      axios.post('add-business', formData).then(function (res) {
+      axios.post(url, formData).then(function (res) {
         console.log(res);
         _this5.errorMsg = '';
         _this5.successMsg = 'Business added successfully';
@@ -47050,8 +47085,30 @@ var render = function() {
                     _c("input", {
                       attrs: { type: "file", name: "adhar_pan" },
                       on: { input: _vm.onFileSelectForAdhar }
+                    }),
+                    _vm._v(" "),
+                    _c("input", {
+                      attrs: { type: "hidden", name: "old_adhar_pan" },
+                      domProps: { value: _vm.vendor.adhar_pan }
                     })
-                  ])
+                  ]),
+                  _vm._v(" "),
+                  _vm.vendor.adhar_pan
+                    ? _c(
+                        "a",
+                        {
+                          attrs: {
+                            href:
+                              "/images/restaurants/" +
+                              _vm.vendor.provider_id +
+                              "/" +
+                              _vm.vendor.adhar_pan,
+                            target: "_blank"
+                          }
+                        },
+                        [_vm._v("\n                                adhar_pan")]
+                      )
+                    : _vm._e()
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group col-md-6" }, [
@@ -47062,8 +47119,34 @@ var render = function() {
                     _c("input", {
                       attrs: { type: "file", name: "fssai_certificate" },
                       on: { input: _vm.onFileSelectForFssai }
+                    }),
+                    _vm._v(" "),
+                    _c("input", {
+                      attrs: { type: "hidden", name: "old_fssai_certificate" },
+                      domProps: { value: _vm.vendor.fssai_certificate }
                     })
-                  ])
+                  ]),
+                  _vm._v(" "),
+                  _vm.vendor.fssai_certificate
+                    ? _c(
+                        "a",
+                        {
+                          attrs: {
+                            href:
+                              "/images/restaurants/" +
+                              _vm.vendor.provider_id +
+                              "/" +
+                              _vm.vendor.fssai_certificate,
+                            target: "_blank"
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                                fssai_certificate\n                            "
+                          )
+                        ]
+                      )
+                    : _vm._e()
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group col-md-6" }, [
@@ -47104,7 +47187,11 @@ var render = function() {
                             selected: _vm.vendor.business_type == "restaurant"
                           }
                         },
-                        [_vm._v("Restaurant")]
+                        [
+                          _vm._v(
+                            "\n                                    Restaurant\n                                "
+                          )
+                        ]
                       ),
                       _vm._v(" "),
                       _c(
@@ -47133,6 +47220,27 @@ var render = function() {
                     })
                   ]),
                   _vm._v(" "),
+                  _c("input", {
+                    attrs: { type: "hidden", name: "old_image" },
+                    domProps: { value: _vm.vendor.business_image }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group col-md-12" }, [
+                  _vm.vendor.business_image && !_vm.image
+                    ? _c("img", {
+                        staticStyle: { width: "100%", height: "300px" },
+                        attrs: {
+                          src:
+                            "/images/restaurants/" +
+                            _vm.vendor.provider_id +
+                            "/" +
+                            _vm.vendor.business_image
+                        },
+                        on: { click: _vm.selectImage }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
                   _vm.image
                     ? _c("div", {
                         staticClass: "imagePreviewWrapper",
@@ -47142,7 +47250,27 @@ var render = function() {
                     : _vm._e()
                 ]),
                 _vm._v(" "),
-                _vm._m(1)
+                _c("div", { staticClass: "form-group col-12" }, [
+                  _vm.vendor.provider_id
+                    ? _c("input", {
+                        attrs: { type: "hidden", name: "provider_id" },
+                        domProps: { value: _vm.vendor.provider_id }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("button", { staticClass: "btn btn-success" }, [
+                    _vm._v("Compete Registration")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-default",
+                      attrs: { type: "reset" }
+                    },
+                    [_vm._v("Cancel")]
+                  )
+                ])
               ])
             ]
           ),
@@ -47166,22 +47294,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-md-12" }, [
       _c("h4", [_vm._v("GSTIN Number?")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group col-12" }, [
-      _c("button", { staticClass: "btn btn-success" }, [
-        _vm._v("Compete Registration")
-      ]),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-default", attrs: { type: "reset" } },
-        [_vm._v("Cancel")]
-      )
     ])
   }
 ]

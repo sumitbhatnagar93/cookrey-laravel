@@ -38,6 +38,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 // Pages
 Route::get('add-service', 'Api\v1\vendor\AddFoodService@addServiceView');
 Route::get('add-service/{id}', 'Api\v1\vendor\AddFoodService@updateVendorView');
+Route::post('update-service', 'Api\v1\vendor\AddFoodService@updateVendorController');
 Route::post('add-business', 'Api\v1\vendor\AddFoodService@addServiceView');
 
 Route::get('vendors', 'Api\v1\vendor\AddFoodService@viewVendors');

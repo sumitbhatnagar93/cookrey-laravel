@@ -104,12 +104,22 @@
                             <div class="form-group col-md-6">
                                 <label class="upload-button">Upload Docs(Aadhar/PAN)
                                     <input type="file" name="adhar_pan" @input="onFileSelectForAdhar">
+                                    <input type="hidden" name="old_adhar_pan" v-bind:value="vendor.adhar_pan">
                                 </label>
+                                <a v-bind:href="'/images/restaurants/'+vendor.provider_id+'/'+vendor.adhar_pan"
+                                   target="_blank" v-if="vendor.adhar_pan">
+                                    adhar_pan</a>
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="upload-button">Upload FSSAI certificate
                                     <input type="file" name="fssai_certificate" @input="onFileSelectForFssai">
+                                    <input type="hidden" name="old_fssai_certificate"
+                                           v-bind:value="vendor.fssai_certificate">
                                 </label>
+                                <a v-bind:href="'/images/restaurants/'+vendor.provider_id+'/'+vendor.fssai_certificate"
+                                   target="_blank" v-if="vendor.fssai_certificate">
+                                    fssai_certificate
+                                </a>
                             </div>
                             <div class="form-group col-md-6">
                                 <label>Service Type</label>
@@ -118,7 +128,9 @@
                                     <option value="tiffin_service" :selected="vendor.business_type == 'tiffin_service'">
                                         Tiffin Service
                                     </option>
-                                    <option value="restaurant" :selected="vendor.business_type == 'restaurant'">Restaurant</option>
+                                    <option value="restaurant" :selected="vendor.business_type == 'restaurant'">
+                                        Restaurant
+                                    </option>
                                     <option value="bar" :selected="vendor.business_type == 'bar'">Bar</option>
                                 </select>
                             </div>
@@ -127,6 +139,12 @@
                                     <input type="file" name="business_image" ref="fileInput"
                                            @input="onFileSelect">
                                 </label>
+                                <input type="hidden" name="old_image" v-bind:value="vendor.business_image">
+                            </div>
+                            <div class="form-group col-md-12">
+                                <img v-bind:src="'/images/restaurants/'+vendor.provider_id+'/'+vendor.business_image"
+                                     style="width: 100%;height: 300px;"
+                                     v-if="vendor.business_image && !image" @click="selectImage">
                                 <div
                                     v-if="image"
                                     class="imagePreviewWrapper"
@@ -135,6 +153,8 @@
                                 </div>
                             </div>
                             <div class="form-group col-12">
+                                <input type="hidden" name="provider_id" v-if="vendor.provider_id"
+                                       v-bind:value="vendor.provider_id">
                                 <button class="btn btn-success">Compete Registration</button>
                                 <button class="btn btn-default" type="reset">Cancel</button>
                             </div>
@@ -165,7 +185,9 @@ export default {
         };
     },
     mounted() {
-        this.initMap();
+        if (this.slug == undefined) {
+            this.initMap('haridwar');
+        }
         console.log(this.slug)
         this.getVendorById()
     },
@@ -173,17 +195,20 @@ export default {
         getVendorById() {
             axios('/getVendorById/' + this.slug).then((res) => {
                 this.vendor = res.data[0]
+                this.initMap(this.vendor.business_address);
                 console.log(res.data)
             })
         },
-        initMap: function () {
-            var address = document.getElementById('business_address').value;
-            console.log(address)
-            if (address === '') {
-                address = 'bahadrabad';
+        initMap: function (address) {
+            var address2 = document.getElementById('business_address').value;
+            if (address2) {
+                address = address2
             }
             const geocoder = new google.maps.Geocoder();
             geocoder.geocode({address: address}, (results, status) => {
+
+                document.getElementById('lat').value = results[0].geometry.location.lat();
+                document.getElementById('lng').value = results[0].geometry.location.lng();
                 // console.log(results);
                 var mapOptions =
                     {
@@ -260,11 +285,17 @@ export default {
             console.log(this.image);
         },
         onSubmit() {
+            let url = '';
+            if (this.vendor) {
+                url = '/update-service';
+            } else {
+                url = '/add-business';
+            }
             let formData = new FormData(document.getElementById('serviceRegistrationForm'));
             formData.append('business_image', this.image);
             formData.append('adhar_pan', this.adhar_pan);
             formData.append('fssai_certificate', this.fssai_certificate);
-            axios.post('add-business', formData)
+            axios.post(url, formData)
                 .then(res => {
                     console.log(res);
                     this.errorMsg = '';
