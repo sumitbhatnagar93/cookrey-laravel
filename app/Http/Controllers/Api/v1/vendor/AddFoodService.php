@@ -141,7 +141,7 @@ class AddFoodService extends Controller
         unset($data['old_fssai_certificate']);
         $vendor->update($data);
         if ($vendor) {
-            return response()->json($vendor, 200);
+            return response()->json($data, 200);
         } else {
             return response()->json(["message" => "Something went wrong"], 500);
         }

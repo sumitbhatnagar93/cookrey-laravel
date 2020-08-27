@@ -2280,7 +2280,8 @@ __webpack_require__.r(__webpack_exports__);
       formData.append('adhar_pan', this.adhar_pan);
       formData.append('fssai_certificate', this.fssai_certificate);
       axios.post(url, formData).then(function (res) {
-        console.log(res);
+        console.log(res.data);
+        _this5.vendor = res.data;
         _this5.errorMsg = '';
         _this5.successMsg = 'Business added successfully';
       })["catch"](function (er) {
@@ -47215,7 +47216,11 @@ var render = function() {
                     ),
                     _c("input", {
                       ref: "fileInput",
-                      attrs: { type: "file", name: "business_image" },
+                      attrs: {
+                        type: "file",
+                        name: "business_image",
+                        alt: _vm.vendor.business_image
+                      },
                       on: { input: _vm.onFileSelect }
                     })
                   ]),

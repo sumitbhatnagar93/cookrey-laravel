@@ -137,7 +137,7 @@
                             <div class="form-group col-md-6">
                                 <label class="upload-button mt-4">Restaurant Front Image
                                     <input type="file" name="business_image" ref="fileInput"
-                                           @input="onFileSelect">
+                                           @input="onFileSelect" v-bind:alt="vendor.business_image">
                                 </label>
                                 <input type="hidden" name="old_image" v-bind:value="vendor.business_image">
                             </div>
@@ -297,7 +297,8 @@ export default {
             formData.append('fssai_certificate', this.fssai_certificate);
             axios.post(url, formData)
                 .then(res => {
-                    console.log(res);
+                    console.log(res.data);
+                    this.vendor = res.data
                     this.errorMsg = '';
                     this.successMsg = 'Business added successfully';
                 }).catch(er => {
