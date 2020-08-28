@@ -145,12 +145,6 @@
                                 <img v-bind:src="'/images/restaurants/'+vendor.provider_id+'/'+vendor.business_image"
                                      style="width: 100%;height: 300px;"
                                      v-if="vendor.business_image && !image" @click="selectImage">
-                                <div
-                                    v-if="image"
-                                    class="imagePreviewWrapper"
-                                    :style="{ 'background-image': `url(${image})` }"
-                                    @click="selectImage">
-                                </div>
                             </div>
                             <div class="form-group col-12">
                                 <input type="hidden" name="provider_id" v-if="vendor.provider_id"
@@ -160,6 +154,9 @@
                             </div>
                         </div>
                     </form>
+                    <img v-bind:src="image"
+                         style="width: 100%;height: 300px;"
+                         v-if="image" @click="selectImage">
                     <strong class="text-success">{{ this.successMsg }}</strong>
                     <strong class="text-danger">{{ this.errorMsg }}</strong>
                 </div>
@@ -272,6 +269,7 @@ export default {
             reader2.readAsDataURL(fssai_certificate[0]);
         },
         onFileSelect(e) {
+            e.preventDefault();
             const input = this.$refs.fileInput
             const file = input.files
             if (file && file[0]) {
@@ -282,7 +280,6 @@ export default {
                 reader.readAsDataURL(file[0])
                 this.$emit('input', file[0])
             }
-            console.log(this.image);
         },
         onSubmit() {
             let url = '';

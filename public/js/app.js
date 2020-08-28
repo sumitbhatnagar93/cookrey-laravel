@@ -2126,9 +2126,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AddFoodService",
   props: ['slug'],
@@ -2248,6 +2245,7 @@ __webpack_require__.r(__webpack_exports__);
     onFileSelect: function onFileSelect(e) {
       var _this4 = this;
 
+      e.preventDefault();
       var input = this.$refs.fileInput;
       var file = input.files;
 
@@ -2261,8 +2259,6 @@ __webpack_require__.r(__webpack_exports__);
         reader.readAsDataURL(file[0]);
         this.$emit('input', file[0]);
       }
-
-      console.log(this.image);
     },
     onSubmit: function onSubmit() {
       var _this5 = this;
@@ -2439,6 +2435,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -47244,14 +47241,6 @@ var render = function() {
                         },
                         on: { click: _vm.selectImage }
                       })
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.image
-                    ? _c("div", {
-                        staticClass: "imagePreviewWrapper",
-                        style: { "background-image": "url(" + _vm.image + ")" },
-                        on: { click: _vm.selectImage }
-                      })
                     : _vm._e()
                 ]),
                 _vm._v(" "),
@@ -47279,6 +47268,14 @@ var render = function() {
               ])
             ]
           ),
+          _vm._v(" "),
+          _vm.image
+            ? _c("img", {
+                staticStyle: { width: "100%", height: "300px" },
+                attrs: { src: _vm.image },
+                on: { click: _vm.selectImage }
+              })
+            : _vm._e(),
           _vm._v(" "),
           _c("strong", { staticClass: "text-success" }, [
             _vm._v(_vm._s(this.successMsg))
@@ -47575,8 +47572,12 @@ var render = function() {
                   { attrs: { href: "add-service/" + vendor.provider_id } },
                   [_vm._v("Edit")]
                 ),
-                _vm._v(" / "),
-                _c("a", { attrs: { href: "#delete" } }, [_vm._v("Delete")])
+                _vm._v(" /\n                    "),
+                _c(
+                  "a",
+                  { attrs: { href: "delete-service/" + vendor.provider_id } },
+                  [_vm._v("Delete")]
+                )
               ])
             ])
           }),

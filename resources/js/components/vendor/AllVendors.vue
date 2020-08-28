@@ -29,7 +29,8 @@
                     <td>{{ vendor.business_type }}</td>
                     <td>{{ vendor.business_address }}</td>
                     <td>{{ vendor.gstin_number }}</td>
-                    <td><a v-bind:href="'add-service/'+vendor.provider_id">Edit</a> / <a href="#delete">Delete</a></td>
+                    <td><a v-bind:href="'add-service/'+vendor.provider_id">Edit</a> /
+                        <a v-bind:href="'delete-service/'+vendor.provider_id">Delete</a></td>
                 </tr>
                 </tbody>
                 <tfoot class="bg-info text-light">

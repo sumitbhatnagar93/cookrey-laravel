@@ -58,6 +58,9 @@ class AddFoodService extends Controller
                     $data['fssai_certificate'] = '';
                 }
 
+                unset($data['old_image']);
+                unset($data['old_adhar_pan']);
+                unset($data['old_fssai_certificate']);
                 $data['provider_id'] = $providerID;
                 $postedData = DB::table('services')->insert($data);
                 if ($postedData) {
@@ -145,5 +148,11 @@ class AddFoodService extends Controller
         } else {
             return response()->json(["message" => "Something went wrong"], 500);
         }
+    }
+
+    public function deleteVendorController($providerId)
+    {
+        $result = DB::table('services')->where('provider_id', $providerId)->delete();
+        return redirect('vendors');
     }
 }
