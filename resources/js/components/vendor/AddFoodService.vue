@@ -10,13 +10,13 @@
                             <div class="form-group col-md-6">
                                 <label>Tiffin service name </label>
                                 <input type="text" required name="business_name" placeholder="Product Title"
-                                       v-bind:value="vendor.business_name"
+                                       v-model="vendor.business_name"
                                        class="form-control">
                             </div>
                             <div class="form-group col-md-6">
                                 <label>Owner name</label>
                                 <input type="text" required name="business_owner_name" placeholder="Product Title"
-                                       class="form-control" v-bind:value="vendor.business_owner_name">
+                                       class="form-control" v-model="vendor.business_owner_name">
                             </div>
                             <div class="form-group col-12">
                                 <label>Description</label>
@@ -36,17 +36,17 @@
                             <div class="form-group col-md-6">
                                 <label>Owner Contact Number</label>
                                 <input type="text" required name="business_owner_contact" minlength="10" maxlength="10"
-                                       class="form-control" v-bind:value="vendor.business_owner_contact">
+                                       class="form-control" v-model="vendor.business_owner_contact">
                             </div>
                             <div class="form-group col-md-6">
                                 <label>Owner Email</label>
                                 <input type="email" required name="business_owner_email" class="form-control"
-                                       v-bind:value="vendor.business_owner_email">
+                                       v-model="vendor.business_owner_email">
                             </div>
                             <div class="form-group col-md-6">
-                                <label>City</label>
+                                <label>City</label> city is : {{ vendor.business_city }}
                                 <input type="text" required name="business_city" class="form-control"
-                                       v-bind:value="vendor.business_city">
+                                       v-model="vendor.business_city">
                             </div>
                             <div class="col-md-12">
                                 <h4>GSTIN Number?</h4>
@@ -64,7 +64,7 @@
                             <div class="form-group col-md-6">
                                 <label>Provide GSTIN Number</label>
                                 <input type="text" required name="gstin_number" class="form-control"
-                                       v-bind:value="vendor.gstin_number">
+                                       v-model="vendor.gstin_number">
                             </div>
                             <div class="form-group col-md-6">
                                 <label>Address</label>
@@ -74,7 +74,7 @@
                             <div class="form-group col-md-6">
                                 <label>Postal Code</label>
                                 <input type="text" required name="postal_code" class="form-control"
-                                       v-bind:value="vendor.postal_code">
+                                       v-model="vendor.postal_code">
                             </div>
                             <div class="col-md-12">
                                 <div id="map" ref="map" style="height: 400px;"></div>
@@ -83,28 +83,28 @@
                             <div class="form-group col-md-6">
                                 <label>longitude</label>
                                 <input type="text" required name="lat" class="form-control" id="lat"
-                                       v-bind:value="vendor.lat">
+                                       v-model="vendor.lat">
                             </div>
                             <div class="form-group col-md-6">
                                 <label>latitude</label>
                                 <input type="text" required name="lng" class="form-control" id="lng"
-                                       v-bind:value="vendor.lng">
+                                       v-model="vendor.lng">
                             </div>
 
                             <div class="form-group col-md-6">
                                 <label>FSSAI registration name</label>
                                 <input type="text" required name="fssai_registered_name" class="form-control"
-                                       v-bind:value="vendor.fssai_registered_name">
+                                       v-model="vendor.fssai_registered_name">
                             </div>
                             <div class="form-group col-md-6">
                                 <label>Address on FSSAI</label>
                                 <input type="text" required name="fssai_address" class="form-control"
-                                       v-bind:value="vendor.fssai_address">
+                                       v-model="vendor.fssai_address">
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="upload-button">Upload Docs(Aadhar/PAN)
                                     <input type="file" name="adhar_pan" @input="onFileSelectForAdhar">
-                                    <input type="hidden" name="old_adhar_pan" v-bind:value="vendor.adhar_pan">
+                                    <input type="hidden" name="old_adhar_pan" v-model="vendor.adhar_pan">
                                 </label>
                                 <a v-bind:href="'/images/restaurants/'+vendor.provider_id+'/'+vendor.adhar_pan"
                                    target="_blank" v-if="vendor.adhar_pan">
@@ -114,7 +114,7 @@
                                 <label class="upload-button">Upload FSSAI certificate
                                     <input type="file" name="fssai_certificate" @input="onFileSelectForFssai">
                                     <input type="hidden" name="old_fssai_certificate"
-                                           v-bind:value="vendor.fssai_certificate">
+                                           v-model="vendor.fssai_certificate">
                                 </label>
                                 <a v-bind:href="'/images/restaurants/'+vendor.provider_id+'/'+vendor.fssai_certificate"
                                    target="_blank" v-if="vendor.fssai_certificate">
@@ -139,7 +139,7 @@
                                     <input type="file" name="business_image" ref="fileInput"
                                            @input="onFileSelect" v-bind:alt="vendor.business_image">
                                 </label>
-                                <input type="hidden" name="old_image" v-bind:value="vendor.business_image">
+                                <input type="hidden" name="old_image" v-model="vendor.business_image">
                             </div>
                             <div class="form-group col-md-12">
                                 <img v-bind:src="'/images/restaurants/'+vendor.provider_id+'/'+vendor.business_image"
@@ -147,8 +147,8 @@
                                      v-if="vendor.business_image && !image" @click="selectImage">
                             </div>
                             <div class="form-group col-12">
-                                <input type="hidden" name="provider_id" v-if="vendor.provider_id"
-                                       v-bind:value="vendor.provider_id">
+                                <input v-if="vendor.provider_id" type="hidden" name="provider_id"
+                                       v-model="vendor.provider_id">
                                 <button class="btn btn-success">Compete Registration</button>
                                 <button class="btn btn-default" type="reset">Cancel</button>
                             </div>
@@ -178,7 +178,27 @@ export default {
             fssai_certificate: '',
             lat: '',
             lng: '',
-            vendor: ''
+            business_city: '',
+            vendor: {
+                business_address: '',
+                business_city: '',
+                business_map_lat: '',
+                business_map_lng: '',
+                business_name: '',
+                business_owner_contact: '',
+                business_owner_email: '',
+                business_owner_name: '',
+                business_type: '',
+                description: '',
+                fssai_address: '',
+                fssai_registered_name: '',
+                gstin_number: '',
+                is_business_owner: '',
+                is_gstin_number: '',
+                lat: '',
+                lng: '',
+                postal_code: '',
+            },
         };
     },
     mounted() {
@@ -197,15 +217,15 @@ export default {
             })
         },
         initMap: function (address) {
+            let vue = this;
             var address2 = document.getElementById('business_address').value;
             if (address2) {
                 address = address2
             }
             const geocoder = new google.maps.Geocoder();
             geocoder.geocode({address: address}, (results, status) => {
-
-                document.getElementById('lat').value = results[0].geometry.location.lat();
-                document.getElementById('lng').value = results[0].geometry.location.lng();
+                document.getElementById('lat').value = vue.vendor.lat = results[0].geometry.location.lat();
+                document.getElementById('lng').value = vue.vendor.lng = results[0].geometry.location.lng();
                 // console.log(results);
                 var mapOptions =
                     {
@@ -228,8 +248,8 @@ export default {
                 });
                 google.maps.event.addListener(marker, 'dragend', function (event) {
                     console.log(event.latLng.lat(), event.latLng.lng())
-                    document.getElementById('lat').value = event.latLng.lat();
-                    document.getElementById('lng').value = event.latLng.lng();
+                    document.getElementById('lat').value = vue.lat = event.latLng.lat();
+                    document.getElementById('lng').value = vue.lng = event.latLng.lng();
                     localStorage.setItem('latlng', JSON.stringify({lat: event.latLng.lat(), lng: event.latLng.lng}));
                     geocoder.geocode({
                         location: {
@@ -278,12 +298,12 @@ export default {
                     this.image = e.target.result
                 }
                 reader.readAsDataURL(file[0])
-                this.$emit('input', file[0])
+                //  this.$emit('input', file[0])
             }
         },
         onSubmit() {
             let url = '';
-            if (this.vendor) {
+            if (this.slug) {
                 url = '/update-service';
             } else {
                 url = '/add-business';

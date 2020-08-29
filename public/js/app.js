@@ -2138,7 +2138,27 @@ __webpack_require__.r(__webpack_exports__);
       fssai_certificate: '',
       lat: '',
       lng: '',
-      vendor: ''
+      business_city: '',
+      vendor: {
+        business_address: '',
+        business_city: '',
+        business_map_lat: '',
+        business_map_lng: '',
+        business_name: '',
+        business_owner_contact: '',
+        business_owner_email: '',
+        business_owner_name: '',
+        business_type: '',
+        description: '',
+        fssai_address: '',
+        fssai_registered_name: '',
+        gstin_number: '',
+        is_business_owner: '',
+        is_gstin_number: '',
+        lat: '',
+        lng: '',
+        postal_code: ''
+      }
     };
   },
   mounted: function mounted() {
@@ -2162,6 +2182,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     initMap: function initMap(address) {
+      var vue = this;
       var address2 = document.getElementById('business_address').value;
 
       if (address2) {
@@ -2172,8 +2193,8 @@ __webpack_require__.r(__webpack_exports__);
       geocoder.geocode({
         address: address
       }, function (results, status) {
-        document.getElementById('lat').value = results[0].geometry.location.lat();
-        document.getElementById('lng').value = results[0].geometry.location.lng(); // console.log(results);
+        document.getElementById('lat').value = vue.vendor.lat = results[0].geometry.location.lat();
+        document.getElementById('lng').value = vue.vendor.lng = results[0].geometry.location.lng(); // console.log(results);
 
         var mapOptions = {
           zoom: 16,
@@ -2194,8 +2215,8 @@ __webpack_require__.r(__webpack_exports__);
         });
         google.maps.event.addListener(marker, 'dragend', function (event) {
           console.log(event.latLng.lat(), event.latLng.lng());
-          document.getElementById('lat').value = event.latLng.lat();
-          document.getElementById('lng').value = event.latLng.lng();
+          document.getElementById('lat').value = vue.lat = event.latLng.lat();
+          document.getElementById('lng').value = vue.lng = event.latLng.lng();
           localStorage.setItem('latlng', JSON.stringify({
             lat: event.latLng.lat(),
             lng: event.latLng.lng
@@ -2256,8 +2277,7 @@ __webpack_require__.r(__webpack_exports__);
           _this4.image = e.target.result;
         };
 
-        reader.readAsDataURL(file[0]);
-        this.$emit('input', file[0]);
+        reader.readAsDataURL(file[0]); //  this.$emit('input', file[0])
       }
     },
     onSubmit: function onSubmit() {
@@ -2265,7 +2285,7 @@ __webpack_require__.r(__webpack_exports__);
 
       var url = '';
 
-      if (this.vendor) {
+      if (this.slug) {
         url = '/update-service';
       } else {
         url = '/add-business';
@@ -46835,6 +46855,14 @@ var render = function() {
                   _c("label", [_vm._v("Tiffin service name ")]),
                   _vm._v(" "),
                   _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.vendor.business_name,
+                        expression: "vendor.business_name"
+                      }
+                    ],
                     staticClass: "form-control",
                     attrs: {
                       type: "text",
@@ -46842,7 +46870,19 @@ var render = function() {
                       name: "business_name",
                       placeholder: "Product Title"
                     },
-                    domProps: { value: _vm.vendor.business_name }
+                    domProps: { value: _vm.vendor.business_name },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.vendor,
+                          "business_name",
+                          $event.target.value
+                        )
+                      }
+                    }
                   })
                 ]),
                 _vm._v(" "),
@@ -46850,6 +46890,14 @@ var render = function() {
                   _c("label", [_vm._v("Owner name")]),
                   _vm._v(" "),
                   _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.vendor.business_owner_name,
+                        expression: "vendor.business_owner_name"
+                      }
+                    ],
                     staticClass: "form-control",
                     attrs: {
                       type: "text",
@@ -46857,7 +46905,19 @@ var render = function() {
                       name: "business_owner_name",
                       placeholder: "Product Title"
                     },
-                    domProps: { value: _vm.vendor.business_owner_name }
+                    domProps: { value: _vm.vendor.business_owner_name },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.vendor,
+                          "business_owner_name",
+                          $event.target.value
+                        )
+                      }
+                    }
                   })
                 ]),
                 _vm._v(" "),
@@ -46904,6 +46964,14 @@ var render = function() {
                   _c("label", [_vm._v("Owner Contact Number")]),
                   _vm._v(" "),
                   _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.vendor.business_owner_contact,
+                        expression: "vendor.business_owner_contact"
+                      }
+                    ],
                     staticClass: "form-control",
                     attrs: {
                       type: "text",
@@ -46912,7 +46980,19 @@ var render = function() {
                       minlength: "10",
                       maxlength: "10"
                     },
-                    domProps: { value: _vm.vendor.business_owner_contact }
+                    domProps: { value: _vm.vendor.business_owner_contact },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.vendor,
+                          "business_owner_contact",
+                          $event.target.value
+                        )
+                      }
+                    }
                   })
                 ]),
                 _vm._v(" "),
@@ -46920,27 +47000,71 @@ var render = function() {
                   _c("label", [_vm._v("Owner Email")]),
                   _vm._v(" "),
                   _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.vendor.business_owner_email,
+                        expression: "vendor.business_owner_email"
+                      }
+                    ],
                     staticClass: "form-control",
                     attrs: {
                       type: "email",
                       required: "",
                       name: "business_owner_email"
                     },
-                    domProps: { value: _vm.vendor.business_owner_email }
+                    domProps: { value: _vm.vendor.business_owner_email },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.vendor,
+                          "business_owner_email",
+                          $event.target.value
+                        )
+                      }
+                    }
                   })
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group col-md-6" }, [
                   _c("label", [_vm._v("City")]),
-                  _vm._v(" "),
+                  _vm._v(
+                    " city is : " +
+                      _vm._s(_vm.vendor.business_city) +
+                      "\n                            "
+                  ),
                   _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.vendor.business_city,
+                        expression: "vendor.business_city"
+                      }
+                    ],
                     staticClass: "form-control",
                     attrs: {
                       type: "text",
                       required: "",
                       name: "business_city"
                     },
-                    domProps: { value: _vm.vendor.business_city }
+                    domProps: { value: _vm.vendor.business_city },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.vendor,
+                          "business_city",
+                          $event.target.value
+                        )
+                      }
+                    }
                   })
                 ]),
                 _vm._v(" "),
@@ -46976,9 +47100,29 @@ var render = function() {
                   _c("label", [_vm._v("Provide GSTIN Number")]),
                   _vm._v(" "),
                   _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.vendor.gstin_number,
+                        expression: "vendor.gstin_number"
+                      }
+                    ],
                     staticClass: "form-control",
                     attrs: { type: "text", required: "", name: "gstin_number" },
-                    domProps: { value: _vm.vendor.gstin_number }
+                    domProps: { value: _vm.vendor.gstin_number },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.vendor,
+                          "gstin_number",
+                          $event.target.value
+                        )
+                      }
+                    }
                   })
                 ]),
                 _vm._v(" "),
@@ -47003,9 +47147,25 @@ var render = function() {
                   _c("label", [_vm._v("Postal Code")]),
                   _vm._v(" "),
                   _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.vendor.postal_code,
+                        expression: "vendor.postal_code"
+                      }
+                    ],
                     staticClass: "form-control",
                     attrs: { type: "text", required: "", name: "postal_code" },
-                    domProps: { value: _vm.vendor.postal_code }
+                    domProps: { value: _vm.vendor.postal_code },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.vendor, "postal_code", $event.target.value)
+                      }
+                    }
                   })
                 ]),
                 _vm._v(" "),
@@ -47021,6 +47181,14 @@ var render = function() {
                   _c("label", [_vm._v("longitude")]),
                   _vm._v(" "),
                   _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.vendor.lat,
+                        expression: "vendor.lat"
+                      }
+                    ],
                     staticClass: "form-control",
                     attrs: {
                       type: "text",
@@ -47028,7 +47196,15 @@ var render = function() {
                       name: "lat",
                       id: "lat"
                     },
-                    domProps: { value: _vm.vendor.lat }
+                    domProps: { value: _vm.vendor.lat },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.vendor, "lat", $event.target.value)
+                      }
+                    }
                   })
                 ]),
                 _vm._v(" "),
@@ -47036,6 +47212,14 @@ var render = function() {
                   _c("label", [_vm._v("latitude")]),
                   _vm._v(" "),
                   _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.vendor.lng,
+                        expression: "vendor.lng"
+                      }
+                    ],
                     staticClass: "form-control",
                     attrs: {
                       type: "text",
@@ -47043,7 +47227,15 @@ var render = function() {
                       name: "lng",
                       id: "lng"
                     },
-                    domProps: { value: _vm.vendor.lng }
+                    domProps: { value: _vm.vendor.lng },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.vendor, "lng", $event.target.value)
+                      }
+                    }
                   })
                 ]),
                 _vm._v(" "),
@@ -47051,13 +47243,33 @@ var render = function() {
                   _c("label", [_vm._v("FSSAI registration name")]),
                   _vm._v(" "),
                   _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.vendor.fssai_registered_name,
+                        expression: "vendor.fssai_registered_name"
+                      }
+                    ],
                     staticClass: "form-control",
                     attrs: {
                       type: "text",
                       required: "",
                       name: "fssai_registered_name"
                     },
-                    domProps: { value: _vm.vendor.fssai_registered_name }
+                    domProps: { value: _vm.vendor.fssai_registered_name },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.vendor,
+                          "fssai_registered_name",
+                          $event.target.value
+                        )
+                      }
+                    }
                   })
                 ]),
                 _vm._v(" "),
@@ -47065,13 +47277,33 @@ var render = function() {
                   _c("label", [_vm._v("Address on FSSAI")]),
                   _vm._v(" "),
                   _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.vendor.fssai_address,
+                        expression: "vendor.fssai_address"
+                      }
+                    ],
                     staticClass: "form-control",
                     attrs: {
                       type: "text",
                       required: "",
                       name: "fssai_address"
                     },
-                    domProps: { value: _vm.vendor.fssai_address }
+                    domProps: { value: _vm.vendor.fssai_address },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.vendor,
+                          "fssai_address",
+                          $event.target.value
+                        )
+                      }
+                    }
                   })
                 ]),
                 _vm._v(" "),
@@ -47086,8 +47318,24 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.vendor.adhar_pan,
+                          expression: "vendor.adhar_pan"
+                        }
+                      ],
                       attrs: { type: "hidden", name: "old_adhar_pan" },
-                      domProps: { value: _vm.vendor.adhar_pan }
+                      domProps: { value: _vm.vendor.adhar_pan },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.vendor, "adhar_pan", $event.target.value)
+                        }
+                      }
                     })
                   ]),
                   _vm._v(" "),
@@ -47120,8 +47368,28 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.vendor.fssai_certificate,
+                          expression: "vendor.fssai_certificate"
+                        }
+                      ],
                       attrs: { type: "hidden", name: "old_fssai_certificate" },
-                      domProps: { value: _vm.vendor.fssai_certificate }
+                      domProps: { value: _vm.vendor.fssai_certificate },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.vendor,
+                            "fssai_certificate",
+                            $event.target.value
+                          )
+                        }
+                      }
                     })
                   ]),
                   _vm._v(" "),
@@ -47223,8 +47491,28 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.vendor.business_image,
+                        expression: "vendor.business_image"
+                      }
+                    ],
                     attrs: { type: "hidden", name: "old_image" },
-                    domProps: { value: _vm.vendor.business_image }
+                    domProps: { value: _vm.vendor.business_image },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.vendor,
+                          "business_image",
+                          $event.target.value
+                        )
+                      }
+                    }
                   })
                 ]),
                 _vm._v(" "),
@@ -47247,8 +47535,28 @@ var render = function() {
                 _c("div", { staticClass: "form-group col-12" }, [
                   _vm.vendor.provider_id
                     ? _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.vendor.provider_id,
+                            expression: "vendor.provider_id"
+                          }
+                        ],
                         attrs: { type: "hidden", name: "provider_id" },
-                        domProps: { value: _vm.vendor.provider_id }
+                        domProps: { value: _vm.vendor.provider_id },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.vendor,
+                              "provider_id",
+                              $event.target.value
+                            )
+                          }
+                        }
                       })
                     : _vm._e(),
                   _vm._v(" "),
