@@ -88,6 +88,7 @@ class RegisterController extends Controller
 
     public function socialRegister(Request $request): User
     {
+
         /**
          * Check if details are valid
          */
@@ -100,6 +101,6 @@ class RegisterController extends Controller
             'picture' => $request->get('picture'),
         ]);
 
-        return $user;
+        return $request;
     }
 }
