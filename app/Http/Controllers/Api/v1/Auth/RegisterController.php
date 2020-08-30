@@ -88,11 +88,11 @@ class RegisterController extends Controller
 
     public function socialRegister(Request $request)
     {
-//        $user = User::create([
-//            'name' => $request->get('name'),
-//            'email' => $request->get('email'),
-//            'picture' => $request->get('picture'),
-//        ]);
+        $user = User::create([
+            'name' => $request->get('name'),
+            'email' => $request->get('email'),
+            'picture' => $request->get('picture'),
+        ]);
 
         return response()->json($request);
     }
