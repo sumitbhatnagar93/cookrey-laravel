@@ -86,15 +86,8 @@ class RegisterController extends Controller
         return response()->json($user, $this->successStatus);
     }
 
-    public function socialRegister(Request $request): User
+    public function socialRegister(Request $request)
     {
-
-        /**
-         * Check if details are valid
-         */
-        /**
-         * @var User $user
-         */
 //        $user = User::create([
 //            'name' => $request->get('name'),
 //            'email' => $request->get('email'),
