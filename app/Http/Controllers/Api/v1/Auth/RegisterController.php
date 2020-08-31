@@ -106,8 +106,8 @@ class RegisterController extends Controller
             }
         }
         $user->picture = $data['picture'];
-        $user['token'] = $user->createToken('Cookrey')->accessToken;
         $user->save();
+        $user['token'] = $user->createToken('Cookrey')->accessToken;
         return response()->json($user, $this->successStatus);
     }
 
