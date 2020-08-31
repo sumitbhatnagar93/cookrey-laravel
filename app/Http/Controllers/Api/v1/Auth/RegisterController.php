@@ -86,6 +86,31 @@ class RegisterController extends Controller
         return response()->json($user, $this->successStatus);
     }
 
+    public function updateImage(Request $request)
+    {
+        $data = $request->all();
+        $uploadPath = public_path('/images/profile/');
+        $user = User::where('email', $request->get('email'))->first();
+        if ($user) {
+            if ($request->hasFile('picture')) {
+                if ($data['old_picutre']) {
+                    unlink($uploadPath . '/' . $data['old_picutre']);
+                }
+                $file = $request->file('picture');
+                $filename = $file->getClientOriginalName();
+                $picture = $filename;
+                $file->move($uploadPath, $picture);
+                $data['picture'] = $picture;
+            } else {
+                $data['picture'] = $data['old_picutre'];
+            }
+        }
+        $user->picture = $data['picture'];
+        $user['token'] = $user->createToken('Cookrey')->accessToken;
+        $user->save();
+        return response()->json($user, $this->successStatus);
+    }
+
     public function socialRegister(Request $request)
     {
         $user = User::create([
