@@ -93,8 +93,8 @@ class RegisterController extends Controller
         $user = User::where('email', $request->get('email'))->first();
         if ($user) {
             if ($request->hasFile('picture')) {
-                if ($data['old_picutre']) {
-                    unlink($uploadPath . '/' . $data['old_picutre']);
+                if ($request->get('old_picture')) {
+                    unlink($uploadPath . '/' . $request->get('old_picture'));
                 }
                 $file = $request->file('picture');
                 $filename = $file->getClientOriginalName();
@@ -102,7 +102,7 @@ class RegisterController extends Controller
                 $file->move($uploadPath, $picture);
                 $data['picture'] = $picture;
             } else {
-                $data['picture'] = $data['old_picutre'];
+                $data['picture'] = $request->get('old_picture');
             }
         }
         $user->picture = $data['picture'];
