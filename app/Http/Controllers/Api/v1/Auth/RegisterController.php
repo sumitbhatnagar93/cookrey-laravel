@@ -101,14 +101,17 @@ class RegisterController extends Controller
                 $picture = $filename;
                 $file->move($uploadPath, $picture);
                 $data['picture'] = $picture;
+                $user->picture = $data['picture'];
+                $user->save();
+                $user['token'] = $user->createToken('Cookrey')->accessToken;
+                return response()->json($user, $this->successStatus);
             } else {
-                $data['picture'] = $request->get('old_picture');
+                //  $data['picture'] = $request->get('old_picture');
+                return response()->json('no image found', $this->successStatus);
             }
+
         }
-        $user->picture = $data['picture'];
-        $user->save();
-        $user['token'] = $user->createToken('Cookrey')->accessToken;
-        return response()->json($request, $this->successStatus);
+
     }
 
     public function socialRegister(Request $request)
