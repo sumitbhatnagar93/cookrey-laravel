@@ -93,9 +93,9 @@ class RegisterController extends Controller
         $user = User::where('email', $request->get('email'))->first();
         if ($user) {
             if ($request->hasFile('picture')) {
-//                if ($request->get('old_picture')) {
-//                    unlink($uploadPath . '/' . $request->get('old_picture'));
-//                }
+                if ($request->get('old_picture') && !filter_var($request->get('old_picture'), FILTER_VALIDATE_URL)) {
+                    unlink($uploadPath . '/' . $request->get('old_picture'));
+                }
                 $file = $request->file('picture');
                 $filename = $file->getClientOriginalName();
                 $picture = $filename;
