@@ -94,7 +94,9 @@ class RegisterController extends Controller
         if ($user) {
             if ($request->hasFile('picture')) {
                 if ($request->get('old_picture') && !filter_var($request->get('old_picture'), FILTER_VALIDATE_URL)) {
-                    unlink($uploadPath . '/' . $request->get('old_picture'));
+                    if ($this->does_url_exists($request->get('old_picture'))) {
+                        unlink($uploadPath . '/' . $request->get('old_picture'));
+                    }
                 }
                 $file = $request->file('picture');
                 $filename = $file->getClientOriginalName();
@@ -123,5 +125,21 @@ class RegisterController extends Controller
         ]);
 
         return response()->json($request);
+    }
+
+    public function does_url_exists($url)
+    {
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_NOBODY, true);
+        curl_exec($ch);
+        $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+        if ($code == 200) {
+            $status = true;
+        } else {
+            $status = false;
+        }
+        curl_close($ch);
+        return $status;
     }
 }
