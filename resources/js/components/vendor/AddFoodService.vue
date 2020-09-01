@@ -298,6 +298,7 @@ export default {
                     this.image = e.target.result
                 }
                 reader.readAsDataURL(file[0])
+                console.log(this.image)
                 //  this.$emit('input', file[0])
             }
         },

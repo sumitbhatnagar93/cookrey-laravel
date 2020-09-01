@@ -2277,7 +2277,8 @@ __webpack_require__.r(__webpack_exports__);
           _this4.image = e.target.result;
         };
 
-        reader.readAsDataURL(file[0]); //  this.$emit('input', file[0])
+        reader.readAsDataURL(file[0]);
+        console.log(this.image); //  this.$emit('input', file[0])
       }
     },
     onSubmit: function onSubmit() {
