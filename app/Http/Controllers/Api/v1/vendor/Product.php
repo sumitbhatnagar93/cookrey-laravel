@@ -57,4 +57,14 @@ class Product extends Controller
             return response()->json(["message" => "Something went wrong"], 500);
         }
     }
+
+    public function getSingleProductById($productID)
+    {
+        $data = DB::table('product')->where('id', $productID)->get();
+        if ($data) {
+            return response()->json($data, 200);
+        } else {
+            return response()->json(["message" => "Something went wrong"], 500);
+        }
+    }
 }
