@@ -2393,18 +2393,96 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "addProductComponent",
   data: function data() {
     return {
       image: '',
-      vendors: []
+      vendors: [],
+      haveAddon: false,
+      feilds: [{
+        name: null,
+        sections: [],
+        subfeilds: [{
+          name: null
+        }]
+      }]
     };
   },
   created: function created() {
     this.getVendors();
   },
   methods: {
+    haveAddons: function haveAddons() {
+      this.haveAddon = !this.haveAddon;
+      console.log(this.haveAddon);
+    },
+    addNewRules: function addNewRules() {
+      this.feilds.push({
+        name: null,
+        sections: [],
+        subfeilds: [{
+          name: null
+        }]
+      });
+    },
+    addChild: function addChild(bok) {
+      bok.subfeilds.push({});
+    },
+    remove: function remove(bok, index) {
+      bok.subfeilds.splice(index, 1);
+    },
+    addMoreAddonSection: function addMoreAddonSection() {
+      this.addonSection.push(this.addonSection.length + 1);
+      console.log(this.addonSection);
+    },
     getVendors: function getVendors() {
       var _this = this;
 
@@ -2439,7 +2517,7 @@ __webpack_require__.r(__webpack_exports__);
       var formData = new FormData(document.getElementById('productForm'));
       formData.append('image', this.image);
       axios.post('upload-product', formData).then(function (res) {
-        console.log(res);
+        console.log(res.data);
       });
     }
   }
@@ -47678,7 +47756,7 @@ var render = function() {
                 _vm._v(" "),
                 _vm._m(4),
                 _vm._v(" "),
-                _c("div", { staticClass: "form-group col-6" }, [
+                _c("div", { staticClass: "form-group col-md-6" }, [
                   _c("label", [_vm._v("Select Vendor")]),
                   _vm._v(" "),
                   _c(
@@ -47712,13 +47790,137 @@ var render = function() {
                 _vm._v(" "),
                 _vm._m(5),
                 _vm._v(" "),
-                _vm._m(6)
+                _vm._m(6),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-12 form-group" }, [
+                  _c("label", { attrs: { for: "add-ons" } }, [
+                    _vm._v("Add-ons?")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    attrs: {
+                      type: "checkbox",
+                      name: "haveAddOns",
+                      id: "add-ons",
+                      value: "yes"
+                    },
+                    on: { click: _vm.haveAddons }
+                  })
+                ]),
+                _vm._v(" "),
+                _vm.haveAddon
+                  ? _c(
+                      "div",
+                      { staticClass: "container" },
+                      [
+                        _vm._l(_vm.feilds, function(bok, i) {
+                          return _c(
+                            "section",
+                            { staticClass: "border m-2 p-3" },
+                            [
+                              _c("h3", [_vm._v("Add-ons " + _vm._s(i + 1))]),
+                              _vm._v(" "),
+                              _vm._m(7, true),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  ref: "add-on",
+                                  refInFor: true,
+                                  staticClass: "add-on-area"
+                                },
+                                _vm._l(bok.subfeilds, function(child, k) {
+                                  return _c(
+                                    "div",
+                                    { key: k, staticClass: "row" },
+                                    [
+                                      _vm._m(8, true),
+                                      _vm._v(" "),
+                                      _vm._m(9, true),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "col-4" }, [
+                                        _c("span", [
+                                          _c("i", {
+                                            directives: [
+                                              {
+                                                name: "show",
+                                                rawName: "v-show",
+                                                value:
+                                                  k ||
+                                                  (!k &&
+                                                    bok.subfeilds.length > 1),
+                                                expression:
+                                                  "k || ( !k && bok.subfeilds.length > 1)"
+                                              }
+                                            ],
+                                            staticClass:
+                                              "bg-danger fa fa-minus fas p-2 rounded-circle text-white",
+                                            on: {
+                                              click: function($event) {
+                                                return _vm.remove(bok, k)
+                                              }
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("i", {
+                                            directives: [
+                                              {
+                                                name: "show",
+                                                rawName: "v-show",
+                                                value:
+                                                  k ===
+                                                  bok.subfeilds.length - 1,
+                                                expression:
+                                                  "k === bok.subfeilds.length-1"
+                                              }
+                                            ],
+                                            staticClass:
+                                              "bg-info fa fa-plus fas p-2 rounded-circle text-white",
+                                            on: {
+                                              click: function($event) {
+                                                return _vm.addChild(bok)
+                                              }
+                                            }
+                                          })
+                                        ])
+                                      ])
+                                    ]
+                                  )
+                                }),
+                                0
+                              )
+                            ]
+                          )
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-12 form-group" }, [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "btn btn-primary text-light",
+                              on: { click: _vm.addNewRules }
+                            },
+                            [
+                              _vm._v(
+                                "Add More\n                                    Section"
+                              )
+                            ]
+                          )
+                        ])
+                      ],
+                      2
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm._m(10)
               ])
             ]
           )
         ])
       ])
-    ])
+    ]),
+    _vm._v(" "),
+    _c("hr")
   ])
 }
 var staticRenderFns = [
@@ -47726,7 +47928,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group col-6" }, [
+    return _c("div", { staticClass: "form-group col-md-6" }, [
       _c("label", [_vm._v("Title")]),
       _vm._v(" "),
       _c("input", {
@@ -47739,7 +47941,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group col-6" }, [
+    return _c("div", { staticClass: "form-group col-md-6" }, [
       _c("label", [_vm._v("rating")]),
       _vm._v(" "),
       _c("input", {
@@ -47752,7 +47954,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group col-6" }, [
+    return _c("div", { staticClass: "form-group col-md-6" }, [
       _c("label", [_vm._v("Price")]),
       _vm._v(" "),
       _c("input", {
@@ -47778,7 +47980,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group col-6" }, [
+    return _c("div", { staticClass: "form-group col-md-6" }, [
       _c("label", [_vm._v("Type")]),
       _vm._v(" "),
       _c("select", { staticClass: "form-control", attrs: { name: "type" } }, [
@@ -47794,7 +47996,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group col-6" }, [
+    return _c("div", { staticClass: "form-group col-md-6" }, [
       _c("label", [_vm._v("Food Type")]),
       _vm._v(" "),
       _c(
@@ -47814,8 +48016,61 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12 form-group" }, [
+      _c("label", [_vm._v("Select Product Type")]),
+      _vm._v(" "),
+      _c(
+        "select",
+        { staticClass: "form-control", attrs: { name: "product_type" } },
+        [
+          _c("option", { attrs: { value: "simple" } }, [_vm._v("Simple")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "variable" } }, [_vm._v("Variable")])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", [_vm._v("Add-ons Title")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "text", name: "addOnTitle[]" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-4 form-group" }, [
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "text", name: "addon[]" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-4 form-group" }, [
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "text", name: "addonPrice[]" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "form-group col-12" }, [
-      _c("button", { staticClass: "btn btn-success" }, [_vm._v("Add")]),
+      _c("button", { staticClass: "btn btn-success" }, [_vm._v("Add Product")]),
       _vm._v(" "),
       _c(
         "button",

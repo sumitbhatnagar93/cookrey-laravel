@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\v1\vendor;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use function Sodium\add;
 
 class Product extends Controller
 {
@@ -32,11 +33,21 @@ class Product extends Controller
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $filename = $file->getClientOriginalName();
-            $extension = $file->getClientOriginalExtension();
             $picture = date('His') . '-' . $filename;
             $data = $request->all();
             $file->move(public_path('/images/restaurants/' . $data['provider_id'] . '/food-images/'), $picture);
             $data['image'] = $picture;
+            $extra = array();
+            foreach ($data['addOnTitle'] as $addonTitle) {
+                foreach ($data['addon'] as $key => $addon) {
+                    $extra[$addonTitle]['name'] = $addon;
+                    $extra[$addonTitle]['price'] = $data['addonPrice'][$key];
+                }
+            }
+            unset($data['addOnTitle']);
+            unset($data['addon']);
+            unset($data['addonPrice']);
+            $data['extra'] = json_encode($extra);
             $postedData = DB::table('product')->insert($data);
             if ($postedData) {
                 return response()->json($data);
@@ -46,6 +57,16 @@ class Product extends Controller
         } else {
             return response()->json(["message" => "Select image first."], 500);
         }
+
+//        $data = $request->all();
+//        $extra = array();
+//        foreach ($data['addOnTitle'] as $addonTitle) {
+//            foreach ($data['addon'] as $key => $addon) {
+//                $extra[$addonTitle]['name'] = $addon;
+//                $extra[$addonTitle]['price'] = $data['addonPrice'][$key];
+//            }
+//        }
+//        return response()->json($extra);
     }
 
     public function getProductById($providerId)

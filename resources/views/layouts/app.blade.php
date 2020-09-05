@@ -77,5 +77,6 @@
     </div>
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places,geometry&key=AIzaSyD1fJmzwJMy35N0rfY_btipuz6f8_zFvZA"
             type="text/javascript"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </body>
 </html>
