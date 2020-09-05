@@ -38,10 +38,11 @@ class Product extends Controller
             $file->move(public_path('/images/restaurants/' . $data['provider_id'] . '/food-images/'), $picture);
             $data['image'] = $picture;
             $extra = array();
-            foreach ($data['addOnTitle'] as $addonTitle) {
-                foreach ($data['addon'] as $key => $addon) {
-                    $extra[$addonTitle]['name'] = $addon;
-                    $extra[$addonTitle]['price'] = $data['addonPrice'][$key];
+            foreach ($data['addOnTitle'] as $key => $addonTitle) {
+                $extra[$key]['title'] = $addonTitle;
+                foreach ($data['addon'] as $subkey => $addon) {
+                    $extra[$key]['addon'][$subkey]['name'] = $addon;
+                    $extra[$key]['addon'][$subkey]['price'] = $data['addonPrice'][$subkey];
                 }
             }
             unset($data['addOnTitle']);
@@ -57,13 +58,13 @@ class Product extends Controller
         } else {
             return response()->json(["message" => "Select image first."], 500);
         }
-
 //        $data = $request->all();
 //        $extra = array();
-//        foreach ($data['addOnTitle'] as $addonTitle) {
-//            foreach ($data['addon'] as $key => $addon) {
-//                $extra[$addonTitle]['name'] = $addon;
-//                $extra[$addonTitle]['price'] = $data['addonPrice'][$key];
+//        foreach ($data['addOnTitle'] as $key => $addonTitle) {
+//            $extra[$key]['title'] = $addonTitle;
+//            foreach ($data['addon'] as $subkey => $addon) {
+//                $extra[$key]['addon'][$subkey]['name'] = $addon;
+//                $extra[$key]['addon'][$subkey]['price'] = $data['addonPrice'][$subkey];
 //            }
 //        }
 //        return response()->json($extra);
