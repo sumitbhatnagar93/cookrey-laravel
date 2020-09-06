@@ -47834,9 +47834,33 @@ var render = function() {
                                     "div",
                                     { key: k, staticClass: "row" },
                                     [
-                                      _vm._m(8, true),
+                                      _c(
+                                        "div",
+                                        { staticClass: "col-4 form-group" },
+                                        [
+                                          _c("input", {
+                                            staticClass: "form-control",
+                                            attrs: {
+                                              type: "text",
+                                              name: i + 1 + "_addon[]"
+                                            }
+                                          })
+                                        ]
+                                      ),
                                       _vm._v(" "),
-                                      _vm._m(9, true),
+                                      _c(
+                                        "div",
+                                        { staticClass: "col-4 form-group" },
+                                        [
+                                          _c("input", {
+                                            staticClass: "form-control",
+                                            attrs: {
+                                              type: "text",
+                                              name: i + 1 + "_addonPrice[]"
+                                            }
+                                          })
+                                        ]
+                                      ),
                                       _vm._v(" "),
                                       _c("div", { staticClass: "col-4" }, [
                                         _c("span", [
@@ -47912,7 +47936,7 @@ var render = function() {
                     )
                   : _vm._e(),
                 _vm._v(" "),
-                _vm._m(10)
+                _vm._m(8)
               ])
             ]
           )
@@ -48040,28 +48064,6 @@ var staticRenderFns = [
       _c("input", {
         staticClass: "form-control",
         attrs: { type: "text", name: "addOnTitle[]" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-4 form-group" }, [
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "text", name: "addon[]" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-4 form-group" }, [
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "text", name: "addonPrice[]" }
       })
     ])
   },

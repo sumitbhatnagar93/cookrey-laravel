@@ -40,14 +40,16 @@ class Product extends Controller
             $extra = array();
             foreach ($data['addOnTitle'] as $key => $addonTitle) {
                 $extra[$key]['title'] = $addonTitle;
-                foreach ($data['addon'] as $subkey => $addon) {
+                $tempAddon = $data[($key + 1) . '_addon'];
+                $tempAddonPrice = $data[($key + 1) . '_addonPrice'];
+                unset($data[($key + 1) . '_addon']);
+                unset($data[($key + 1) . '_addonPrice']);
+                foreach ($tempAddon as $subkey => $addon) {
                     $extra[$key]['addon'][$subkey]['name'] = $addon;
-                    $extra[$key]['addon'][$subkey]['price'] = $data['addonPrice'][$subkey];
+                    $extra[$key]['addon'][$subkey]['price'] = $tempAddonPrice[$subkey];
                 }
             }
             unset($data['addOnTitle']);
-            unset($data['addon']);
-            unset($data['addonPrice']);
             $data['extra'] = json_encode($extra);
             $postedData = DB::table('product')->insert($data);
             if ($postedData) {
@@ -62,9 +64,9 @@ class Product extends Controller
 //        $extra = array();
 //        foreach ($data['addOnTitle'] as $key => $addonTitle) {
 //            $extra[$key]['title'] = $addonTitle;
-//            foreach ($data['addon'] as $subkey => $addon) {
-//                $extra[$key]['addon'][$subkey]['name'] = $addon;
-//                $extra[$key]['addon'][$subkey]['price'] = $data['addonPrice'][$subkey];
+//            foreach ($data[($key+1).'_addon'] as $subkey => $addon) {
+//                    $extra[$key]['addon'][$subkey]['name'] = $addon;
+//                    $extra[$key]['addon'][$subkey]['price'] = $data[($key+1).'_addonPrice'][$subkey];
 //            }
 //        }
 //        return response()->json($extra);

@@ -80,10 +80,10 @@
                                     <div class="add-on-area" ref="add-on">
                                         <div class="row" v-for="(child,k) in bok.subfeilds" :key="k">
                                             <div class="col-4 form-group">
-                                                <input type="text" class="form-control" name="addon[]">
+                                                <input type="text" class="form-control" v-bind:name="(i+1)+'_addon[]'">
                                             </div>
                                             <div class="col-4 form-group">
-                                                <input type="text" class="form-control" name="addonPrice[]">
+                                                <input type="text" class="form-control" v-bind:name="(i+1)+'_addonPrice[]'">
                                             </div>
                                             <div class="col-4">
                                                 <span>
