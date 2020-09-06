@@ -37,20 +37,37 @@ class Product extends Controller
             $data = $request->all();
             $file->move(public_path('/images/restaurants/' . $data['provider_id'] . '/food-images/'), $picture);
             $data['image'] = $picture;
-            $extra = array();
-            foreach ($data['addOnTitle'] as $key => $addonTitle) {
-                $extra[$key]['title'] = $addonTitle;
-                $tempAddon = $data[($key + 1) . '_addon'];
-                $tempAddonPrice = $data[($key + 1) . '_addonPrice'];
-                unset($data[($key + 1) . '_addon']);
-                unset($data[($key + 1) . '_addonPrice']);
-                foreach ($tempAddon as $subkey => $addon) {
-                    $extra[$key]['addon'][$subkey]['name'] = $addon;
-                    $extra[$key]['addon'][$subkey]['price'] = $tempAddonPrice[$subkey];
+            if (isset($data['haveAddOns'])) {
+                $extra = array();
+                foreach ($data['addOnTitle'] as $key => $addonTitle) {
+                    $extra[$key]['title'] = $addonTitle;
+                    $tempAddon = $data[($key + 1) . '_addon'];
+                    $tempAddonPrice = $data[($key + 1) . '_addonPrice'];
+                    unset($data[($key + 1) . '_addon']);
+                    unset($data[($key + 1) . '_addonPrice']);
+                    foreach ($tempAddon as $subkey => $addon) {
+                        $extra[$key]['addon'][$subkey]['name'] = $addon;
+                        if ($tempAddonPrice[$subkey]) {
+                            $extra[$key]['addon'][$subkey]['price'] = $tempAddonPrice[$subkey];
+                        } else {
+                            $extra[$key]['addon'][$subkey]['price'] = 0;
+                        }
+                    }
+                }
+                unset($data['addOnTitle']);
+                $data['extra'] = json_encode($extra);
+            }
+            if ($data['variantName']) {
+                $data['price'] = null;
+                $variant = array();
+                foreach ($data['variantName'] as $key => $value) {
+                    $variant[$key]['name'] = $value;
+                    $variant[$key]['price'] = $data['variantPrice'][$key];
                 }
             }
-            unset($data['addOnTitle']);
-            $data['extra'] = json_encode($extra);
+            unset($data['variantName']);
+            unset($data['variantPrice']);
+            $data['variant'] = json_encode($variant);
             $postedData = DB::table('product')->insert($data);
             if ($postedData) {
                 return response()->json($data);

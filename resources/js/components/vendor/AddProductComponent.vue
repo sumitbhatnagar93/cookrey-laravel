@@ -26,10 +26,6 @@
                                 <label>rating</label>
                                 <input type="number" name="rating" class="form-control">
                             </div>
-                            <div class="form-group col-md-6">
-                                <label>Price</label>
-                                <input type="text" name="price" placeholder="Product Price.." class="form-control">
-                            </div>
                             <div class="form-group col-12">
                                 <label>Description</label>
                                 <textarea name="description" cols="30" rows="10" class="form-control"></textarea>
@@ -59,12 +55,44 @@
                                     <option value="non-veg">Non Veg</option>
                                 </select>
                             </div>
+                            <div class="form-group col-md-6" v-if="productType==='simple'">
+                                <label>Price</label>
+                                <input type="text" name="price"
+                                       placeholder="Product Price.." class="form-control">
+                            </div>
                             <div class="col-12 form-group">
                                 <label>Select Product Type</label>
-                                <select name="product_type" class="form-control">
+                                <select name="product_type" class="form-control" v-model="productType">
                                     <option value="simple">Simple</option>
                                     <option value="variable">Variable</option>
                                 </select>
+                            </div>
+                            <div class="col-12 form-group" v-if="productType==='variable'">
+                                <label>Add Variant</label>
+                                <div class="container">
+                                    <div class="row" v-for="(v,i) in variant">
+                                        <div class="col-4 form-group">
+                                            <input type="text" class="form-control" placeholder="variant name"
+                                                   name="variantName[]">
+                                        </div>
+                                        <div class="col-4 form-group">
+                                            <input type="text" class="form-control" placeholder="variant price"
+                                                   name="variantPrice[]">
+                                        </div>
+                                        <div class="col-4">
+                                                <span>
+                                            <i class="bg-danger fa fa-minus fas p-2 rounded-circle text-white"
+                                               @click="removeVariant(i)"
+                                               v-show="i || ( !i && variant.length > 1)">
+                                            </i>
+                                            <i class="bg-info fa fa-plus fas p-2 rounded-circle text-white"
+                                               @click="addVariant()"
+                                               v-show="i === variant.length-1">
+                                            </i>
+                                        </span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-12 form-group">
                                 <label for="add-ons">Add-ons?</label>
@@ -83,7 +111,8 @@
                                                 <input type="text" class="form-control" v-bind:name="(i+1)+'_addon[]'">
                                             </div>
                                             <div class="col-4 form-group">
-                                                <input type="text" class="form-control" v-bind:name="(i+1)+'_addonPrice[]'">
+                                                <input type="text" class="form-control"
+                                                       v-bind:name="(i+1)+'_addonPrice[]'">
                                             </div>
                                             <div class="col-4">
                                                 <span>
@@ -111,6 +140,8 @@
                             </div>
                         </div>
                     </form>
+                    <strong class="text-success">{{ this.successMsg }}</strong>
+                    <strong class="text-danger">{{ this.errorMsg }}</strong>
                 </div>
             </div>
         </div>
@@ -123,9 +154,13 @@ export default {
     name: "addProductComponent",
     data() {
         return {
+            productType: 'simple',
+            successMsg: '',
+            errorMsg: '',
             image: '',
             vendors: [],
             haveAddon: false,
+            variant: [{}],
             feilds: [{
                 name: null,
                 sections: [],
@@ -153,6 +188,12 @@ export default {
         },
         remove(bok, index) {
             bok.subfeilds.splice(index, 1);
+        },
+        addVariant: function () {
+            this.variant.push({});
+        },
+        removeVariant(index) {
+            this.variant.splice(index, 1);
         },
         addMoreAddonSection() {
             this.addonSection.push(this.addonSection.length + 1);
@@ -187,7 +228,12 @@ export default {
             axios.post('upload-product', formData)
                 .then(res => {
                     console.log(res.data);
-                })
+                    this.errorMsg = '';
+                    this.successMsg = 'product added successfully';
+                }).catch(er => {
+                this.successMsg = '';
+                this.errorMsg = 'something went wrong.. ask sumit to solve this';
+            })
         }
     }
 }
