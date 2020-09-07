@@ -57,7 +57,7 @@ class Product extends Controller
                 unset($data['addOnTitle']);
                 $data['extra'] = json_encode($extra);
             }
-            if ($data['variantName']) {
+            if ($data['product_type'] == 'variable') {
                 $data['price'] = null;
                 $variant = array();
                 foreach ($data['variantName'] as $key => $value) {
