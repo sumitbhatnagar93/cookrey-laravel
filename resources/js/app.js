@@ -26,6 +26,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * Vendor related templates
  */
 Vue.component('add-product', require('./components/vendor/AddProductComponent.vue').default);
+Vue.component('add-subscription-product', require('./components/vendor/TiffinComponent.vue').default);
 Vue.component('add-service', require('./components/vendor/AddFoodService.vue').default);
 Vue.component('cookrey-vendors', require('./components/vendor/AllVendors.vue').default);
 

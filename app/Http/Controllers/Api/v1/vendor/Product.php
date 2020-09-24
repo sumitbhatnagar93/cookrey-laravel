@@ -28,6 +28,11 @@ class Product extends Controller
         return view('vendors/add-product', $data);
     }
 
+    public function addSubscriptionProductView()
+    {
+        return view('vendors/add-product', ['productType' => 'subscription']);
+    }
+
     public function onProductSubmit(Request $request)
     {
         if ($request->hasFile('image')) {
@@ -37,6 +42,10 @@ class Product extends Controller
             $data = $request->all();
             $file->move(public_path('/images/restaurants/' . $data['provider_id'] . '/food-images/'), $picture);
             $data['image'] = $picture;
+            if (isset($data['productItem'])) {
+                $data['product_meal'] = json_encode($data['productItem']);
+                unset($data['productItem']);
+            }
             if (isset($data['haveAddOns'])) {
                 $extra = array();
                 foreach ($data['addOnTitle'] as $key => $addonTitle) {
@@ -57,17 +66,17 @@ class Product extends Controller
                 unset($data['addOnTitle']);
                 $data['extra'] = json_encode($extra);
             }
-            if ($data['product_type'] == 'variable') {
+            if (!empty($data['product_type']) && ($data['product_type'] == 'variable')) {
                 $data['price'] = null;
                 $variant = array();
                 foreach ($data['variantName'] as $key => $value) {
                     $variant[$key]['name'] = $value;
                     $variant[$key]['price'] = $data['variantPrice'][$key];
                 }
+                $data['variant'] = json_encode($variant);
             }
             unset($data['variantName']);
             unset($data['variantPrice']);
-            $data['variant'] = json_encode($variant);
             $postedData = DB::table('product')->insert($data);
             if ($postedData) {
                 return response()->json($data);
