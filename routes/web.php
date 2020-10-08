@@ -28,6 +28,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/add-product', 'Api\v1\vendor\Product@addProductView');
 Route::get('/add-subscription-product', 'Api\v1\vendor\Product@addSubscriptionProductView');
 Route::get('getProductById/{providerId}', 'Api\v1\vendor\Product@getProductById');
+Route::get('getSubsProductById/{providerId}', 'Api\v1\vendor\Product@getSubsProductById');
 Route::get('getSingleProductById/{productId}', 'Api\v1\vendor\Product@getSingleProductById');
 Route::post('/upload-product', 'Api\v1\vendor\Product@onProductSubmit');
 Route::post('byApp', 'HomeController@registerByApp');
@@ -43,6 +44,8 @@ Route::get('delete-service/{id}', 'Api\v1\vendor\AddFoodService@deleteVendorCont
 Route::get('add-service/{id}', 'Api\v1\vendor\AddFoodService@updateVendorView');
 Route::post('update-service', 'Api\v1\vendor\AddFoodService@updateVendorController');
 Route::post('add-business', 'Api\v1\vendor\AddFoodService@addServiceView');
+Route::post('addSubscription', 'Api\v1\vendor\AddFoodService@addSubscription');
+
 
 Route::get('vendors', 'Api\v1\vendor\AddFoodService@viewVendors');
 Route::get('getVendors', 'Api\v1\vendor\AddFoodService@getVendors');

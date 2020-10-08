@@ -43,7 +43,7 @@ class Product extends Controller
             $file->move(public_path('/images/restaurants/' . $data['provider_id'] . '/food-images/'), $picture);
             $data['image'] = $picture;
             if (isset($data['productItem'])) {
-                $data['product_meal'] = json_encode($data['productItem']);
+                $data['product_meal'] = implode(',', $data['productItem']);
                 unset($data['productItem']);
             }
             if (isset($data['haveAddOns'])) {
@@ -99,6 +99,16 @@ class Product extends Controller
     }
 
     public function getProductById($providerId)
+    {
+        $data = DB::table('product')->where('provider_id', $providerId)->get();
+        if ($data) {
+            return response()->json($data, 200);
+        } else {
+            return response()->json(["message" => "Something went wrong"], 500);
+        }
+    }
+
+    public function getSubsProductById($providerId)
     {
         $data = DB::table('product')->where('provider_id', $providerId)->get();
         if ($data) {

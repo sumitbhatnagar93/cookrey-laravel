@@ -155,4 +155,15 @@ class AddFoodService extends Controller
         $result = DB::table('services')->where('provider_id', $providerId)->delete();
         return redirect('vendors');
     }
+
+    public function addSubscription(Request $request)
+    {
+        $data = $request->all();
+        $postedData = DB::table('user_subscribtion')->insert($data);
+        if ($postedData) {
+            return response()->json($data);
+        } else {
+            return response()->json(["message" => "Something went wrong"]);
+        }
+    }
 }
