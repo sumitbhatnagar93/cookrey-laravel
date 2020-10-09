@@ -12,7 +12,7 @@ class Users extends Controller
 
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('cors');
     }
 
     public function getUser($email)
