@@ -166,4 +166,15 @@ class AddFoodService extends Controller
             return response()->json(["message" => "Something went wrong"]);
         }
     }
+
+    public function cancelSubsDate(Request $request)
+    {
+        $data = $request->all();
+        $postedData = DB::table('user_subscribtion')->where('userId', $data['userId'])->update($data);
+        if ($postedData) {
+            return response()->json($data);
+        } else {
+            return response()->json(["message" => "Something went wrong"]);
+        }
+    }
 }
