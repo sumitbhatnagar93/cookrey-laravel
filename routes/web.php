@@ -35,7 +35,7 @@ Route::post('byApp', 'HomeController@registerByApp');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::post('payment', 'Api\v1\payment\paymentController@paymentProcess');
 
 
 // Pages
