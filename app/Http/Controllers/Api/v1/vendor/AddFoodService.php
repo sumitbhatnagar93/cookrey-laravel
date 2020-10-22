@@ -77,7 +77,13 @@ class AddFoodService extends Controller
 
     public function getVendors()
     {
-        $data = DB::table('services')->get();
+        $data = DB::table('services')->where('business_type','tiffin_service')->get();
+        return response()->json($data);
+    }
+
+    public function getOtherVendors()
+    {
+        $data = DB::table('services')->where('business_type','restaurant')->get();
         return response()->json($data);
     }
 

@@ -50,5 +50,6 @@ Route::post('cancelSubsDate', 'Api\v1\vendor\AddFoodService@cancelSubsDate');
 
 Route::get('vendors', 'Api\v1\vendor\AddFoodService@viewVendors');
 Route::get('getVendors', 'Api\v1\vendor\AddFoodService@getVendors');
+Route::get('getOtherVendors', 'Api\v1\vendor\AddFoodService@getOtherVendors');
 Route::get('getVendorById/{id}', 'Api\v1\vendor\AddFoodService@getVendorById');
 Route::get('getUserSubscriptionById/{id}', 'Api\v1\Auth\Users@getUserSubscriptionById');
