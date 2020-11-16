@@ -47,6 +47,7 @@ Route::post('add-business', 'Api\v1\vendor\AddFoodService@addServiceView');
 Route::post('addSubscription', 'Api\v1\vendor\AddFoodService@addSubscription');
 Route::post('cancelSubsDate', 'Api\v1\vendor\AddFoodService@cancelSubsDate');
 
+Route::post('addOrder', 'Api\v1\vendor\AddFoodService@createOrder');
 
 Route::get('vendors', 'Api\v1\vendor\AddFoodService@viewVendors');
 Route::get('getVendors', 'Api\v1\vendor\AddFoodService@getVendors');

@@ -77,13 +77,13 @@ class AddFoodService extends Controller
 
     public function getVendors()
     {
-        $data = DB::table('services')->where('business_type','tiffin_service')->get();
+        $data = DB::table('services')->where('business_type', 'tiffin_service')->get();
         return response()->json($data);
     }
 
     public function getOtherVendors()
     {
-        $data = DB::table('services')->where('business_type','restaurant')->get();
+        $data = DB::table('services')->where('business_type', 'restaurant')->get();
         return response()->json($data);
     }
 
@@ -182,5 +182,30 @@ class AddFoodService extends Controller
         } else {
             return response()->json(["message" => "Something went wrong"]);
         }
+    }
+
+    public function createOrder(Request $request)
+    {
+        $data = $request->all();
+        $data['order_id'] = $this->createOrderID(10);
+        $postedData = DB::table('orders')->insert($data);
+        if ($postedData) {
+            return response()->json($data);
+        } else {
+            return response()->json(["message" => "Something went wrong"]);
+        }
+    }
+
+    public function createOrderID($n)
+    {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $randomString = '';
+
+        for ($i = 0; $i < $n; $i++) {
+            $index = rand(0, strlen($characters) - 1);
+            $randomString .= $characters[$index];
+        }
+
+        return $randomString;
     }
 }
