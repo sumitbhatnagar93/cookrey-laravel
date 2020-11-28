@@ -211,6 +211,9 @@ class AddFoodService extends Controller
     public function getOrderById($id){
         $data = DB::table('orders')->where('order_id', $id)->get();
         if (!empty($data)){
+            $vendorData = DB::table('services')->where('provider_id', $data[0]->vendor_id)->get();
+            $data[0]->vendor_name = $vendorData[0]->business_name;
+            $data[0]->vendor_address = $vendorData[0]->business_address;
             return response()->json($data);
         }else{
             return response()->json(["message" => "Something went wrong"]);
