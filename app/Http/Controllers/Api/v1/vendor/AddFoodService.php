@@ -208,4 +208,12 @@ class AddFoodService extends Controller
 
         return $randomString;
     }
+    public function getOrderById($id){
+        $data = DB::table('orders')->where('order_id', $id)->get();
+        if (!empty($data)){
+            return response()->json($data);
+        }else{
+            return response()->json(["message" => "Something went wrong"]);
+        }
+    }
 }
