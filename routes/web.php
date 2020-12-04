@@ -49,6 +49,7 @@ Route::post('cancelSubsDate', 'Api\v1\vendor\AddFoodService@cancelSubsDate');
 
 Route::post('addOrder', 'Api\v1\vendor\AddFoodService@createOrder');
 Route::get('getOrderById/{id}','Api\v1\vendor\AddFoodService@getOrderById');
+Route::get('getOrderByUserId/{id}','Api\v1\vendor\AddFoodService@getOrderByUserId');
 
 Route::get('vendors', 'Api\v1\vendor\AddFoodService@viewVendors');
 Route::get('getVendors', 'Api\v1\vendor\AddFoodService@getVendors');
