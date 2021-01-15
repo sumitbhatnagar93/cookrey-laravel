@@ -1,0 +1,246 @@
+div.front-banner {
+    background-image: url('/images/banner.jpeg');
+    /*background: #1d68a7;*/
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    height: 401px;
+    padding: 9rem;
+}
+/*div.front-banner:after {*/
+/*    content: "";*/
+/*    background: rgba(0,0,0,.35);*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    position: absolute;*/
+/*}*/
+.CKHM-srch{
+    background: #fff;
+    width: 604px;
+    margin: 0 auto;
+}
+.CKHM-srch input:first-child{
+    width: 272px;
+}
+.CKHM-srch input:after{
+    content: '';
+    position: absolute;
+    height: 11px;
+
+}
+.CKHM-srch input{
+    padding: 12px 2px 12px 14px;
+    margin: 0;
+    border: none;
+    width: 270px;
+}
+
+
+.CKHM-srch form {
+    width: 100%;
+    max-width: 790px;
+    margin-bottom: 0;
+    margin: 0 auto;
+}
+
+.CKHM-srch form .inner-form {
+    background: #fff;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -ms-flex-align: center;
+    align-items: center;
+    box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+    border-radius: 3px;
+}
+
+.CKHM-srch form .inner-form .input-field {
+    height: 68px;
+}
+
+.CKHM-srch form .inner-form .input-field input {
+    height: 100%;
+    background: transparent;
+    border: 0;
+    display: block;
+    width: 100%;
+    padding: 10px 32px;
+    font-size: 16px;
+    color: #555;
+}
+
+.CKHM-srch form .inner-form .input-field input.placeholder {
+    color: #888;
+    font-size: 16px;
+}
+
+.CKHM-srch form .inner-form .input-field input:-moz-placeholder {
+    color: #888;
+    font-size: 16px;
+}
+
+.CKHM-srch form .inner-form .input-field input::-webkit-input-placeholder {
+    color: #888;
+    font-size: 16px;
+}
+
+.CKHM-srch form .inner-form .input-field input:hover, .CKHM-srch form .inner-form .input-field input:focus {
+    box-shadow: none;
+    outline: 0;
+    border-color: #fff;
+}
+
+.CKHM-srch form .inner-form .input-field.first-wrap {
+    width: 200px;
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.CKHM-srch form .inner-form .input-field.first-wrap .choices__inner {
+    background: transparent;
+    border-radius: 0;
+    border: 0;
+    height: 100%;
+    color: #fff;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 10px 30px;
+}
+
+.CKHM-srch form .inner-form .input-field.first-wrap .choices__inner .choices__list.choices__list--single {
+    display: -ms-flexbox;
+    display: flex;
+    padding: 0;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 100%;
+}
+
+.CKHM-srch form .inner-form .input-field.first-wrap .choices__inner .choices__item.choices__item--selectable.choices__placeholder {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 100%;
+    opacity: 1;
+    color: #888;
+}
+
+.CKHM-srch form .inner-form .input-field.first-wrap .choices__inner .choices__list--single .choices__item {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 100%;
+    color: #555;
+}
+
+.CKHM-srch form .inner-form .input-field.first-wrap .choices[data-type*="select-one"]:after {
+    right: 30px;
+    border-color: #e5e5e5 transparent transparent transparent;
+}
+
+.CKHM-srch form .inner-form .input-field.first-wrap .choices__list.choices__list--dropdown {
+    border: 0;
+    background: #fff;
+    padding: 20px 30px;
+    margin-top: 2px;
+    border-radius: 4px;
+    box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+}
+
+.CKHM-srch form .inner-form .input-field.first-wrap .choices__list.choices__list--dropdown .choices__item--selectable {
+    padding-right: 0;
+}
+
+.CKHM-srch form .inner-form .input-field.first-wrap .choices__list--dropdown .choices__item--selectable.is-highlighted {
+    background: #fff;
+    color: #63c76a;
+}
+
+.CKHM-srch form .inner-form .input-field.first-wrap .choices__list--dropdown .choices__item {
+    color: #555;
+    min-height: 24px;
+}
+
+.CKHM-srch form .inner-form .input-field.second-wrap {
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+
+.CKHM-srch form .inner-form .input-field.third-wrap {
+    width: 74px;
+}
+
+.CKHM-srch form .inner-form .input-field.third-wrap .btn-search {
+    height: 100%;
+    width: 100%;
+    white-space: nowrap;
+    color: #fff;
+    border: 0;
+    cursor: pointer;
+    background: #63c76a;
+    transition: all .2s ease-out, color .2s ease-out;
+}
+
+.CKHM-srch form .inner-form .input-field.third-wrap .btn-search svg {
+    width: 16px;
+}
+
+.CKHM-srch form .inner-form .input-field.third-wrap .btn-search:hover {
+    background: #50c058;
+}
+
+.CKHM-srch form .inner-form .input-field.third-wrap .btn-search:focus {
+    outline: 0;
+    box-shadow: none;
+}
+
+@media screen and (max-width: 992px) {
+    .CKHM-srch form .inner-form .input-field {
+        height: 50px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .CKHM-srch form .inner-form {
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        padding: 20px;
+    }
+    .CKHM-srch form .inner-form .input-field {
+        margin-bottom: 20px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    .CKHM-srch form .inner-form .input-field input {
+        padding: 10px 15px;
+    }
+    .CKHM-srch form .inner-form .input-field.first-wrap {
+        width: 100%;
+        border-right: 0;
+    }
+    .CKHM-srch form .inner-form .input-field.first-wrap .choices__inner {
+        padding: 10px 15px;
+    }
+    .CKHM-srch form .inner-form .input-field.first-wrap .choices[data-type*="select-one"]:after {
+        right: 11.5px;
+        border-color: #e5e5e5 transparent transparent transparent;
+    }
+    .CKHM-srch form .inner-form .input-field.second-wrap {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+    .CKHM-srch form .inner-form .input-field.second-wrap input {
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    .CKHM-srch form .inner-form .input-field.third-wrap {
+        margin-bottom: 0;
+        width: 100%;
+    }
+}
