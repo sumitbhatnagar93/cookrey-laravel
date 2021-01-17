@@ -162,6 +162,14 @@
                 </div>
             </div>
         </div>
+        <form class="form-group" @submit.prevent="onSubmit2()" id="testForm">
+            <input type="file" name="testImg" ref="fileInput"
+                   @input="onFileSelect2" v-bind:alt="testImg">
+            <button type="submit">Upload</button>
+        </form>
+        <img v-bind:src="testImg"
+             style="width: 100%;height: 300px;"
+             v-if="testImg">
     </div>
 </template>
 
@@ -171,6 +179,7 @@ export default {
     props: ['slug'],
     data() {
         return {
+            testImg:'',
             successMsg: '',
             errorMsg: '',
             image: '',
@@ -302,6 +311,16 @@ export default {
                 //  this.$emit('input', file[0])
             }
         },
+        onFileSelect2(e) {
+            const testt = e.target.files || e.dataTransfer.files;
+            if (!testt.length)
+                return;
+            const reader2 = new FileReader();
+            reader2.onload = (e) => {
+                this.testImg = e.target.result;
+            };
+            reader2.readAsDataURL(testt[0]);
+        },
         onSubmit() {
             let url = '';
             if (this.slug) {
@@ -322,6 +341,16 @@ export default {
                 }).catch(er => {
                 this.successMsg = '';
                 this.errorMsg = 'something went wrong.. ask sumit to solve this';
+            })
+        },
+        onSubmit2(){
+            let formData = new FormData(document.getElementById('testForm'));
+            formData.append('testImg', this.testImg);
+            axios.post('/test-upload', formData)
+                .then(res => {
+                    console.log(res.data);
+                }).catch(er => {
+                console.log(er);
             })
         }
     }

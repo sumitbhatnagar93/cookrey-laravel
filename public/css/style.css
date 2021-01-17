@@ -5,7 +5,6 @@ div.front-banner {
     background-size: cover;
     background-position: center;
     position: relative;
-    height: 401px;
     padding: 9rem;
 }
 /*div.front-banner:after {*/
@@ -200,6 +199,14 @@ div.front-banner {
 .CKHM-srch form .inner-form .input-field.third-wrap .btn-search:focus {
     outline: 0;
     box-shadow: none;
+}
+
+.CKLST-submeta i {
+    color: chocolate;
+}
+.card.CKRW-item {
+    margin: 12px;
+    box-shadow: 0px 6px 9px 4px #ccc;
 }
 
 @media screen and (max-width: 992px) {

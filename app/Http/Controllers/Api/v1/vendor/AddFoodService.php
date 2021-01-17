@@ -230,4 +230,17 @@ class AddFoodService extends Controller
             return response()->json(["message" => "Something went wrong"]);
         }
     }
+
+    public function testUpload(Request $request){
+        $data = $request->all();
+        $uploadPath = public_path('/images');
+        if ($request->hasFile('testImg')) {
+            $file = $request->file('testImg');
+            $filename = $file->getClientOriginalName();
+            $file->move($uploadPath, $filename);
+                return response()->json($data);
+        } else {
+            return response()->json(["message" => "Something went wrong"]);
+        }
+    }
 }
