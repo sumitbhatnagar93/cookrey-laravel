@@ -1968,6 +1968,58 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "footerComponent"
 });
@@ -2040,6 +2092,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "home-banner"
 });
@@ -2055,6 +2108,37 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3124,6 +3208,135 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
   }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/vendorComponent.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/vendorComponent.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "vendorComponent"
 });
 
 /***/ }),
@@ -47428,6 +47641,211 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", [
+      _c("footer", { staticClass: "container" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-4" }, [
+            _c("h4", [_vm._v("Colmun 1")]),
+            _vm._v(" "),
+            _c("nav", [
+              _c(
+                "a",
+                {
+                  staticClass: "elhb8j-16 evQfKr",
+                  attrs: { href: "https://www.zomato.com/who-we-are" }
+                },
+                [
+                  _c("p", { staticClass: "elhb8j-15 mcMLG" }, [
+                    _vm._v("\n                        Who We Are")
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "elhb8j-16 evQfKr",
+                  attrs: { href: "http://blog.zomato.com/" }
+                },
+                [_c("p", { staticClass: "elhb8j-15 mcMLG" }, [_vm._v("Blog")])]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "elhb8j-16 evQfKr",
+                  attrs: { href: "https://www.zomato.com/careers" }
+                },
+                [
+                  _c("p", { staticClass: "elhb8j-15 mcMLG" }, [
+                    _vm._v("\n                        Careers")
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "elhb8j-16 evQfKr",
+                  attrs: { href: "https://www.zomato.com/report-fraud" }
+                },
+                [
+                  _c("p", { staticClass: "elhb8j-15 mcMLG" }, [
+                    _vm._v("Report Fraud")
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "elhb8j-16 evQfKr",
+                  attrs: { href: "https://www.zomato.com/contact" }
+                },
+                [
+                  _c("p", { staticClass: "elhb8j-15 mcMLG" }, [
+                    _vm._v("\n                        Contact")
+                  ])
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-4" }, [
+            _c("h4", [_vm._v("Colmun 1")]),
+            _vm._v(" "),
+            _c("nav", [
+              _c(
+                "a",
+                {
+                  staticClass: "elhb8j-16 evQfKr",
+                  attrs: { href: "https://www.zomato.com/who-we-are" }
+                },
+                [
+                  _c("p", { staticClass: "elhb8j-15 mcMLG" }, [
+                    _vm._v("\n                        Who We Are")
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "elhb8j-16 evQfKr",
+                  attrs: { href: "http://blog.zomato.com/" }
+                },
+                [_c("p", { staticClass: "elhb8j-15 mcMLG" }, [_vm._v("Blog")])]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "elhb8j-16 evQfKr",
+                  attrs: { href: "https://www.zomato.com/careers" }
+                },
+                [
+                  _c("p", { staticClass: "elhb8j-15 mcMLG" }, [
+                    _vm._v("\n                        Careers")
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "elhb8j-16 evQfKr",
+                  attrs: { href: "https://www.zomato.com/report-fraud" }
+                },
+                [
+                  _c("p", { staticClass: "elhb8j-15 mcMLG" }, [
+                    _vm._v("Report Fraud")
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "elhb8j-16 evQfKr",
+                  attrs: { href: "https://www.zomato.com/contact" }
+                },
+                [
+                  _c("p", { staticClass: "elhb8j-15 mcMLG" }, [
+                    _vm._v("\n                        Contact")
+                  ])
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-4" }, [
+            _c("h4", [_vm._v("Colmun 1")]),
+            _vm._v(" "),
+            _c("nav", [
+              _c(
+                "a",
+                {
+                  staticClass: "elhb8j-16 evQfKr",
+                  attrs: { href: "https://www.zomato.com/who-we-are" }
+                },
+                [
+                  _c("p", { staticClass: "elhb8j-15 mcMLG" }, [
+                    _vm._v("\n                        Who We Are")
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "elhb8j-16 evQfKr",
+                  attrs: { href: "http://blog.zomato.com/" }
+                },
+                [_c("p", { staticClass: "elhb8j-15 mcMLG" }, [_vm._v("Blog")])]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "elhb8j-16 evQfKr",
+                  attrs: { href: "https://www.zomato.com/careers" }
+                },
+                [
+                  _c("p", { staticClass: "elhb8j-15 mcMLG" }, [
+                    _vm._v("\n                        Careers")
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "elhb8j-16 evQfKr",
+                  attrs: { href: "https://www.zomato.com/report-fraud" }
+                },
+                [
+                  _c("p", { staticClass: "elhb8j-15 mcMLG" }, [
+                    _vm._v("Report Fraud")
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "elhb8j-16 evQfKr",
+                  attrs: { href: "https://www.zomato.com/contact" }
+                },
+                [
+                  _c("p", { staticClass: "elhb8j-15 mcMLG" }, [
+                    _vm._v("\n                        Contact")
+                  ])
+                ]
+              )
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
       _c(
         "div",
         { staticClass: "container-fluid bg-dark text-white text-center" },
@@ -47587,10 +48005,12 @@ var staticRenderFns = [
                 ]
               )
             ]),
+            _vm._v(" "),
             _c(
               "div",
               {
                 staticClass: "choices__list choices__list--dropdown",
+                staticStyle: { display: "none" },
                 attrs: { "aria-expanded": "false" }
               },
               [
@@ -47811,352 +48231,778 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "section-title text-center m-4 text-muted" }, [
+        _c("div", {}, [
+          _vm._m(1),
+          _vm._v(" "),
+          _c("div", { staticClass: "desc-see-more-link" }, [
+            _c("h6", { staticClass: "sc-1gbvc19-0 bPGePZ desc" }, [
+              _vm._v(
+                "Explore curated lists of top restaurants, cafes, pubs, and bars in Haridwar,\n                        based on trends"
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "ks3f96-0 cFSkbc sc-jAWRmi eKxScq",
+                attrs: {
+                  href: "/haridwar/collections",
+                  tabindex: "0",
+                  color: "#F57082",
+                  target: "_self",
+                  role: "link"
+                }
+              },
+              [
+                _c(
+                  "span",
+                  {
+                    staticClass: "ks3f96-1 iFQLJx",
+                    attrs: {
+                      tabindex: "-1",
+                      color: "#F57082",
+                      target: "_self",
+                      role: "link"
+                    }
+                  },
+                  [
+                    _vm._v("All collections in Haridwar"),
+                    _vm._v(" "),
+                    _c(
+                      "i",
+                      {
+                        staticClass: "rbbb40-1 MxLSp sc-igaqVs jqgDvY",
+                        attrs: { color: "#F57082", size: "12" }
+                      },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            staticClass: "rbbb40-0 fQZfgq",
+                            attrs: {
+                              xmlns: "http://www.w3.org/2000/svg",
+                              fill: "#F57082",
+                              width: "12",
+                              height: "12",
+                              viewBox: "0 0 20 20",
+                              "aria-labelledby":
+                                "icon-svg-title- icon-svg-desc-",
+                              role: "img"
+                            }
+                          },
+                          [
+                            _c("title", [_vm._v("right-triangle")]),
+                            _c("path", {
+                              attrs: { d: "M5 0.42l10 10-10 10v-20z" }
+                            })
+                          ]
+                        )
+                      ]
+                    )
+                  ]
+                )
+              ]
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _vm._m(2)
+    ]),
+    _vm._v(" "),
+    _c("section", { staticClass: "apk-banner" }),
+    _vm._v(" "),
+    _vm._m(3)
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", { staticClass: "container" }, [
-        _c("h1", [_vm._v("Find you nearby vendors...")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "card CKRW-item" }, [
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-md-4" }, [
-                _c("div", { staticClass: "img-thumbnail" }, [
-                  _c("img", {
-                    staticClass: "img-thumbnail",
-                    attrs: { src: "/images/dummy-box.png", alt: "restaurant" }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-8" }, [
-                _c("div", { staticClass: "meta-info m-3" }, [
-                  _c("h3", [_vm._v("Poorvi Tiffin Service")]),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v(
-                      "We provide best tiffin box and it will give you home food feel."
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Rs.50/ per tiffin")]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("B clock, second floor, Roorkee (UK)")]),
-                  _vm._v(" "),
-                  _c("hr"),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "btn btn-outline-success",
-                      attrs: { href: "#" }
-                    },
-                    [_vm._v("Subscribe Now")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "btn btn-outline-info",
-                      attrs: { href: "#" }
-                    },
-                    [_vm._v("Explore more")]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "CKLST-submeta float-right" }, [
-                    _c("span", { staticClass: "CK-distance" }, [
-                      _vm._v("5.4km")
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "stars" }, [
-                      _c("i", { staticClass: "far fa-star" }),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star" }),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star" }),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star" }),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star" })
-                    ])
-                  ])
-                ])
-              ])
-            ])
+    return _c(
+      "section",
+      {
+        staticClass: "container-fluid text-white bg-danger p-5 text-center",
+        attrs: { id: "about" }
+      },
+      [
+        _c("div", { staticClass: "container" }, [
+          _c("h2", [_vm._v("About Us")]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "For us, it's not just about bringing you good food from your favourite restaurants. It's about making a connection,\n              which is why we sit down with the chefs, dreaming up menus that will arrive fresh and full of flavour. Try us!"
+            )
+          ])
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h2", {}, [_c("h2", [_vm._v("Find Nearest Vendor")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "owl-carousel" }, [
+        _c("div", { staticClass: "card CKRW-item" }, [
+          _c("div", { staticClass: "mad-entity-media" }, [
+            _c("img", {
+              attrs: { src: "/images/448x288_img1.jpg", alt: "restaurant" }
+            })
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "card CKRW-item" }, [
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-md-4" }, [
-                _c("div", { staticClass: "img-thumbnail" }, [
-                  _c("img", {
-                    staticClass: "img-thumbnail",
-                    attrs: { src: "/images/dummy-box.png", alt: "restaurant" }
-                  })
-                ])
-              ]),
+          _c("div", { staticClass: "meta-info m-3" }, [
+            _c("h3", [_vm._v("Poorvi Tiffin Service")]),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v(
+                "We provide best tiffin box and it will give you home food feel."
+              )
+            ]),
+            _vm._v(" "),
+            _c("span", [_vm._v("Rs.50/ per tiffin")]),
+            _vm._v(" "),
+            _c("span", [_vm._v("B clock, second floor, Roorkee (UK)")]),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _c(
+              "a",
+              { staticClass: "btn btn-outline-success", attrs: { href: "#" } },
+              [_vm._v("Subscribe Now")]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              { staticClass: "btn btn-outline-info", attrs: { href: "#" } },
+              [_vm._v("Explore more")]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "CKLST-submeta float-right" }, [
+              _c("span", { staticClass: "CK-distance" }, [_vm._v("5.4km")]),
               _vm._v(" "),
-              _c("div", { staticClass: "col-md-8" }, [
-                _c("div", { staticClass: "meta-info m-3" }, [
-                  _c("h3", [_vm._v("Poorvi Tiffin Service")]),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v(
-                      "We provide best tiffin box and it will give you home food feel."
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Rs.50/ per tiffin")]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("B clock, second floor, Roorkee (UK)")]),
-                  _vm._v(" "),
-                  _c("hr"),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "btn btn-outline-success",
-                      attrs: { href: "#" }
-                    },
-                    [_vm._v("Subscribe Now")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "btn btn-outline-info",
-                      attrs: { href: "#" }
-                    },
-                    [_vm._v("Explore more")]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "CKLST-submeta float-right" }, [
-                    _c("span", { staticClass: "CK-distance" }, [
-                      _vm._v("5.4km")
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "stars" }, [
-                      _c("i", { staticClass: "far fa-star" }),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star" }),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star" }),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star" }),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star" })
-                    ])
-                  ])
-                ])
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card CKRW-item" }, [
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-md-4" }, [
-                _c("div", { staticClass: "img-thumbnail" }, [
-                  _c("img", {
-                    staticClass: "img-thumbnail",
-                    attrs: { src: "/images/dummy-box.png", alt: "restaurant" }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-8" }, [
-                _c("div", { staticClass: "meta-info m-3" }, [
-                  _c("h3", [_vm._v("Poorvi Tiffin Service")]),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v(
-                      "We provide best tiffin box and it will give you home food feel."
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Rs.50/ per tiffin")]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("B clock, second floor, Roorkee (UK)")]),
-                  _vm._v(" "),
-                  _c("hr"),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "btn btn-outline-success",
-                      attrs: { href: "#" }
-                    },
-                    [_vm._v("Subscribe Now")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "btn btn-outline-info",
-                      attrs: { href: "#" }
-                    },
-                    [_vm._v("Explore more")]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "CKLST-submeta float-right" }, [
-                    _c("span", { staticClass: "CK-distance" }, [
-                      _vm._v("5.4km")
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "stars" }, [
-                      _c("i", { staticClass: "far fa-star" }),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star" }),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star" }),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star" }),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star" })
-                    ])
-                  ])
-                ])
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card CKRW-item" }, [
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-md-4" }, [
-                _c("div", { staticClass: "img-thumbnail" }, [
-                  _c("img", {
-                    staticClass: "img-thumbnail",
-                    attrs: { src: "/images/dummy-box.png", alt: "restaurant" }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-8" }, [
-                _c("div", { staticClass: "meta-info m-3" }, [
-                  _c("h3", [_vm._v("Poorvi Tiffin Service")]),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v(
-                      "We provide best tiffin box and it will give you home food feel."
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Rs.50/ per tiffin")]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("B clock, second floor, Roorkee (UK)")]),
-                  _vm._v(" "),
-                  _c("hr"),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "btn btn-outline-success",
-                      attrs: { href: "#" }
-                    },
-                    [_vm._v("Subscribe Now")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "btn btn-outline-info",
-                      attrs: { href: "#" }
-                    },
-                    [_vm._v("Explore more")]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "CKLST-submeta float-right" }, [
-                    _c("span", { staticClass: "CK-distance" }, [
-                      _vm._v("5.4km")
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "stars" }, [
-                      _c("i", { staticClass: "far fa-star" }),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star" }),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star" }),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star" }),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star" })
-                    ])
-                  ])
-                ])
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card CKRW-item" }, [
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-md-4" }, [
-                _c("div", { staticClass: "img-thumbnail" }, [
-                  _c("img", {
-                    staticClass: "img-thumbnail",
-                    attrs: { src: "/images/dummy-box.png", alt: "restaurant" }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-8" }, [
-                _c("div", { staticClass: "meta-info m-3" }, [
-                  _c("h3", [_vm._v("Poorvi Tiffin Service")]),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v(
-                      "We provide best tiffin box and it will give you home food feel."
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Rs.50/ per tiffin")]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("B clock, second floor, Roorkee (UK)")]),
-                  _vm._v(" "),
-                  _c("hr"),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "btn btn-outline-success",
-                      attrs: { href: "#" }
-                    },
-                    [_vm._v("Subscribe Now")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "btn btn-outline-info",
-                      attrs: { href: "#" }
-                    },
-                    [_vm._v("Explore more")]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "CKLST-submeta float-right" }, [
-                    _c("span", { staticClass: "CK-distance" }, [
-                      _vm._v("5.4km")
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "stars" }, [
-                      _c("i", { staticClass: "far fa-star" }),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star" }),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star" }),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star" }),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "fas fa-star" })
-                    ])
-                  ])
-                ])
+              _c("div", { staticClass: "stars" }, [
+                _c("i", { staticClass: "far fa-star" }),
+                _vm._v(" "),
+                _c("i", { staticClass: "fas fa-star" }),
+                _vm._v(" "),
+                _c("i", { staticClass: "fas fa-star" }),
+                _vm._v(" "),
+                _c("i", { staticClass: "fas fa-star" }),
+                _vm._v(" "),
+                _c("i", { staticClass: "fas fa-star" })
               ])
             ])
           ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card CKRW-item" }, [
+          _c("div", { staticClass: "mad-entity-media" }, [
+            _c("img", {
+              attrs: { src: "/images/448x288_img1.jpg", alt: "restaurant" }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "meta-info m-3" }, [
+            _c("h3", [_vm._v("Poorvi Tiffin Service")]),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v(
+                "We provide best tiffin box and it will give you home food feel."
+              )
+            ]),
+            _vm._v(" "),
+            _c("span", [_vm._v("Rs.50/ per tiffin")]),
+            _vm._v(" "),
+            _c("span", [_vm._v("B clock, second floor, Roorkee (UK)")]),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _c(
+              "a",
+              { staticClass: "btn btn-outline-success", attrs: { href: "#" } },
+              [_vm._v("Subscribe Now")]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              { staticClass: "btn btn-outline-info", attrs: { href: "#" } },
+              [_vm._v("Explore more")]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "CKLST-submeta float-right" }, [
+              _c("span", { staticClass: "CK-distance" }, [_vm._v("5.4km")]),
+              _vm._v(" "),
+              _c("div", { staticClass: "stars" }, [
+                _c("i", { staticClass: "far fa-star" }),
+                _vm._v(" "),
+                _c("i", { staticClass: "fas fa-star" }),
+                _vm._v(" "),
+                _c("i", { staticClass: "fas fa-star" }),
+                _vm._v(" "),
+                _c("i", { staticClass: "fas fa-star" }),
+                _vm._v(" "),
+                _c("i", { staticClass: "fas fa-star" })
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card CKRW-item" }, [
+          _c("div", { staticClass: "mad-entity-media" }, [
+            _c("img", {
+              attrs: { src: "/images/448x288_img1.jpg", alt: "restaurant" }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "meta-info m-3" }, [
+            _c("h3", [_vm._v("Poorvi Tiffin Service")]),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v(
+                "We provide best tiffin box and it will give you home food feel."
+              )
+            ]),
+            _vm._v(" "),
+            _c("span", [_vm._v("Rs.50/ per tiffin")]),
+            _vm._v(" "),
+            _c("span", [_vm._v("B clock, second floor, Roorkee (UK)")]),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _c(
+              "a",
+              { staticClass: "btn btn-outline-success", attrs: { href: "#" } },
+              [_vm._v("Subscribe Now")]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              { staticClass: "btn btn-outline-info", attrs: { href: "#" } },
+              [_vm._v("Explore more")]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "CKLST-submeta float-right" }, [
+              _c("span", { staticClass: "CK-distance" }, [_vm._v("5.4km")]),
+              _vm._v(" "),
+              _c("div", { staticClass: "stars" }, [
+                _c("i", { staticClass: "far fa-star" }),
+                _vm._v(" "),
+                _c("i", { staticClass: "fas fa-star" }),
+                _vm._v(" "),
+                _c("i", { staticClass: "fas fa-star" }),
+                _vm._v(" "),
+                _c("i", { staticClass: "fas fa-star" }),
+                _vm._v(" "),
+                _c("i", { staticClass: "fas fa-star" })
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card CKRW-item" }, [
+          _c("div", { staticClass: "mad-entity-media" }, [
+            _c("img", {
+              attrs: { src: "/images/448x288_img1.jpg", alt: "restaurant" }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "meta-info m-3" }, [
+            _c("h3", [_vm._v("Poorvi Tiffin Service")]),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v(
+                "We provide best tiffin box and it will give you home food feel."
+              )
+            ]),
+            _vm._v(" "),
+            _c("span", [_vm._v("Rs.50/ per tiffin")]),
+            _vm._v(" "),
+            _c("span", [_vm._v("B clock, second floor, Roorkee (UK)")]),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _c(
+              "a",
+              { staticClass: "btn btn-outline-success", attrs: { href: "#" } },
+              [_vm._v("Subscribe Now")]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              { staticClass: "btn btn-outline-info", attrs: { href: "#" } },
+              [_vm._v("Explore more")]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "CKLST-submeta float-right" }, [
+              _c("span", { staticClass: "CK-distance" }, [_vm._v("5.4km")]),
+              _vm._v(" "),
+              _c("div", { staticClass: "stars" }, [
+                _c("i", { staticClass: "far fa-star" }),
+                _vm._v(" "),
+                _c("i", { staticClass: "fas fa-star" }),
+                _vm._v(" "),
+                _c("i", { staticClass: "fas fa-star" }),
+                _vm._v(" "),
+                _c("i", { staticClass: "fas fa-star" }),
+                _vm._v(" "),
+                _c("i", { staticClass: "fas fa-star" })
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("section", { staticClass: "vendor-area container p-3" }, [
+      _c("h2", { staticClass: "text-muted" }, [_vm._v("Cities We Deliver To")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "CKHM-areas text-center" }, [
+        _c(
+          "a",
+          { staticClass: "inline-list bXAMUA", attrs: { href: "#/ncr/" } },
+          [_vm._v("Delhi NCR")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "inline-list bXAMUA", attrs: { href: "#/kolkata/" } },
+          [_vm._v("Kolkata")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "inline-list bXAMUA", attrs: { href: "#/mumbai/" } },
+          [_vm._v("Mumbai")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "inline-list bXAMUA",
+            attrs: { href: "#/bangalore/" }
+          },
+          [_vm._v("Bengaluru")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "inline-list bXAMUA", attrs: { href: "#/pune/" } },
+          [_vm._v("Pune")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "inline-list bXAMUA",
+            attrs: { href: "#/hyderabad/" }
+          },
+          [_vm._v("Hyderabad")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "inline-list bXAMUA", attrs: { href: "#/chennai/" } },
+          [_vm._v("Chennai")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "inline-list bXAMUA", attrs: { href: "#/lucknow/" } },
+          [_vm._v("Lucknow")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "inline-list bXAMUA", attrs: { href: "#/kochi/" } },
+          [_vm._v("Kochi")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "inline-list bXAMUA", attrs: { href: "#/jaipur/" } },
+          [_vm._v("Jaipur")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "inline-list bXAMUA",
+            attrs: { href: "#/ahmedabad/" }
+          },
+          [_vm._v("Ahmedabad")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "inline-list bXAMUA",
+            attrs: { href: "#/chandigarh/" }
+          },
+          [_vm._v("Chandigarh")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "inline-list bXAMUA", attrs: { href: "#/indore/" } },
+          [_vm._v("Indore")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "inline-list bXAMUA", attrs: { href: "#/shimla/" } },
+          [_vm._v("Shimla")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "inline-list bXAMUA", attrs: { href: "#/ludhiana/" } },
+          [_vm._v("Ludhiana")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "inline-list bXAMUA", attrs: { href: "#/guwahati/" } },
+          [_vm._v("Guwahati")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "inline-list bXAMUA", attrs: { href: "#/amritsar/" } },
+          [_vm._v("Amritsar")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "inline-list bXAMUA", attrs: { href: "#/kanpur/" } },
+          [_vm._v("Kanpur")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "inline-list bXAMUA",
+            attrs: { href: "#/allahabad/" }
+          },
+          [_vm._v("Allahabad")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "inline-list bXAMUA",
+            attrs: { href: "#/aurangabad/" }
+          },
+          [_vm._v("Aurangabad")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "inline-list bXAMUA", attrs: { href: "#/bhopal/" } },
+          [_vm._v("Bhopal")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "inline-list bXAMUA", attrs: { href: "#/ranchi/" } },
+          [_vm._v("Ranchi")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "inline-list bXAMUA",
+            attrs: { href: "#/visakhapatnam/" }
+          },
+          [_vm._v("Visakhapatnam")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "inline-list bXAMUA",
+            attrs: { href: "#/bhubaneswar/" }
+          },
+          [_vm._v("Bhubaneswar")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "inline-list bXAMUA",
+            attrs: { href: "#/coimbatore/" }
+          },
+          [_vm._v("Coimbatore")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "inline-list bXAMUA",
+            attrs: { href: "#/mangalore/" }
+          },
+          [_vm._v("Mangalore")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "inline-list bXAMUA", attrs: { href: "#/vadodara/" } },
+          [_vm._v("Vadodara")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "inline-list bXAMUA", attrs: { href: "#/nagpur/" } },
+          [_vm._v("Nagpur")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "inline-list bXAMUA", attrs: { href: "#/agra/" } },
+          [_vm._v("Agra")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "inline-list bXAMUA", attrs: { href: "#/dehradun/" } },
+          [_vm._v("Dehradun")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "inline-list bXAMUA", attrs: { href: "#/mysore/" } },
+          [_vm._v("Mysore")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "inline-list bXAMUA",
+            attrs: { href: "#/puducherry/" }
+          },
+          [_vm._v("Puducherry")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "inline-list bXAMUA", attrs: { href: "#/surat/" } },
+          [_vm._v("Surat")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "inline-list bXAMUA", attrs: { href: "#/varanasi/" } },
+          [_vm._v("Varanasi")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "inline-list bXAMUA", attrs: { href: "#/patna/" } },
+          [_vm._v("Patna")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "inline-list bXAMUA", attrs: { href: "#/udaipur/" } },
+          [_vm._v("Udaipur")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "inline-list bXAMUA", attrs: { href: "#/cuttack/" } },
+          [_vm._v("Cuttack")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "inline-list bXAMUA",
+            attrs: { href: "#/trivandrum/" }
+          },
+          [_vm._v("Trivandrum")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "inline-list bXAMUA", attrs: { href: "#/haridwar/" } },
+          [_vm._v("Haridwar")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "inline-list bXAMUA", attrs: { href: "#/leh/" } },
+          [_vm._v("Leh")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "inline-list bXAMUA", attrs: { href: "#/pushkar/" } },
+          [_vm._v("Pushkar")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "inline-list bXAMUA", attrs: { href: "#/rajkot/" } },
+          [_vm._v("Rajkot")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "inline-list bXAMUA", attrs: { href: "#/madurai/" } },
+          [_vm._v("Madurai")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "inline-list bXAMUA",
+            attrs: { href: "#/kozhikode/" }
+          },
+          [_vm._v("Kozhikode")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "inline-list bXAMUA",
+            attrs: { href: "#/alappuzha/" }
+          },
+          [_vm._v("Alappuzha")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "inline-list bXAMUA", attrs: { href: "#/thrissur/" } },
+          [_vm._v("Thrissur")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "inline-list bXAMUA", attrs: { href: "#/manipal/" } },
+          [_vm._v("Manipal")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "inline-list bXAMUA",
+            attrs: { href: "#/vijayawada/" }
+          },
+          [_vm._v("Vijayawada")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "inline-list bXAMUA", attrs: { href: "#/jodhpur/" } },
+          [_vm._v("Jodhpur")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "inline-list bXAMUA", attrs: { href: "#/kota/" } },
+          [_vm._v("Kota")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "inline-list bXAMUA", attrs: { href: "#/ajmer/" } },
+          [_vm._v("Ajmer")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "inline-list bXAMUA",
+            attrs: { href: "#/mussoorie/" }
+          },
+          [_vm._v("Mussoorie")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "inline-list bXAMUA",
+            attrs: { href: "#/rishikesh/" }
+          },
+          [_vm._v("Rishikesh")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "inline-list bXAMUA",
+            attrs: { href: "#/jalandhar/" }
+          },
+          [_vm._v("Jalandhar")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "inline-list bXAMUA", attrs: { href: "#/jammu/" } },
+          [_vm._v("Jammu")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "inline-list bXAMUA", attrs: { href: "#/manali/" } },
+          [_vm._v("Manali")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "inline-list bXAMUA",
+            attrs: { href: "#/dharamshala/" }
+          },
+          [_vm._v("Dharamshala")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "inline-list bXAMUA", attrs: { href: "#/raipur/" } },
+          [_vm._v("Raipur")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "inline-list bXAMUA",
+            attrs: { href: "#/gorakhpur/" }
+          },
+          [_vm._v("Gorakhpur")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "inline-list bXAMUA", attrs: { href: "#/palakkad/" } },
+          [_vm._v("Palakkad")]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "sc-biNVYa iapRVw" }, [
+          _c(
+            "a",
+            {
+              staticClass: "sc-haEqAx gSlADi",
+              attrs: { href: "#/delivery-cities" }
+            },
+            [_vm._v("See more")]
+          )
         ])
       ])
     ])
@@ -49903,6 +50749,332 @@ var staticRenderFns = [
         { staticClass: "btn btn-default", attrs: { type: "reset" } },
         [_vm._v("Cancel")]
       )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/vendorComponent.vue?vue&type=template&id=b5e80acc&scoped=true&":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/vendorComponent.vue?vue&type=template&id=b5e80acc&scoped=true& ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "container CKSV-main" }, [
+      _c("div", { staticClass: "section-title text-center m-4 text-muted" }, [
+        _c("div", {}, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "desc-see-more-link" }, [
+            _c("h6", { staticClass: "sc-1gbvc19-0 bPGePZ desc" }, [
+              _vm._v(
+                "Explore curated lists of top restaurants, cafes, pubs, and bars in Haridwar,\n                        based on trends"
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "ks3f96-0 cFSkbc sc-jAWRmi eKxScq",
+                attrs: {
+                  href: "/haridwar/collections",
+                  tabindex: "0",
+                  color: "#F57082",
+                  target: "_self",
+                  role: "link"
+                }
+              },
+              [
+                _c(
+                  "span",
+                  {
+                    staticClass: "ks3f96-1 iFQLJx",
+                    attrs: {
+                      tabindex: "-1",
+                      color: "#F57082",
+                      target: "_self",
+                      role: "link"
+                    }
+                  },
+                  [
+                    _vm._v("All collections in Haridwar"),
+                    _vm._v(" "),
+                    _c(
+                      "i",
+                      {
+                        staticClass: "rbbb40-1 MxLSp sc-igaqVs jqgDvY",
+                        attrs: { color: "#F57082", size: "12" }
+                      },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            staticClass: "rbbb40-0 fQZfgq",
+                            attrs: {
+                              xmlns: "http://www.w3.org/2000/svg",
+                              fill: "#F57082",
+                              width: "12",
+                              height: "12",
+                              viewBox: "0 0 20 20",
+                              "aria-labelledby":
+                                "icon-svg-title- icon-svg-desc-",
+                              role: "img"
+                            }
+                          },
+                          [
+                            _c("title", [_vm._v("right-triangle")]),
+                            _c("path", {
+                              attrs: { d: "M5 0.42l10 10-10 10v-20z" }
+                            })
+                          ]
+                        )
+                      ]
+                    )
+                  ]
+                )
+              ]
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _vm._m(1)
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h2", {}, [_c("h2", [_vm._v("Find Nearest Vendor")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "card CKRW-item" }, [
+        _c("div", { staticClass: "mad-entity-media" }, [
+          _c("img", {
+            attrs: { src: "/images/448x288_img1.jpg", alt: "restaurant" }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "meta-info m-3" }, [
+          _c("h3", [_vm._v("Poorvi Tiffin Service")]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "We provide best tiffin box and it will give you home food feel."
+            )
+          ]),
+          _vm._v(" "),
+          _c("span", [_vm._v("Rs.50/ per tiffin")]),
+          _vm._v(" "),
+          _c("span", [_vm._v("B clock, second floor, Roorkee (UK)")]),
+          _vm._v(" "),
+          _c("hr"),
+          _vm._v(" "),
+          _c(
+            "a",
+            { staticClass: "btn btn-outline-success", attrs: { href: "#" } },
+            [_vm._v("Subscribe Now")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            { staticClass: "btn btn-outline-info", attrs: { href: "#" } },
+            [_vm._v("Explore more")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "CKLST-submeta float-right" }, [
+            _c("span", { staticClass: "CK-distance" }, [_vm._v("5.4km")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "stars" }, [
+              _c("i", { staticClass: "far fa-star" }),
+              _vm._v(" "),
+              _c("i", { staticClass: "fas fa-star" }),
+              _vm._v(" "),
+              _c("i", { staticClass: "fas fa-star" }),
+              _vm._v(" "),
+              _c("i", { staticClass: "fas fa-star" }),
+              _vm._v(" "),
+              _c("i", { staticClass: "fas fa-star" })
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card CKRW-item" }, [
+        _c("div", { staticClass: "mad-entity-media" }, [
+          _c("img", {
+            attrs: { src: "/images/448x288_img1.jpg", alt: "restaurant" }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "meta-info m-3" }, [
+          _c("h3", [_vm._v("Poorvi Tiffin Service")]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "We provide best tiffin box and it will give you home food feel."
+            )
+          ]),
+          _vm._v(" "),
+          _c("span", [_vm._v("Rs.50/ per tiffin")]),
+          _vm._v(" "),
+          _c("span", [_vm._v("B clock, second floor, Roorkee (UK)")]),
+          _vm._v(" "),
+          _c("hr"),
+          _vm._v(" "),
+          _c(
+            "a",
+            { staticClass: "btn btn-outline-success", attrs: { href: "#" } },
+            [_vm._v("Subscribe Now")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            { staticClass: "btn btn-outline-info", attrs: { href: "#" } },
+            [_vm._v("Explore more")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "CKLST-submeta float-right" }, [
+            _c("span", { staticClass: "CK-distance" }, [_vm._v("5.4km")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "stars" }, [
+              _c("i", { staticClass: "far fa-star" }),
+              _vm._v(" "),
+              _c("i", { staticClass: "fas fa-star" }),
+              _vm._v(" "),
+              _c("i", { staticClass: "fas fa-star" }),
+              _vm._v(" "),
+              _c("i", { staticClass: "fas fa-star" }),
+              _vm._v(" "),
+              _c("i", { staticClass: "fas fa-star" })
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card CKRW-item" }, [
+        _c("div", { staticClass: "mad-entity-media" }, [
+          _c("img", {
+            attrs: { src: "/images/448x288_img1.jpg", alt: "restaurant" }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "meta-info m-3" }, [
+          _c("h3", [_vm._v("Poorvi Tiffin Service")]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "We provide best tiffin box and it will give you home food feel."
+            )
+          ]),
+          _vm._v(" "),
+          _c("span", [_vm._v("Rs.50/ per tiffin")]),
+          _vm._v(" "),
+          _c("span", [_vm._v("B clock, second floor, Roorkee (UK)")]),
+          _vm._v(" "),
+          _c("hr"),
+          _vm._v(" "),
+          _c(
+            "a",
+            { staticClass: "btn btn-outline-success", attrs: { href: "#" } },
+            [_vm._v("Subscribe Now")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            { staticClass: "btn btn-outline-info", attrs: { href: "#" } },
+            [_vm._v("Explore more")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "CKLST-submeta float-right" }, [
+            _c("span", { staticClass: "CK-distance" }, [_vm._v("5.4km")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "stars" }, [
+              _c("i", { staticClass: "far fa-star" }),
+              _vm._v(" "),
+              _c("i", { staticClass: "fas fa-star" }),
+              _vm._v(" "),
+              _c("i", { staticClass: "fas fa-star" }),
+              _vm._v(" "),
+              _c("i", { staticClass: "fas fa-star" }),
+              _vm._v(" "),
+              _c("i", { staticClass: "fas fa-star" })
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card CKRW-item" }, [
+        _c("div", { staticClass: "mad-entity-media" }, [
+          _c("img", {
+            attrs: { src: "/images/448x288_img1.jpg", alt: "restaurant" }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "meta-info m-3" }, [
+          _c("h3", [_vm._v("Poorvi Tiffin Service")]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "We provide best tiffin box and it will give you home food feel."
+            )
+          ]),
+          _vm._v(" "),
+          _c("span", [_vm._v("Rs.50/ per tiffin")]),
+          _vm._v(" "),
+          _c("span", [_vm._v("B clock, second floor, Roorkee (UK)")]),
+          _vm._v(" "),
+          _c("hr"),
+          _vm._v(" "),
+          _c(
+            "a",
+            { staticClass: "btn btn-outline-success", attrs: { href: "#" } },
+            [_vm._v("Subscribe Now")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            { staticClass: "btn btn-outline-info", attrs: { href: "#" } },
+            [_vm._v("Explore more")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "CKLST-submeta float-right" }, [
+            _c("span", { staticClass: "CK-distance" }, [_vm._v("5.4km")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "stars" }, [
+              _c("i", { staticClass: "far fa-star" }),
+              _vm._v(" "),
+              _c("i", { staticClass: "fas fa-star" }),
+              _vm._v(" "),
+              _c("i", { staticClass: "fas fa-star" }),
+              _vm._v(" "),
+              _c("i", { staticClass: "fas fa-star" }),
+              _vm._v(" "),
+              _c("i", { staticClass: "fas fa-star" })
+            ])
+          ])
+        ])
+      ])
     ])
   }
 ]
@@ -62117,6 +63289,7 @@ Vue.component('add-product', __webpack_require__(/*! ./components/vendor/AddProd
 Vue.component('add-subscription-product', __webpack_require__(/*! ./components/vendor/TiffinComponent.vue */ "./resources/js/components/vendor/TiffinComponent.vue")["default"]);
 Vue.component('add-service', __webpack_require__(/*! ./components/vendor/AddFoodService.vue */ "./resources/js/components/vendor/AddFoodService.vue")["default"]);
 Vue.component('cookrey-vendors', __webpack_require__(/*! ./components/vendor/AllVendors.vue */ "./resources/js/components/vendor/AllVendors.vue")["default"]);
+Vue.component('cookrey-vendors-web', __webpack_require__(/*! ./components/vendorComponent.vue */ "./resources/js/components/vendorComponent.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -62721,6 +63894,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TiffinComponent_vue_vue_type_template_id_65c0f932_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TiffinComponent_vue_vue_type_template_id_65c0f932_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/vendorComponent.vue":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/vendorComponent.vue ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _vendorComponent_vue_vue_type_template_id_b5e80acc_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./vendorComponent.vue?vue&type=template&id=b5e80acc&scoped=true& */ "./resources/js/components/vendorComponent.vue?vue&type=template&id=b5e80acc&scoped=true&");
+/* harmony import */ var _vendorComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./vendorComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/vendorComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _vendorComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _vendorComponent_vue_vue_type_template_id_b5e80acc_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _vendorComponent_vue_vue_type_template_id_b5e80acc_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "b5e80acc",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/vendorComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/vendorComponent.vue?vue&type=script&lang=js&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/vendorComponent.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_vendorComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./vendorComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/vendorComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_vendorComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/vendorComponent.vue?vue&type=template&id=b5e80acc&scoped=true&":
+/*!************************************************************************************************!*\
+  !*** ./resources/js/components/vendorComponent.vue?vue&type=template&id=b5e80acc&scoped=true& ***!
+  \************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_vendorComponent_vue_vue_type_template_id_b5e80acc_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./vendorComponent.vue?vue&type=template&id=b5e80acc&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/vendorComponent.vue?vue&type=template&id=b5e80acc&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_vendorComponent_vue_vue_type_template_id_b5e80acc_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_vendorComponent_vue_vue_type_template_id_b5e80acc_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

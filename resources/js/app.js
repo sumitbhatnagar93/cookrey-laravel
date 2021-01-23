@@ -32,6 +32,7 @@ Vue.component('add-product', require('./components/vendor/AddProductComponent.vu
 Vue.component('add-subscription-product', require('./components/vendor/TiffinComponent.vue').default);
 Vue.component('add-service', require('./components/vendor/AddFoodService.vue').default);
 Vue.component('cookrey-vendors', require('./components/vendor/AllVendors.vue').default);
+Vue.component('cookrey-vendors-web', require('./components/vendorComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -12,6 +12,8 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ asset('css/owl.min.css') }}" />
+
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -77,8 +79,8 @@
             </div>
         </div>
     </nav>
-<home-banner></home-banner>
-    <main class="py-4">
+    <home-banner></home-banner>
+    <main class="">
         @yield('content')
     </main>
     <footer>
@@ -89,5 +91,28 @@
     src="https://maps.googleapis.com/maps/api/js?libraries=places,geometry&key=AIzaSyD1fJmzwJMy35N0rfY_btipuz6f8_zFvZA"
     type="text/javascript"></script>
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<script src="{{ asset('js/jquery.min.js') }}" ></script>
+
+<script type="text/javascript" src="{{ asset('js/owl.min.js') }}"></script>
+<script>
+    jQuery(function ($){
+        $('.owl-carousel').owlCarousel({
+            loop:true,
+            margin:10,
+            nav:true,
+            responsive:{
+                0:{
+                    items:1
+                },
+                600:{
+                    items:1
+                },
+                1000:{
+                    items:3
+                }
+            }
+        })
+    });
+</script>
 </body>
 </html>

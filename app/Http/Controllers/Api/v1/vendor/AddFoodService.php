@@ -92,6 +92,11 @@ class AddFoodService extends Controller
         return view('vendors/vendors');
     }
 
+    public function viewVendorsOnFront()
+    {
+        return view('/vendors-web');
+    }
+
     public function getVendorById($providerId)
     {
         $data = DB::table('services')->where('provider_id', $providerId)->get();
@@ -208,6 +213,7 @@ class AddFoodService extends Controller
 
         return $randomString;
     }
+
     public function getOrderById($id){
         $data = DB::table('orders')->where('order_id', $id)->get();
         if (!empty($data)){
@@ -219,6 +225,7 @@ class AddFoodService extends Controller
             return response()->json(["message" => "Something went wrong"]);
         }
     }
+
     public function getOrderByUserId($id){
         $data = DB::table('orders')->where('user_id', $id)->get();
         if (!empty($data)){

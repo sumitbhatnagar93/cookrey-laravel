@@ -207,8 +207,40 @@ div.front-banner {
 .card.CKRW-item {
     margin: 12px;
     box-shadow: 0px 6px 9px 4px #ccc;
+    background: transparent;
 }
+.card.CKRW-item .mad-entity-media{
 
+}
+section.apk-banner{
+    background: url('/images/apk-banner.png');
+    width: 100%;
+    background-size: cover;
+    height: 420px;
+}
+section .CKHM-areas{
+    display: inline-block;
+    width: 100%;
+}
+section .CKHM-areas a.inline-list{
+    display: inline-block;
+    text-align: left;
+    text-decoration: none;
+    color: rgb(130, 130, 130);
+    margin-bottom: 0.2rem;
+    width: 20%;
+    font-size: 1rem;
+    line-height: 1.8;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: bottom;
+}
+div.CKSV-main .card .mad-entity-media{width: 415px;}
+div.CKSV-main .card .mad-entity-media img{width: 100%;}
+div.CKSV-main .card{
+    max-width: 417px;
+}
 @media screen and (max-width: 992px) {
     .CKHM-srch form .inner-form .input-field {
         height: 50px;
@@ -249,5 +281,10 @@ div.front-banner {
     .CKHM-srch form .inner-form .input-field.third-wrap {
         margin-bottom: 0;
         width: 100%;
+    }
+}
+@media (min-width: 1200px){
+    .container {
+        max-width: 1327px;
     }
 }

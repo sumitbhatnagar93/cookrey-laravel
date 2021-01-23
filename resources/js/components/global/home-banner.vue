@@ -12,7 +12,8 @@
                             <div class="choices" role="listbox" data-type="select-one" tabindex="0" aria-haspopup="true" aria-expanded="false" dir="ltr" aria-activedescendant="choices-choices-single-defaul-11-item-choice-2">
                                 <div class="choices__inner"><select data-trigger="" name="choices-single-defaul" class="choices__input is-hidden" tabindex="-1" style="display:none;" aria-hidden="true" data-choice="active"><option value="Category" selected="">Category</option></select><div class="choices__list choices__list--single"><div class="choices__item choices__item--selectable choices__placeholder" data-item="" data-id="1" data-value="Category" aria-selected="true">
                                     Category
-                                </div></div></div><div class="choices__list choices__list--dropdown" aria-expanded="false">
+                                </div></div></div>
+                                <div style="display: none" class="choices__list choices__list--dropdown" aria-expanded="false">
                                 <div class="choices__list" dir="ltr" role="listbox"><div class="choices__item choices__item--choice choices__item--selectable choices__placeholder is-highlighted" data-select-text="" data-choice="" data-id="2" data-value="Category" data-choice-selectable="" id="choices-choices-single-defaul-11-item-choice-2" role="option" aria-selected="true">
                                     Category
                                 </div><div class="choices__item choices__item--choice choices__item--selectable" data-select-text="" data-choice="" data-id="1" data-value="Accessories" data-choice-selectable="" id="choices-choices-single-defaul-11-item-choice-1" role="option">
