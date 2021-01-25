@@ -1,57 +1,56 @@
 <template>
     <div>
-        <footer class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <h4>Colmun 1</h4>
-                    <nav>
-                        <a href="https://www.zomato.com/who-we-are" class="elhb8j-16 evQfKr"><p class="elhb8j-15 mcMLG">
-                            Who We Are</p>
-                        </a>
-                        <a href="http://blog.zomato.com/" class="elhb8j-16 evQfKr"><p class="elhb8j-15 mcMLG">Blog</p>
-                        </a>
-                        <a href="https://www.zomato.com/careers" class="elhb8j-16 evQfKr"><p class="elhb8j-15 mcMLG">
-                            Careers</p></a>
-                        <a href="https://www.zomato.com/report-fraud" class="elhb8j-16 evQfKr"><p
-                            class="elhb8j-15 mcMLG">Report Fraud</p></a>
-                        <a href="https://www.zomato.com/contact" class="elhb8j-16 evQfKr"><p class="elhb8j-15 mcMLG">
-                            Contact</p></a>
-                    </nav>
+        <footer class="footer-distributed">
+            <div class="footer-left">
+                <h3>WebDev<span>Trick</span></h3>
+                <p class="footer-links">
+                    <a href="#">Home</a>
+                    ·
+                    <a href="#">Blog</a>
+                    ·
+                    <a href="#">Pricing</a>
+                    ·
+                    <a href="#">About</a>
+                    ·
+                    <a href="#">Faq</a>
+                    ·
+                    <a href="#">Contact</a>
+                </p>
+                <p class="footer-company-name">webdevtrick &copy; 2019</p>
+            </div>
+
+            <div class="footer-center">
+                <div>
+                    <i class="fa fa-map-marker"></i>
+                    <p><span>21 Revolution Street</span> Delhi, India</p>
                 </div>
-                <div class="col-md-4">
-                    <h4>Colmun 1</h4>
-                    <nav>
-                        <a href="https://www.zomato.com/who-we-are" class="elhb8j-16 evQfKr"><p class="elhb8j-15 mcMLG">
-                            Who We Are</p>
-                        </a>
-                        <a href="http://blog.zomato.com/" class="elhb8j-16 evQfKr"><p class="elhb8j-15 mcMLG">Blog</p>
-                        </a>
-                        <a href="https://www.zomato.com/careers" class="elhb8j-16 evQfKr"><p class="elhb8j-15 mcMLG">
-                            Careers</p></a>
-                        <a href="https://www.zomato.com/report-fraud" class="elhb8j-16 evQfKr"><p
-                            class="elhb8j-15 mcMLG">Report Fraud</p></a>
-                        <a href="https://www.zomato.com/contact" class="elhb8j-16 evQfKr"><p class="elhb8j-15 mcMLG">
-                            Contact</p></a>
-                    </nav>
+                <div>
+                    <i class="fa fa-phone"></i>
+                    <p>+1 555 123456</p>
                 </div>
-                <div class="col-md-4">
-                    <h4>Colmun 1</h4>
-                    <nav>
-                        <a href="https://www.zomato.com/who-we-are" class="elhb8j-16 evQfKr"><p class="elhb8j-15 mcMLG">
-                            Who We Are</p>
-                        </a>
-                        <a href="http://blog.zomato.com/" class="elhb8j-16 evQfKr"><p class="elhb8j-15 mcMLG">Blog</p>
-                        </a>
-                        <a href="https://www.zomato.com/careers" class="elhb8j-16 evQfKr"><p class="elhb8j-15 mcMLG">
-                            Careers</p></a>
-                        <a href="https://www.zomato.com/report-fraud" class="elhb8j-16 evQfKr"><p
-                            class="elhb8j-15 mcMLG">Report Fraud</p></a>
-                        <a href="https://www.zomato.com/contact" class="elhb8j-16 evQfKr"><p class="elhb8j-15 mcMLG">
-                            Contact</p></a>
-                    </nav>
+                <div>
+                    <i class="fa fa-envelope"></i>
+                    <p><a href="mailto:support@company.com">contact@webdevtrick.com</a></p>
                 </div>
             </div>
+
+            <div class="footer-right">
+                <p class="footer-company-about">
+                    <span>About the company</span>
+                    Web Dev Trick is a blog for web designers, graphic designers, web developers &amp; SEO Learner.
+                </p>
+                <div class="footer-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+
+                </div>
+
+            </div>
+
         </footer>
+
         <div class="container-fluid bg-dark text-white text-center">
             <span>copyright @ 2021</span>
             <strong>By: Cookrey Ptv Ltd</strong>

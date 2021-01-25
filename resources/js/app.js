@@ -25,6 +25,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('home-component', require('./components/homeComponent.vue').default);
 Vue.component('home-banner',require('./components/global/home-banner.vue').default);
 Vue.component('footer-component',require('./components/global/footerComponent.vue').default);
+Vue.component('search-component',require('./components/global/searchComponent.vue').default);
 /**
  * Vendor related templates
  */
