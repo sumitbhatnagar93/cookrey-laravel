@@ -10,7 +10,7 @@
     <div class="container">
         <div class="section-title text-center m-4 text-muted">
             <div class="">
-                <h2 class=""><h2 >Find Nearest Vendor</h2></h2>
+                <h2 class="CK-center-title">Find Nearest Vendor</h2>
                 <div class="desc-see-more-link">
                     <h6 class="sc-1gbvc19-0 bPGePZ desc">Explore curated lists of top restaurants, cafes, pubs, and bars in Haridwar,
                         based on trends</h6>

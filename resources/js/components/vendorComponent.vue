@@ -17,7 +17,7 @@
                         <span>Rs.50/ per tiffin</span>
                         <span>B clock, second floor, Roorkee (UK)</span>
                         <hr>
-                        <a href="#" class="btn btn-outline-success">Subscribe Now</a>
+                        <a href="/vendor/2" class="btn btn-outline-success">Subscribe Now</a>
                         <a href="#" class="btn btn-outline-info">Explore more</a>
                         <div class="CKLST-submeta float-right">
                             <span class="CK-distance">5.4km</span>

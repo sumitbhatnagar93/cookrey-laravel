@@ -1,6 +1,40 @@
+.CK-main-nav {
+    position: relative;
+    z-index: 999;
+    color: #fff;
+}
+
+/**
+* Home page menu link css
+ */
+.CK-main-nav.home-nav.navbar-light .navbar-nav .nav-link {
+    color: #fff !important;
+    font-weight: 700;
+}
+
+.CK-main-nav.home-nav.navbar-light .navbar-nav .nav-link:hover,
+.CK-main-nav.home-nav.navbar-light .navbar-nav .nav-link:focus {
+    color: #fff !important;
+    font-weight: 700;
+}
+
+/**
+inner pages menu link css
+ */
+.CK-main-nav.navbar-light .navbar-nav .nav-link {
+    color: rgb(125 122 122 / 90%);
+    font-weight: 700;
+}
+
+.CK-main-nav.navbar-light .navbar-nav .nav-link:hover,
+.CK-main-nav.navbar-light .navbar-nav .nav-link:focus {
+    color: rgb(125 122 122 / 90%);
+    font-weight: 700;
+}
+
 div.front-banner {
     background-image: url('/images/banner.jpeg');
-    /*background: #1d68a7;*/
+    margin-top: -52px;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -246,6 +280,23 @@ section .CKHM-areas a.inline-list {
     vertical-align: bottom;
 }
 
+h2.CK-center-title {
+    position: relative;
+    text-align: center;
+}
+
+h2.CK-center-title:after {
+    left: 0 !important;
+    margin: 0 auto !important;
+    content: '';
+    position: absolute;
+    background: orange;
+    height: 2px;
+    width: 115px;
+    right: 0;
+    bottom: -2px;
+}
+
 div.section-title h2:after {
     content: '';
     position: absolute;
@@ -256,8 +307,9 @@ div.section-title h2:after {
     right: 0;
     bottom: -2px;
 }
+
 div.section-title {
-    margin-top: 66px!important;
+    margin-top: 66px !important;
 }
 
 div.CKSV-main .card .mad-entity-media {
@@ -627,3 +679,51 @@ Footer css start here
 /*
 End footer css
  */
+
+.CK-vendor-single .card .card-header {
+    background-color: rgb(166 31 31 / 75%);
+    color: #fff;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (max-width: 768px) {
+
+    .CK-vendor-single .card {
+        text-align: center;
+    }
+}
+
+@media (min-width: 300px) {
+    .CK-vendor-single .card {
+        width: 300px;
+        margin: auto;
+        box-shadow: rgb(204, 204, 204) 2px 2px 23px 11px;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 524px) {
+    .CK-vendor-single .card {
+        width: 500px;
+        margin: auto;
+        box-shadow: rgb(204, 204, 204) 2px 2px 23px 11px;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .CK-vendor-single .card {
+        width: 800px;
+        margin: auto;
+        box-shadow: rgb(204, 204, 204) 2px 2px 23px 11px;
+    }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .CK-vendor-single .card {
+        width: 800px;
+        margin: auto;
+        box-shadow: rgb(204, 204, 204) 2px 2px 23px 11px;
+    }
+}

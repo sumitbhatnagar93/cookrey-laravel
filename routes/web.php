@@ -59,5 +59,6 @@ Route::get('getUserSubscriptionById/{id}', 'Api\v1\Auth\Users@getUserSubscriptio
 
 // web pages front-end
 Route::get('services', 'Api\v1\vendor\AddFoodService@viewVendorsOnFront');
+Route::get('vendor/{id}', 'Api\v1\vendor\AddFoodService@viewSingleVendorsOnFront');
 
 Route::post('test-upload', 'Api\v1\vendor\AddFoodService@testUpload');

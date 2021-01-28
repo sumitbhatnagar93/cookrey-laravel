@@ -97,6 +97,11 @@ class AddFoodService extends Controller
         return view('/vendors-web');
     }
 
+    public function viewSingleVendorsOnFront()
+    {
+        return view('/vendor-single');
+    }
+
     public function getVendorById($providerId)
     {
         $data = DB::table('services')->where('provider_id', $providerId)->get();
