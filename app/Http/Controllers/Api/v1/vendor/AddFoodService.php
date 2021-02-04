@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Api\v1\vendor;
 
+use Razorpay\Api\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Contracts\Session\Session;
+use Illuminate\Support\Facades\Redirect;
 
 class AddFoodService extends Controller
 {
@@ -219,40 +222,64 @@ class AddFoodService extends Controller
         return $randomString;
     }
 
-    public function getOrderById($id){
+    public function getOrderById($id)
+    {
         $data = DB::table('orders')->where('order_id', $id)->get();
-        if (!empty($data)){
+        if (!empty($data)) {
             $vendorData = DB::table('services')->where('provider_id', $data[0]->vendor_id)->get();
             $data[0]->vendor_name = $vendorData[0]->business_name;
             $data[0]->vendor_address = $vendorData[0]->business_address;
             return response()->json($data);
-        }else{
+        } else {
             return response()->json(["message" => "Something went wrong"]);
         }
     }
 
-    public function getOrderByUserId($id){
+    public function getOrderByUserId($id)
+    {
         $data = DB::table('orders')->where('user_id', $id)->get();
-        if (!empty($data)){
+        if (!empty($data)) {
             $vendorData = DB::table('services')->where('provider_id', $data[0]->vendor_id)->get();
             $data[0]->vendor_name = $vendorData[0]->business_name;
             $data[0]->vendor_address = $vendorData[0]->business_address;
             return response()->json($data);
-        }else{
+        } else {
             return response()->json(["message" => "Something went wrong"]);
         }
     }
 
-    public function testUpload(Request $request){
+    public function testUpload(Request $request)
+    {
         $data = $request->all();
         $uploadPath = public_path('/images');
         if ($request->hasFile('testImg')) {
             $file = $request->file('testImg');
             $filename = $file->getClientOriginalName();
             $file->move($uploadPath, $filename);
-                return response()->json($data);
+            return response()->json($data);
         } else {
             return response()->json(["message" => "Something went wrong"]);
         }
     }
+
+    /**
+     * Rozapay payment
+     */
+    public function payment()
+    {
+        //get API Configuration
+        $api = new Api('rzp_test_fVUykSh2DqZuiy', 'sZWTk5zifNBlMX3Sc16jdrVO');
+        $orderData = [
+            'receipt' => 3456,
+            'amount' => 5000,
+            'currency' => 'INR',
+            'payment_capture' => 1
+        ];
+        $razorpayOrder = $api->order->create($orderData);
+        $razorpayOrderId = $razorpayOrder['id'];
+        $displayAmount = $amount = $orderData['amount'];
+        return response()->json(['orderID' => $razorpayOrderId]);
+    }
+
+
 }

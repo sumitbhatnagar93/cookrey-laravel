@@ -103,6 +103,7 @@
 <script src="{{ asset('js/jquery.min.js') }}"></script>
 
 <script type="text/javascript" src="{{ asset('js/owl.min.js') }}"></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
     jQuery(function ($) {
         $('.owl-carousel').owlCarousel({

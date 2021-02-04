@@ -62,3 +62,4 @@ Route::get('services', 'Api\v1\vendor\AddFoodService@viewVendorsOnFront');
 Route::get('vendor/{id}', 'Api\v1\vendor\AddFoodService@viewSingleVendorsOnFront');
 
 Route::post('test-upload', 'Api\v1\vendor\AddFoodService@testUpload');
+Route::get('paytest', 'Api\v1\vendor\AddFoodService@payment');
