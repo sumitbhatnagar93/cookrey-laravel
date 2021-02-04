@@ -92,10 +92,10 @@ export default {
                     alert(response.razorpay_order_id);
                     alert(response.razorpay_signature)
                 },
-                "prefill": {
-                    "name": "Gaurav Kumar",
-                    "email": "gaurav.kumar@example.com",
-                    "contact": "9999999999"
+                prefill: {
+                    email: 'demopay@sunilk.work',
+                    contact: '123456789',
+                    name: 'Ionic Razorpay Demo'
                 },
                 "notes": {
                     "address": "Razorpay Corporate Office"
