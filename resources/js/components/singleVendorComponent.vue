@@ -30,7 +30,9 @@
                                 <p class="card-text">Dal | Roti | Rice | Salad</p>
                             </div>
                             <div class="col-md-4">
-                                <button class="btn btn-outline-info">Subscribe now</button>
+                                <button class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModal"
+                                        data-whatever="@getbootstrap">Subscribe now
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -53,6 +55,86 @@
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Subscribe</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <h4>Select you subscription period</h4>
+                                <label class="radio-inline">
+                                    <input type="radio" name="optradio" checked>Week
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="optradio">Month
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" id="custom-option" @click="isCustomOption" name="optradio">Custom
+                                </label>
+                                <div class="custom-opt">
+                                    <label for="from">
+                                        <span>From:</span>
+                                        <input type="date" class="form-control" id="from">
+                                    </label>
+                                    <label for="to">
+                                        <span>To:</span>
+                                        <input type="date" class="form-control" id="to">
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
+                                           value="option1">
+                                    <label class="form-check-label" for="inlineCheckbox1">Lunch</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2"
+                                           value="option2">
+                                    <label class="form-check-label" for="inlineCheckbox2">Dinner</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <h4>Choose Addons</h4>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
+                                           value="option1">
+                                    <label class="form-check-label" for="inlineCheckbox3">Lunch</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox4"
+                                           value="option2">
+                                    <label class="form-check-label" for="inlineCheckbox4">Dinner</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox5"
+                                           value="option2">
+                                    <label class="form-check-label" for="inlineCheckbox5">Dinner</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox6"
+                                           value="option2">
+                                    <label class="form-check-label" for="inlineCheckbox6">Dinner</label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </template>
 
@@ -62,7 +144,10 @@ export default {
     name: "singleVendorComponent",
     data() {
         return {
-            orderID: ''
+            currentUser: '',
+            orderID: '',
+            grandTotal: '',
+            cart: ''
         };
     },
     created() {
@@ -77,6 +162,9 @@ export default {
                 }).catch(er => {
                 console.log(er);
             })
+        },
+        isCustomOption() {
+
         },
         pay() {
             var options = {

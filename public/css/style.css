@@ -680,6 +680,25 @@ Footer css start here
 End footer css
  */
 
+/*
+Bootstrap modal enhancement
+ */
+.modal-header {
+    position: relative;
+}
+.modal-header .close {
+    border-radius: 100%;
+    background: #060606;
+    height: 41px;
+    padding: 0.5rem 1rem;
+    position: absolute;
+    color: #fff;
+    top: -10px;
+    right: -17px;
+    margin: 0;
+    opacity: 1;
+}
+
 .CK-vendor-single .card .card-header {
     background-color: rgb(166 31 31 / 75%);
     color: #fff;
