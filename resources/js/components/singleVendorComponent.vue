@@ -71,15 +71,15 @@
                             <div class="form-group">
                                 <h4>Select you subscription period</h4>
                                 <label class="radio-inline">
-                                    <input type="radio" name="optradio" checked>Week
+                                    <input type="radio" name="optradio" checked @click="isDefaultOption">Week
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="optradio">Month
+                                    <input type="radio" name="optradio" @click="isDefaultOption">Month
                                 </label>
                                 <label class="radio-inline">
                                     <input type="radio" id="custom-option" @click="isCustomOption" name="optradio">Custom
                                 </label>
-                                <div class="custom-opt">
+                                <div class="custom-opt" v-if="isCustomOpt">
                                     <label for="from">
                                         <span>From:</span>
                                         <input type="date" class="form-control" id="from">
@@ -144,6 +144,7 @@ export default {
     name: "singleVendorComponent",
     data() {
         return {
+            isCustomOpt: false,
             currentUser: '',
             orderID: '',
             grandTotal: '',
@@ -163,8 +164,11 @@ export default {
                 console.log(er);
             })
         },
+        isDefaultOption() {
+            this.isCustomOpt = false
+        },
         isCustomOption() {
-
+            this.isCustomOpt = true
         },
         pay() {
             var options = {

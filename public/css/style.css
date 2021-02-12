@@ -1,3 +1,12 @@
+/**
+google search
+ */
+.pac-item {
+    background: #fff;
+    padding: 14px;
+    width: 302px;
+}
+
 .CK-main-nav {
     position: relative;
     z-index: 999;
@@ -686,6 +695,7 @@ Bootstrap modal enhancement
 .modal-header {
     position: relative;
 }
+
 .modal-header .close {
     border-radius: 100%;
     background: #060606;
