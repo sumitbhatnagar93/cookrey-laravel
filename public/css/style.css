@@ -1,6 +1,11 @@
 /**
 google search
  */
+.pac-container{
+    width: 358px!important;
+    left: 455px!important;
+    top: 163px!important;
+}
 .pac-item {
     background: #fff;
     padding: 14px;

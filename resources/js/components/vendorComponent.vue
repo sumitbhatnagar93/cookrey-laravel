@@ -47,24 +47,52 @@ export default {
     name: "vendorComponent",
     data() {
         return {
+            loader: [],
             vendors: [],
-            cookreyVendors: []
+            cookreyVendors: [],
+            currentLocation: [],
         }
     },
     created() {
         this.onInit();
+        window.addEventListener('reloadListing', () => {
+            this.showPreloader()
+            this.onInit()
+        })
     },
     methods: {
-        onInit() {
-            axios('getVendors').then((res) => {
-                console.log(res.data)
-                this.vendors = res.data
-                this.sortList(res.data, 29.8543, 77.8880).then(() => {
-                    console.log('sorted')
-                    console.log(this.cookreyVendors)
-                });
-            })
+        async onInit() {
+            this.currentLocation = JSON.parse(localStorage.getItem('currentLocation'))
+            const geocoder = new google.maps.Geocoder();
+            geocoder.geocode({placeId: this.currentLocation.place_id}, (results, status) => {
+                this.currentLocation.lat = results[0].geometry.location.lat()
+                this.currentLocation.lng = results[0].geometry.location.lng()
+                axios('getVendors').then((res) => {
+                    this.vendors = res.data
+                    this.sortList(res.data, this.currentLocation.lat, this.currentLocation.lng).then(() => {
+                        this.loader.hide()
+                    });
+                })
+            });
         },
+
+        showPreloader() {
+            this.loader = this.$loading.show({
+                canCancel: true,
+                onCancel: this.onCancel,
+                color: '#ffffff',
+                loader: 'dots',
+                backgroundColor: '#000000',
+            });
+        },
+        async geoCode(placeId) {
+            const geocoder = new google.maps.Geocoder();
+            geocoder.geocode({placeId: placeId}, (results, status) => {
+                this.currentLocation.lat = results[0].geometry.location.lat()
+                this.currentLocation.lng = results[0].geometry.location.lng()
+            });
+        },
+
         async sortList(data, lat, lng) {
             this.cookreyVendors = [];
             const geocoder = new google.maps.Geocoder();

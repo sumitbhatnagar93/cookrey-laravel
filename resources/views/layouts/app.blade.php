@@ -18,6 +18,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/vue-ui-preloader/dist/loader.css">
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -104,6 +105,7 @@
 
 <script type="text/javascript" src="{{ asset('js/owl.min.js') }}"></script>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="https://unpkg.com/vue-ui-preloader"></script>
 <script>
     jQuery(function ($) {
         $('.owl-carousel').owlCarousel({

@@ -62,6 +62,7 @@
             </ul>
         </div>
     </div>
+
 </template>
 
 <script>
@@ -85,9 +86,12 @@ export default {
             console.log(autocomplete)
             autocomplete.addListener('place_changed', function () {
                 var place = autocomplete.getPlace();
-                console.log(place)
+                console.log(place.place_id)
+                localStorage.setItem('currentLocation',JSON.stringify(place));
+                window.dispatchEvent(new CustomEvent('reloadListing'));
             });
         },
+
         onInit() {
             // axios('getVendors').then((res) => {
             //     console.log(res.data)
@@ -120,7 +124,7 @@ export default {
         //             // });
         //         });
         // }
-    }
+    },
 }
 </script>
 

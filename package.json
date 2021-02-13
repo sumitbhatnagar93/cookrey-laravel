@@ -28,6 +28,8 @@
         "bootstrap-vue-datatable": "^1.0.7",
         "laravel-vue-datatable": "^0.5.13",
         "vue-google-maps": "^0.1.21",
+        "vue-loading-overlay": "^3.4.2",
+        "vue-ui-preloader": "^1.1.3",
         "vue2-google-maps": "^0.10.7"
     }
 }
