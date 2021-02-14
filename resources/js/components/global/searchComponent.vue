@@ -12,16 +12,16 @@
                                 d="M10.2 0.42c-4.5 0-8.2 3.7-8.2 8.3 0 6.2 7.5 11.3 7.8 11.6 0.2 0.1 0.3 0.1 0.4 0.1s0.3 0 0.4-0.1c0.3-0.2 7.8-5.3 7.8-11.6 0.1-4.6-3.6-8.3-8.2-8.3zM10.2 11.42c-1.7 0-3-1.3-3-3s1.3-3 3-3c1.7 0 3 1.3 3 3s-1.3 3-3 3z"></path>
                         </svg>
                     </i>
-                    <input value=""  id="autocomplete" placeholder="Haridwar"
+                    <input value="" id="autocomplete" placeholder="Haridwar"
                            class="sc-etwtAo jNaXUL">
                     <i
-                    class="rbbb40-1 MxLSp sc-fQejPQ gbglTO" color="#4F4F4F" size="12">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="#4F4F4F" width="12" height="12"
-                         viewBox="0 0 20 20" aria-labelledby="icon-svg-title- icon-svg-desc-" role="img"
-                         class="rbbb40-0 fQZfgq"><title>down-triangle</title>
-                        <path d="M20 5.42l-10 10-10-10h20z"></path>
-                    </svg>
-                </i>
+                        class="rbbb40-1 MxLSp sc-fQejPQ gbglTO" color="#4F4F4F" size="12">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="#4F4F4F" width="12" height="12"
+                             viewBox="0 0 20 20" aria-labelledby="icon-svg-title- icon-svg-desc-" role="img"
+                             class="rbbb40-0 fQZfgq"><title>down-triangle</title>
+                            <path d="M20 5.42l-10 10-10-10h20z"></path>
+                        </svg>
+                    </i>
                     <div class="sc-iBEsjs eiPvfz">
                         <div class="sc-bmyXtO sc-dEoRIm ioKzAG">
                             <div class="sc-kxynE kKwxbz">
@@ -42,8 +42,8 @@
                 <div class="sc-VJcYb dtzfDv"></div>
                 <div class="sc-18n4g8v-0 gAhmYY sc-kUaPvJ dPcESM">
                     <input value=""
-                                                                         placeholder="Search for your favourite vendor.."
-                                                                         class="sc-fONwsr lbMFPq">
+                           placeholder="Search for your favourite vendor.."
+                           class="sc-fONwsr lbMFPq">
                     <div class="sc-jVODtj hjtbhk"><i class="rbbb40-1 MxLSp" color="#828282" size="18">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="#828282" width="18" height="18"
                              viewBox="0 0 20 20" aria-labelledby="icon-svg-title- icon-svg-desc-" role="img"
@@ -58,7 +58,7 @@
         </div>
         <div class="autocomplete" v-if="autocompleteItems.length === 0">
             <ul>
-                <li v-for="(item,index) of autocompleteItems" >{{item.description}}</li>
+                <li v-for="(item,index) of autocompleteItems">{{ item.description }}</li>
             </ul>
         </div>
     </div>
@@ -87,20 +87,20 @@ export default {
             autocomplete.addListener('place_changed', function () {
                 var place = autocomplete.getPlace();
                 console.log(place.place_id)
-                localStorage.setItem('currentLocation',JSON.stringify(place));
+                localStorage.setItem('currentLocation', JSON.stringify(place));
                 window.dispatchEvent(new CustomEvent('reloadListing'));
             });
         },
 
         onInit() {
-            // axios('getVendors').then((res) => {
-            //     console.log(res.data)
-            //     this.vendors = res.data
-            //     this.sortList(res.data, 29.8543, 77.8880).then(() => {
-            //         console.log('sorted')
-            //         console.log(this.cookreyVendors)
-            //     });
-            // })
+            if (navigator.geolocation) {
+                const location = navigator.geolocation.getCurrentPosition(this.showPosition);
+            } else {
+                console.log("Geolocation is not supported by this browser.");
+            }
+        },
+        showPosition(position) {
+          console.log(position)
         },
         // onChange() {
         //     const GoogleAutocomplete = new google.maps.places.AutocompleteService();

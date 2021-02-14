@@ -2166,14 +2166,15 @@ __webpack_require__.r(__webpack_exports__);
         window.dispatchEvent(new CustomEvent('reloadListing'));
       });
     },
-    onInit: function onInit() {// axios('getVendors').then((res) => {
-      //     console.log(res.data)
-      //     this.vendors = res.data
-      //     this.sortList(res.data, 29.8543, 77.8880).then(() => {
-      //         console.log('sorted')
-      //         console.log(this.cookreyVendors)
-      //     });
-      // })
+    onInit: function onInit() {
+      if (navigator.geolocation) {
+        var location = navigator.geolocation.getCurrentPosition(this.showPosition);
+      } else {
+        console.log("Geolocation is not supported by this browser.");
+      }
+    },
+    showPosition: function showPosition(position) {
+      console.log(position);
     } // onChange() {
     //     const GoogleAutocomplete = new google.maps.places.AutocompleteService();
     //     if (this.autocomplete.input === '') {
@@ -3608,6 +3609,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "vendorComponent",
   data: function data() {
@@ -3622,6 +3624,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var _this = this;
 
     this.onInit();
+    this.currentLocation.lat = 29.8543;
+    this.currentLocation.lng = 77.8880;
     window.addEventListener('reloadListing', function () {
       _this.showPreloader();
 
@@ -3633,12 +3637,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var geocoder;
+        var localData, geocoder;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _this2.currentLocation = JSON.parse(localStorage.getItem('currentLocation'));
+                localData = localStorage.getItem('currentLocation');
+
+                if (localData) {
+                  _this2.currentLocation = JSON.parse(localData);
+                } else {
+                  _this2.currentLocation.place_id = 'ChIJGVGzCG6zDjkRcgq9XsJdj3k';
+                }
+
                 geocoder = new google.maps.Geocoder();
                 geocoder.geocode({
                   placeId: _this2.currentLocation.place_id
@@ -3654,7 +3665,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   });
                 });
 
-              case 3:
+              case 4:
               case "end":
                 return _context.stop();
             }
@@ -52731,6 +52742,12 @@ var render = function() {
         _c("search-component"),
         _vm._v(" "),
         _vm._m(0),
+        _vm._v(" "),
+        _vm.cookreyVendors.length == 0
+          ? _c("h4", { staticClass: "text-center" }, [
+              _vm._v("No Service Found :(")
+            ])
+          : _vm._e(),
         _vm._v(" "),
         _c(
           "div",

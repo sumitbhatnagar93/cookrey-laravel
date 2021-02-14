@@ -26,7 +26,8 @@
 </head>
 <body>
 <div id="app">
-    <nav class="navbar navbar-expand-md navbar-light shadow-sm CK-main-nav @if(Route::getCurrentRoute()->uri() == '/') home-nav @endif">
+    <nav
+        class="navbar navbar-expand-md navbar-light shadow-sm CK-main-nav @if(Route::getCurrentRoute()->uri() == '/') home-nav @endif">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
                 {{ config('app.name', 'Laravel') }}
@@ -45,7 +46,9 @@
 
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
-
+                    <li class="nav-item">
+                        <a href="#" class="nav-link"><i class="fas fa-map-marker-alt"></i></a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="services">{{ __('Vendors') }}</a>
                     </li>
@@ -57,11 +60,11 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
-{{--                        @if (Route::has('register'))--}}
-{{--                            <li class="nav-item">--}}
-{{--                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>--}}
-{{--                            </li>--}}
-{{--                        @endif--}}
+                        {{--                        @if (Route::has('register'))--}}
+                        {{--                            <li class="nav-item">--}}
+                        {{--                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>--}}
+                        {{--                            </li>--}}
+                        {{--                        @endif--}}
                     @else
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
@@ -107,6 +110,7 @@
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script src="https://unpkg.com/vue-ui-preloader"></script>
 <script>
+
     jQuery(function ($) {
         $('.owl-carousel').owlCarousel({
             loop: true,

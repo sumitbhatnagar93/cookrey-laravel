@@ -6,6 +6,7 @@
             <div class="section-title text-muted">
                 <h2 class="position-relative">Collections</h2>
             </div>
+            <h4 class="text-center" v-if="cookreyVendors.length==0">No Service Found :(</h4>
             <div class="row">
                 <div v-for="(vendor,index) of cookreyVendors" class="card CKRW-item">
                     <div class="mad-entity-media">
@@ -55,6 +56,8 @@ export default {
     },
     created() {
         this.onInit();
+        this.currentLocation.lat = 29.8543
+        this.currentLocation.lng = 77.8880
         window.addEventListener('reloadListing', () => {
             this.showPreloader()
             this.onInit()
@@ -62,7 +65,12 @@ export default {
     },
     methods: {
         async onInit() {
-            this.currentLocation = JSON.parse(localStorage.getItem('currentLocation'))
+            const localData = localStorage.getItem('currentLocation')
+            if(localData){
+                this.currentLocation = JSON.parse(localData)
+            }else{
+                this.currentLocation.place_id = 'ChIJGVGzCG6zDjkRcgq9XsJdj3k'
+            }
             const geocoder = new google.maps.Geocoder();
             geocoder.geocode({placeId: this.currentLocation.place_id}, (results, status) => {
                 this.currentLocation.lat = results[0].geometry.location.lat()
