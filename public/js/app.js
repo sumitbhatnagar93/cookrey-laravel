@@ -2110,39 +2110,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "searchComponent",
   data: function data() {
     return {
+      address: '',
       location: [],
       autocomplete: {
         input: ''
@@ -2166,7 +2138,17 @@ __webpack_require__.r(__webpack_exports__);
         window.dispatchEvent(new CustomEvent('reloadListing'));
       });
     },
-    onInit: function onInit() {
+    onInit: function onInit() {},
+    onSelectLocation: function onSelectLocation() {
+      // const geocoder = new google.maps.Geocoder();
+      // const currentLocation = new google.maps.LatLng(29.8543, 77.8880);
+      // geocoder.geocode({location: currentLocation}, (results, status) => {
+      //     console.log(results)
+      //     this.address = results[0].address_components[4]['long_name'] + ', ' + results[0].address_components[5]['long_name'] + ', ' + results[0].address_components[6]['long_name']
+      //     console.log(this.address)
+      //     localStorage.setItem('currentLocation', JSON.stringify(results[0]));
+      //     window.dispatchEvent(new CustomEvent('reloadListing'));
+      // });
       if (navigator.geolocation) {
         var location = navigator.geolocation.getCurrentPosition(this.showPosition);
       } else {
@@ -2174,6 +2156,21 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     showPosition: function showPosition(position) {
+      var _this = this;
+
+      var geocoder = new google.maps.Geocoder();
+      var lat = position.coords.latitude;
+      var lng = position.coords.longitude;
+      var currentLocation = new google.maps.LatLng(26.8467088, 80.9461592);
+      geocoder.geocode({
+        location: currentLocation
+      }, function (results, status) {
+        console.log(results);
+        _this.address = results[0].address_components[4]['long_name'] + ', ' + results[0].address_components[5]['long_name'] + ', ' + results[0].address_components[6]['long_name'];
+        console.log(_this.address);
+        localStorage.setItem('currentLocation', JSON.stringify(results[0]));
+        window.dispatchEvent(new CustomEvent('reloadListing'));
+      });
       console.log(position);
     } // onChange() {
     //     const GoogleAutocomplete = new google.maps.places.AutocompleteService();
@@ -49568,13 +49565,17 @@ var render = function() {
         _c("div", { staticClass: "sc-ipXKqB CKHM-srch-wrapper" }, [
           _c(
             "div",
-            { staticClass: "sc-18n4g8v-0 gAhmYY sc-clNaTc wrapper-inner" },
+            {
+              staticClass: "sc-18n4g8v-0 gAhmYY sc-clNaTc wrapper-inner",
+              staticStyle: { "font-size": "23px", color: "dimgrey" }
+            },
             [
               _c(
                 "i",
                 {
                   staticClass: "rbbb40-1 MxLSp",
-                  attrs: { color: "#F57082", size: "20" }
+                  attrs: { color: "#ED5A6B", size: "20" },
+                  on: { click: _vm.onSelectLocation }
                 },
                 [
                   _c(
@@ -49583,7 +49584,7 @@ var render = function() {
                       staticClass: "rbbb40-0 kIxlGM",
                       attrs: {
                         xmlns: "http://www.w3.org/2000/svg",
-                        fill: "#F57082",
+                        fill: "#ED5A6B",
                         width: "20",
                         height: "20",
                         viewBox: "0 0 20 20",
@@ -49592,12 +49593,12 @@ var render = function() {
                       }
                     },
                     [
-                      _c("title", [_vm._v("location-fill")]),
+                      _c("title", [_vm._v("current-location")]),
                       _vm._v(" "),
                       _c("path", {
                         attrs: {
                           d:
-                            "M10.2 0.42c-4.5 0-8.2 3.7-8.2 8.3 0 6.2 7.5 11.3 7.8 11.6 0.2 0.1 0.3 0.1 0.4 0.1s0.3 0 0.4-0.1c0.3-0.2 7.8-5.3 7.8-11.6 0.1-4.6-3.6-8.3-8.2-8.3zM10.2 11.42c-1.7 0-3-1.3-3-3s1.3-3 3-3c1.7 0 3 1.3 3 3s-1.3 3-3 3z"
+                            "M13.58 10c0 1.977-1.603 3.58-3.58 3.58s-3.58-1.603-3.58-3.58c0-1.977 1.603-3.58 3.58-3.58v0c1.977 0 3.58 1.603 3.58 3.58v0zM20 9.52v0.96c0 0.265-0.215 0.48-0.48 0.48v0h-1.72c-0.447 3.584-3.256 6.393-6.802 6.836l-0.038 0.004v1.72c0 0.265-0.215 0.48-0.48 0.48v0h-0.96c-0.265 0-0.48-0.215-0.48-0.48v0-1.72c-3.575-0.455-6.375-3.262-6.816-6.802l-0.004-0.038h-1.74c-0.265 0-0.48-0.215-0.48-0.48v0-0.96c0-0.265 0.215-0.48 0.48-0.48v0h1.74c0.445-3.578 3.245-6.385 6.781-6.836l0.039-0.004v-1.72c0-0.265 0.215-0.48 0.48-0.48v0h0.96c0.265 0 0.48 0.215 0.48 0.48v0 1.72c3.584 0.447 6.393 3.256 6.836 6.802l0.004 0.038h1.72c0.265 0 0.48 0.215 0.48 0.48v0zM15.96 10c0-3.292-2.668-5.96-5.96-5.96s-5.96 2.668-5.96 5.96c0 3.292 2.668 5.96 5.96 5.96v0c3.292 0 5.96-2.668 5.96-5.96v0z"
                         }
                       })
                     ]
@@ -49606,149 +49607,38 @@ var render = function() {
               ),
               _vm._v(" "),
               _c("input", {
-                staticClass: "sc-etwtAo jNaXUL",
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.address,
+                    expression: "address"
+                  }
+                ],
+                staticClass: "sc-etwtAo search-input",
                 attrs: {
                   value: "",
                   id: "autocomplete",
                   placeholder: "Haridwar"
+                },
+                domProps: { value: _vm.address },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.address = $event.target.value
+                  }
                 }
               }),
               _vm._v(" "),
-              _c(
-                "i",
-                {
-                  staticClass: "rbbb40-1 MxLSp sc-fQejPQ gbglTO",
-                  attrs: { color: "#4F4F4F", size: "12" }
-                },
-                [
-                  _c(
-                    "svg",
-                    {
-                      staticClass: "rbbb40-0 fQZfgq",
-                      attrs: {
-                        xmlns: "http://www.w3.org/2000/svg",
-                        fill: "#4F4F4F",
-                        width: "12",
-                        height: "12",
-                        viewBox: "0 0 20 20",
-                        "aria-labelledby": "icon-svg-title- icon-svg-desc-",
-                        role: "img"
-                      }
-                    },
-                    [
-                      _c("title", [_vm._v("down-triangle")]),
-                      _vm._v(" "),
-                      _c("path", { attrs: { d: "M20 5.42l-10 10-10-10h20z" } })
-                    ]
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "sc-iBEsjs eiPvfz" }, [
-                _c("div", { staticClass: "sc-bmyXtO sc-dEoRIm ioKzAG" }, [
-                  _c("div", { staticClass: "sc-kxynE kKwxbz" }, [
-                    _c("div", { staticClass: "sc-kZmsYB grqoos" }, [
-                      _c(
-                        "i",
-                        {
-                          staticClass: "rbbb40-1 MxLSp",
-                          attrs: { color: "#ED5A6B", size: "20" }
-                        },
-                        [
-                          _c(
-                            "svg",
-                            {
-                              staticClass: "rbbb40-0 kIxlGM",
-                              attrs: {
-                                xmlns: "http://www.w3.org/2000/svg",
-                                fill: "#ED5A6B",
-                                width: "20",
-                                height: "20",
-                                viewBox: "0 0 20 20",
-                                "aria-labelledby":
-                                  "icon-svg-title- icon-svg-desc-",
-                                role: "img"
-                              }
-                            },
-                            [
-                              _c("title", [_vm._v("current-location")]),
-                              _vm._v(" "),
-                              _c("path", {
-                                attrs: {
-                                  d:
-                                    "M13.58 10c0 1.977-1.603 3.58-3.58 3.58s-3.58-1.603-3.58-3.58c0-1.977 1.603-3.58 3.58-3.58v0c1.977 0 3.58 1.603 3.58 3.58v0zM20 9.52v0.96c0 0.265-0.215 0.48-0.48 0.48v0h-1.72c-0.447 3.584-3.256 6.393-6.802 6.836l-0.038 0.004v1.72c0 0.265-0.215 0.48-0.48 0.48v0h-0.96c-0.265 0-0.48-0.215-0.48-0.48v0-1.72c-3.575-0.455-6.375-3.262-6.816-6.802l-0.004-0.038h-1.74c-0.265 0-0.48-0.215-0.48-0.48v0-0.96c0-0.265 0.215-0.48 0.48-0.48v0h1.74c0.445-3.578 3.245-6.385 6.781-6.836l0.039-0.004v-1.72c0-0.265 0.215-0.48 0.48-0.48v0h0.96c0.265 0 0.48 0.215 0.48 0.48v0 1.72c3.584 0.447 6.393 3.256 6.836 6.802l0.004 0.038h1.72c0.265 0 0.48 0.215 0.48 0.48v0zM15.96 10c0-3.292-2.668-5.96-5.96-5.96s-5.96 2.668-5.96 5.96c0 3.292 2.668 5.96 5.96 5.96v0c3.292 0 5.96-2.668 5.96-5.96v0z"
-                                }
-                              })
-                            ]
-                          )
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "p",
-                      {
-                        staticClass: "sc-1hez2tp-0 kSdOga",
-                        attrs: { color: "#ED5A6B" }
-                      },
-                      [_vm._v("Detect current location")]
-                    )
-                  ])
-                ])
-              ])
+              _c("i", { staticClass: "fas fa-angle-down" })
             ]
           ),
           _vm._v(" "),
           _c("div", { staticClass: "sc-VJcYb dtzfDv" }),
           _vm._v(" "),
-          _c("div", { staticClass: "sc-18n4g8v-0 gAhmYY sc-kUaPvJ dPcESM" }, [
-            _c("input", {
-              staticClass: "sc-fONwsr lbMFPq",
-              attrs: {
-                value: "",
-                placeholder: "Search for your favourite vendor.."
-              }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "sc-jVODtj hjtbhk" }, [
-              _c(
-                "i",
-                {
-                  staticClass: "rbbb40-1 MxLSp",
-                  attrs: { color: "#828282", size: "18" }
-                },
-                [
-                  _c(
-                    "svg",
-                    {
-                      staticClass: "rbbb40-0 ZGPg",
-                      attrs: {
-                        xmlns: "http://www.w3.org/2000/svg",
-                        fill: "#828282",
-                        width: "18",
-                        height: "18",
-                        viewBox: "0 0 20 20",
-                        "aria-labelledby": "icon-svg-title- icon-svg-desc-",
-                        role: "img"
-                      }
-                    },
-                    [
-                      _c("title", [_vm._v("Search")]),
-                      _vm._v(" "),
-                      _c("path", {
-                        attrs: {
-                          d:
-                            "M19.78 19.12l-3.88-3.9c1.28-1.6 2.080-3.6 2.080-5.8 0-5-3.98-9-8.98-9s-9 4-9 9c0 5 4 9 9 9 2.2 0 4.2-0.8 5.8-2.1l3.88 3.9c0.1 0.1 0.3 0.2 0.5 0.2s0.4-0.1 0.5-0.2c0.4-0.3 0.4-0.8 0.1-1.1zM1.5 9.42c0-4.1 3.4-7.5 7.5-7.5s7.48 3.4 7.48 7.5-3.38 7.5-7.48 7.5c-4.1 0-7.5-3.4-7.5-7.5z"
-                        }
-                      })
-                    ]
-                  )
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "sc-hGoxap ckBgCS" })
-          ])
+          _vm._m(0)
         ])
       ]
     ),
@@ -49766,7 +49656,28 @@ var render = function() {
       : _vm._e()
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "sc-18n4g8v-0 gAhmYY sc-kUaPvJ dPcESM" }, [
+      _c("input", {
+        staticClass: "sc-fONwsr lbMFPq",
+        attrs: { value: "", placeholder: "Search for your favourite vendor.." }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "sc-jVODtj hjtbhk" }, [
+        _c("i", {
+          staticClass: "fa fa-search",
+          staticStyle: { "font-size": "23px", color: "dimgrey" }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "sc-hGoxap ckBgCS" })
+    ])
+  }
+]
 render._withStripped = true
 
 

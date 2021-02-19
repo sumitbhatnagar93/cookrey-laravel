@@ -399,8 +399,13 @@ Search component css
     height: 20px;
 }
 
-.jNaXUL {
+.search-input:focus {
+    outline: none;
     border: none;
+}
+.search-input {
+    border: none;
+    outline: none;
     font-size: 1.4rem;
     margin: 0px 1rem 0px 0.5rem;
 }
