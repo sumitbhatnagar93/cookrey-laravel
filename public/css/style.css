@@ -253,7 +253,7 @@ div.front-banner {
     box-shadow: none;
 }
 
-.CKLST-submeta i {
+.CKLST-submeta i, .rating-system i {
     color: chocolate;
 }
 

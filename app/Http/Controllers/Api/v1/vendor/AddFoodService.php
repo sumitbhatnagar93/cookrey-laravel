@@ -281,5 +281,16 @@ class AddFoodService extends Controller
         return response()->json(['orderID' => $razorpayOrderId]);
     }
 
+    public function addVendorRating(Request $request)
+    {
+        $PostData = $request->all();
+        $vendorID = $PostData['vendorID'];
+        unset($PostData['vendorID']);
+        $PostData['vendorRating'] = round($PostData['vendorRating'],2);
+        $rateData = json_encode($PostData);
+        $data['rating'] = $rateData;
+        $result = DB::table('services')->where('provider_id', $vendorID)->update($data);
+        return response()->json(['data' => $result]);
+    }
 
 }

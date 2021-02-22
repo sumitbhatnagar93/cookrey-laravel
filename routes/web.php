@@ -56,6 +56,7 @@ Route::get('getVendors', 'Api\v1\vendor\AddFoodService@getVendors');
 Route::get('getOtherVendors', 'Api\v1\vendor\AddFoodService@getOtherVendors');
 Route::get('getVendorById/{id}', 'Api\v1\vendor\AddFoodService@getVendorById');
 Route::get('getUserSubscriptionById/{id}', 'Api\v1\Auth\Users@getUserSubscriptionById');
+Route::post('add-rating','Api\v1\vendor\AddFoodService@addVendorRating');
 
 // web pages front-end
 Route::get('services', 'Api\v1\vendor\AddFoodService@viewVendorsOnFront');

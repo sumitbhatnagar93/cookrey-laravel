@@ -1,6 +1,5 @@
 <template>
     <div>
-
         <div class="container CKSV-main">
             <search-component></search-component>
             <div class="section-title text-muted">
@@ -28,12 +27,39 @@
                         <a href="#" class="btn btn-outline-info">Explore more</a>
                         <div class="CKLST-submeta float-right">
                             <span class="CK-distance">5.4 ratings</span>
-                            <div class="stars">
-                                <i class="far fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
+                            <div class="stars" data-toggle="modal"
+                                 v-bind:data-target="'#ratingModal'+vendor.provider_id">
+                                <star-rating v-bind:increment="0.5" v-model="vendor.rating.vendorRating"
+                                             v-bind:showRating="false"
+                                             v-bind:star-size="20" style="pointer-events: none;">
+                                </star-rating>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" v-bind:id="'ratingModal'+vendor.provider_id" tabindex="-1" role="dialog"
+                         aria-labelledby="ratingModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <form @submit.prevent="addRating(vendor.provider_id,vendor.rating.vendorRating)"
+                                          v-bind:id="'ratingForm'+vendor.provider_id">
+                                        <div class="form-group">
+                                            <h4>Add your valuable rating</h4>
+                                            <div class="rating-system text-center">
+                                                <star-rating v-model="vendor.rating.vendorRating"
+                                                             :increment="0.5"></star-rating>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                <textarea name="feedbackMsg" placeholder="Feedback"
+                                          v-bind:id="'feedbackMsg'+vendor.provider_id" cols="50"
+                                          rows="4"></textarea>
+                                        </div>
+                                        <button class="btn btn-dark">Cancel</button>
+                                        <button class="btn btn-success">Submit</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -44,10 +70,18 @@
 </template>
 
 <script>
+import StarRating from 'vue-star-rating';
+
 export default {
     name: "vendorComponent",
+    components: {
+        StarRating,
+    },
+    props: ['authToken'],
     data() {
         return {
+            rating: 0,
+            isRated: false,
             loader: [],
             vendors: [],
             cookreyVendors: [],
@@ -66,9 +100,9 @@ export default {
     methods: {
         async onInit() {
             const localData = localStorage.getItem('currentLocation')
-            if(localData){
+            if (localData) {
                 this.currentLocation = JSON.parse(localData)
-            }else{
+            } else {
                 this.currentLocation.place_id = 'ChIJGVGzCG6zDjkRcgq9XsJdj3k'
             }
             const geocoder = new google.maps.Geocoder();
@@ -79,6 +113,7 @@ export default {
                     this.vendors = res.data
                     this.sortList(res.data, this.currentLocation.lat, this.currentLocation.lng).then(() => {
                         this.loader.hide()
+                        console.log(this.cookreyVendors)
                     });
                 })
             });
@@ -93,6 +128,7 @@ export default {
                 backgroundColor: '#000000',
             });
         },
+
         async geoCode(placeId) {
             const geocoder = new google.maps.Geocoder();
             geocoder.geocode({placeId: placeId}, (results, status) => {
@@ -104,15 +140,33 @@ export default {
         async sortList(data, lat, lng) {
             this.cookreyVendors = [];
             const geocoder = new google.maps.Geocoder();
-            for (const value of data) {
+            //    for (const index, value of data) {
+            Object.entries(data).forEach(([key, value]) => {
                 const from = new google.maps.LatLng(lat, lng);
                 const to = new google.maps.LatLng(value.lat, value.lng);
                 const dist = google.maps.geometry.spherical.computeDistanceBetween(from, to);
                 const km = (dist / 1000).toFixed(1);
                 if (parseInt(km) <= 5) {
-                    this.cookreyVendors.push(value);
+                    value.rating = value.rating ? JSON.parse(value.rating) : 0
+                    this.cookreyVendors.push(value)
                 }
-            }
+            })
+            console.log(this.cookreyVendors)
+        },
+
+        addRating(vendorID, rating) {
+            this.showPreloader()
+            let formData = new FormData(document.getElementById('ratingForm' + vendorID));
+            formData.append('vendorRating', rating)
+            formData.append('vendorID', vendorID)
+            axios.post('/add-rating', formData)
+                .then(res => {
+                    console.log(res.data);
+                    $('#ratingModal' + vendorID).modal('hide')
+                    this.loader.hide()
+                }).catch(er => {
+                console.log(er.data);
+            })
         }
     }
 }
