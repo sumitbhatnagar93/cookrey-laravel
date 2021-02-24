@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
+
 
 class AddFoodService extends Controller
 {
@@ -80,7 +82,10 @@ class AddFoodService extends Controller
 
     public function getVendors()
     {
-        $data = DB::table('services')->where('business_type', 'tiffin_service')->get();
+        $data = DB::table('services')
+            ->leftJoin('users_feedback', 'services.provider_id', '=', 'users_feedback.vendor_id')
+            ->where('business_type', 'tiffin_service')
+            ->get();
         return response()->json($data);
     }
 
@@ -283,14 +288,30 @@ class AddFoodService extends Controller
 
     public function addVendorRating(Request $request)
     {
-        $PostData = $request->all();
-        $vendorID = $PostData['vendorID'];
-        unset($PostData['vendorID']);
-        $PostData['vendorRating'] = round($PostData['vendorRating'],2);
-        $rateData = json_encode($PostData);
-        $data['rating'] = $rateData;
-        $result = DB::table('services')->where('provider_id', $vendorID)->update($data);
-        return response()->json(['data' => $result]);
+        $postData = $request->all();
+
+        /*
+         * rating info gathering
+         */
+        $vendorID = $postData['vendor_id'];
+        $postData['feedback_rating'] = round($postData['feedback_rating'], 2);
+        $postData['user_id'] = Auth::id();
+
+        /*
+         * check rating already exist
+         */
+        $checkIf = DB::table('users_feedback')->where(['vendor_id' => $vendorID, 'user_id' => Auth::id()])->count();
+
+        if ($checkIf === 0) {
+            $newRatingID = DB::table('users_feedback')->insertGetId($postData);
+            if ($newRatingID) DB::table('services')->where('provider_id', $vendorID)->update(['rating' => $newRatingID]);
+            $msgType = 'success';
+            $message = 'Congrats! Your feedbacks submitted...';
+        } else {
+            $msgType = 'error';
+            $message = 'Sorry! You already given the feedback...';
+        }
+        return response()->json(['responseType' => $msgType, 'message' => $message]);
     }
 
 }

@@ -24,12 +24,11 @@
                         <span class="float-right"><i class="fas fa-walking"></i> 5 Km</span>
                         <hr>
                         <a v-bind:href="'vendor/'+vendor.provider_id" class="btn btn-outline-success">Subscribe Now</a>
-                        <a href="#" class="btn btn-outline-info">Explore more</a>
                         <div class="CKLST-submeta float-right">
-                            <span class="CK-distance">5.4 ratings</span>
+                            <span class="CK-distance">{{ vendor.feedback_rating }} ratings</span>
                             <div class="stars" data-toggle="modal"
                                  v-bind:data-target="'#ratingModal'+vendor.provider_id">
-                                <star-rating v-bind:increment="0.5" v-model="vendor.rating.vendorRating"
+                                <star-rating v-bind:increment="0.5" v-model="vendor.feedback_rating"
                                              v-bind:showRating="false"
                                              v-bind:star-size="20" style="pointer-events: none;">
                                 </star-rating>
@@ -41,24 +40,27 @@
                          aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
-                                <div class="modal-body">
-                                    <form @submit.prevent="addRating(vendor.provider_id,vendor.rating.vendorRating)"
+                                <div v-if="isCurrentUser" class="modal-body">
+                                    <form @submit.prevent="addRating(vendor.provider_id,vendor.feedback_rating)"
                                           v-bind:id="'ratingForm'+vendor.provider_id">
                                         <div class="form-group">
                                             <h4>Add your valuable rating</h4>
                                             <div class="rating-system text-center">
-                                                <star-rating v-model="vendor.rating.vendorRating"
+                                                <star-rating v-model="vendor.feedback_rating"
                                                              :increment="0.5"></star-rating>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                <textarea name="feedbackMsg" placeholder="Feedback"
+                                <textarea name="feedback_msg" placeholder="Feedback"
                                           v-bind:id="'feedbackMsg'+vendor.provider_id" cols="50"
                                           rows="4"></textarea>
                                         </div>
                                         <button class="btn btn-dark">Cancel</button>
                                         <button class="btn btn-success">Submit</button>
                                     </form>
+                                </div>
+                                <div v-if="!isCurrentUser" class="modal-body text-center">
+                                    <a v-bind:href="loginUri" class="btn btn-info">Login now</a>
                                 </div>
                             </div>
                         </div>
@@ -71,15 +73,20 @@
 
 <script>
 import StarRating from 'vue-star-rating';
-
+import Vue from 'vue';
+import VueToast from 'vue-toast-notification';
+import 'vue-toast-notification/dist/theme-sugar.css';
+Vue.use(VueToast);
 export default {
     name: "vendorComponent",
     components: {
         StarRating,
     },
-    props: ['authToken'],
+    props: ['auth_info'],
     data() {
         return {
+            loginUri: null,
+            isCurrentUser: false,
             rating: 0,
             isRated: false,
             loader: [],
@@ -87,6 +94,12 @@ export default {
             cookreyVendors: [],
             currentLocation: [],
         }
+    },
+    mounted() {
+        if (this.auth_info['auth_token']) {
+            this.isCurrentUser = true
+        }
+        this.loginUri = this.auth_info['login_uri']
     },
     created() {
         this.onInit();
@@ -110,10 +123,10 @@ export default {
                 this.currentLocation.lat = results[0].geometry.location.lat()
                 this.currentLocation.lng = results[0].geometry.location.lng()
                 axios('getVendors').then((res) => {
+                    console.log(res.data)
                     this.vendors = res.data
                     this.sortList(res.data, this.currentLocation.lat, this.currentLocation.lng).then(() => {
                         this.loader.hide()
-                        console.log(this.cookreyVendors)
                     });
                 })
             });
@@ -147,7 +160,7 @@ export default {
                 const dist = google.maps.geometry.spherical.computeDistanceBetween(from, to);
                 const km = (dist / 1000).toFixed(1);
                 if (parseInt(km) <= 5) {
-                    value.rating = value.rating ? JSON.parse(value.rating) : 0
+                    //value.vendorRating = value.rating ? JSON.parse(value.rating) : 0
                     this.cookreyVendors.push(value)
                 }
             })
@@ -157,13 +170,17 @@ export default {
         addRating(vendorID, rating) {
             this.showPreloader()
             let formData = new FormData(document.getElementById('ratingForm' + vendorID));
-            formData.append('vendorRating', rating)
-            formData.append('vendorID', vendorID)
+            formData.append('feedback_rating', rating)
+            formData.append('vendor_id', vendorID)
             axios.post('/add-rating', formData)
                 .then(res => {
                     console.log(res.data);
                     $('#ratingModal' + vendorID).modal('hide')
                     this.loader.hide()
+                    let instance = Vue.$toast.open({
+                        message: res.data.message,
+                        type: res.data.responseType,
+                    });
                 }).catch(er => {
                 console.log(er.data);
             })
