@@ -2414,30 +2414,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -2556,25 +2540,100 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "singleVendorComponent",
+  props: ['slug'],
   data: function data() {
     return {
       isCustomOpt: false,
       currentUser: '',
       orderID: '',
       grandTotal: '',
-      cart: ''
+      vendor: [],
+      vendorDistance: null,
+      cart: '',
+      currentLocation: [],
+      products: []
     };
+  },
+  mounted: function mounted() {
+    this.showPreloader();
+    console.log(this.slug);
+    this.getVendorById();
   },
   created: function created() {
     this.getOrderID();
   },
   methods: {
-    getOrderID: function getOrderID() {
+    getVendorById: function getVendorById() {
       var _this = this;
+
+      var localData = localStorage.getItem('currentLocation');
+
+      if (localData) {
+        this.currentLocation = JSON.parse(localData);
+      } else {
+        this.currentLocation.place_id = 'ChIJGVGzCG6zDjkRcgq9XsJdj3k';
+      }
+
+      var lat = this.currentLocation.geometry.location.lat;
+      var lng = this.currentLocation.geometry.location.lng;
+      axios('/getVendorById/' + this.slug).then(function (res) {
+        _this.vendor = res.data[0];
+
+        _this.getProductById();
+
+        _this.getKmDistance(res.data[0], lat, lng).then(function (inp) {
+          console.log(inp);
+          _this.vendorDistance = inp;
+        });
+      });
+    },
+    getProductById: function getProductById() {
+      var _this2 = this;
+
+      axios('/getProductById/' + this.slug).then(function (res) {
+        _this2.products = res.data;
+        console.log('product data ', res.data);
+
+        _this2.loader.hide();
+      });
+    },
+    showPreloader: function showPreloader() {
+      this.loader = this.$loading.show({
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: '#ffffff',
+        loader: 'dots',
+        backgroundColor: '#000000'
+      });
+    },
+    getKmDistance: function getKmDistance(data, lat, lng) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var geocoder, from, to, dist, km;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                geocoder = new google.maps.Geocoder();
+                from = new google.maps.LatLng(lat, lng);
+                to = new google.maps.LatLng(data.lat, data.lng);
+                dist = google.maps.geometry.spherical.computeDistanceBetween(from, to);
+                km = (dist / 1000).toFixed(1);
+                return _context.abrupt("return", km);
+
+              case 6:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    getOrderID: function getOrderID() {
+      var _this3 = this;
 
       axios.get('/paytest').then(function (res) {
         console.log(res.data);
-        _this.orderID = res.data.orderID;
+        _this3.orderID = res.data.orderID;
       })["catch"](function (er) {
         console.log(er);
       });
@@ -3673,6 +3732,8 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
     };
   },
   mounted: function mounted() {
+    this.showPreloader();
+
     if (this.auth_info['auth_token']) {
       this.isCurrentUser = true;
     }
@@ -50594,47 +50655,67 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _c(
+      "div",
+      {
+        staticClass: "main-banner text-white text-center front-banner",
+        staticStyle: { "background-image": "url('/images/banner.jpeg')" }
+      },
+      [
+        _c("h1", { staticClass: "text-white" }, [
+          _vm._v(_vm._s(_vm.vendor.business_name))
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "meta-info" }, [
+          _c("span", [_vm._v(_vm._s(_vm.vendor.business_address))]),
+          _c("br"),
+          _vm._v(" "),
+          _c("span", [_vm._v(_vm._s(_vm.vendorDistance) + " Km | 3.4 ratings")])
+        ])
+      ]
+    ),
+    _vm._v(" "),
     _c("div", { staticClass: "container CK-vendor-single" }, [
       _c("h2", { staticClass: "CK-center-title m-4" }, [
         _vm._v("Select Your favorite tiffin box")
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c(
-          "div",
-          { staticClass: "card font-weight-bolder mb-3 text-muted text-white" },
-          [
-            _c("div", { staticClass: "card-header" }, [
-              _vm._v(
-                "Rs. 50/ per\n                    tiffin\n                "
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _c("h5", { staticClass: "card-title" }, [_vm._v("In the Box")]),
+      _c(
+        "div",
+        { staticClass: "row" },
+        _vm._l(_vm.products, function(product) {
+          return _c(
+            "div",
+            {
+              staticClass: "card font-weight-bolder mb-3 text-muted text-white"
+            },
+            [
+              _c("div", { staticClass: "card-header" }, [
+                _vm._v(
+                  "Rs. " +
+                    _vm._s(product.price) +
+                    "/ per\n                    tiffin\n                "
+                )
+              ]),
               _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _vm._m(0),
+              _c("div", { staticClass: "card-body" }, [
+                _c("h5", { staticClass: "card-title" }, [_vm._v("In the Box")]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-md-4" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-outline-info",
-                      on: { click: _vm.pay }
-                    },
-                    [_vm._v("Subscribe now")]
-                  )
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-8" }, [
+                    _c("p", { staticClass: "card-text" }, [
+                      _vm._v(_vm._s(product.product_meal))
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(0, true)
                 ])
               ])
-            ])
-          ]
-        ),
-        _vm._v(" "),
-        _vm._m(1),
-        _vm._v(" "),
-        _vm._m(2)
-      ])
+            ]
+          )
+        }),
+        0
+      )
     ]),
     _vm._v(" "),
     _c(
@@ -50655,7 +50736,7 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(3),
+              _vm._m(1),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("form", [
@@ -50692,20 +50773,39 @@ var render = function() {
                     _vm._v(" "),
                     _vm.isCustomOpt
                       ? _c("div", { staticClass: "custom-opt" }, [
-                          _vm._m(4),
+                          _vm._m(2),
                           _vm._v(" "),
-                          _vm._m(5)
+                          _vm._m(3)
                         ])
                       : _vm._e()
                   ]),
                   _vm._v(" "),
-                  _vm._m(6),
+                  _vm._m(4),
                   _vm._v(" "),
-                  _vm._m(7)
+                  _vm._m(5)
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(8)
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v("Cancel")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button" },
+                    on: { click: _vm.pay }
+                  },
+                  [_vm._v("Subscribe")]
+                )
+              ])
             ])
           ]
         )
@@ -50718,84 +50818,20 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-8" }, [
-      _c("p", { staticClass: "card-text" }, [
-        _vm._v("Dal | Roti | Rice | Salad")
-      ])
+    return _c("div", { staticClass: "col-md-4" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-outline-info",
+          attrs: {
+            "data-toggle": "modal",
+            "data-target": "#exampleModal",
+            "data-whatever": "@getbootstrap"
+          }
+        },
+        [_vm._v("Subscribe now\n                            ")]
+      )
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "card font-weight-bolder mb-3 text-muted text-white" },
-      [
-        _c("div", { staticClass: "card-header" }, [
-          _vm._v("Rs. 50/ per\n                    tiffin\n                ")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-body" }, [
-          _c("h5", { staticClass: "card-title" }, [_vm._v("In the Box")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-8" }, [
-              _c("p", { staticClass: "card-text" }, [
-                _vm._v("Dal | Roti | Rice | Salad")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-4" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-outline-info",
-                  attrs: {
-                    "data-toggle": "modal",
-                    "data-target": "#exampleModal",
-                    "data-whatever": "@getbootstrap"
-                  }
-                },
-                [_vm._v("Subscribe now\n                            ")]
-              )
-            ])
-          ])
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "card font-weight-bolder mb-3 text-muted text-white" },
-      [
-        _c("div", { staticClass: "card-header" }, [
-          _vm._v("Rs. 50/ per\n                    tiffin\n                ")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-body" }, [
-          _c("h5", { staticClass: "card-title" }, [_vm._v("In the Box")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-8" }, [
-              _c("p", { staticClass: "card-text" }, [
-                _vm._v("Dal | Roti | Rice | Salad")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-4" }, [
-              _c("button", { staticClass: "btn btn-outline-info" }, [
-                _vm._v("Subscribe now")
-              ])
-            ])
-          ])
-        ])
-      ]
-    )
   },
   function() {
     var _vm = this
@@ -50956,27 +50992,6 @@ var staticRenderFns = [
           [_vm._v("Dinner")]
         )
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-secondary",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_vm._v("Cancel")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-primary", attrs: { type: "button" } },
-        [_vm._v("Subscribe")]
-      )
     ])
   }
 ]

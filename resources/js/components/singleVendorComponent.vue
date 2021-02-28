@@ -1,54 +1,30 @@
 <template>
     <div>
+        <div class="main-banner text-white text-center front-banner"
+             style="background-image: url('/images/banner.jpeg')">
+            <h1 class="text-white">{{ vendor.business_name }}</h1>
+            <div class="meta-info">
+                <span>{{ vendor.business_address }}</span><br>
+                <span>{{ vendorDistance }} Km | 3.4 ratings</span>
+            </div>
+        </div>
         <div class="container CK-vendor-single">
             <h2 class="CK-center-title m-4">Select Your favorite tiffin box</h2>
             <div class="row">
-                <div class="card font-weight-bolder mb-3 text-muted text-white">
-                    <div class="card-header">Rs. 50/ per
+                <div v-for="product of products" class="card font-weight-bolder mb-3 text-muted text-white">
+                    <div class="card-header">Rs. {{ product.price }}/ per
                         tiffin
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">In the Box</h5>
                         <div class="row">
                             <div class="col-md-8">
-                                <p class="card-text">Dal | Roti | Rice | Salad</p>
-                            </div>
-                            <div class="col-md-4">
-                                <button class="btn btn-outline-info" @click="pay">Subscribe now</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card font-weight-bolder mb-3 text-muted text-white">
-                    <div class="card-header">Rs. 50/ per
-                        tiffin
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">In the Box</h5>
-                        <div class="row">
-                            <div class="col-md-8">
-                                <p class="card-text">Dal | Roti | Rice | Salad</p>
+                                <p class="card-text">{{ product.product_meal }}</p>
                             </div>
                             <div class="col-md-4">
                                 <button class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModal"
                                         data-whatever="@getbootstrap">Subscribe now
                                 </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card font-weight-bolder mb-3 text-muted text-white">
-                    <div class="card-header">Rs. 50/ per
-                        tiffin
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">In the Box</h5>
-                        <div class="row">
-                            <div class="col-md-8">
-                                <p class="card-text">Dal | Roti | Rice | Salad</p>
-                            </div>
-                            <div class="col-md-4">
-                                <button class="btn btn-outline-info">Subscribe now</button>
                             </div>
                         </div>
                     </div>
@@ -129,7 +105,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-primary">Subscribe</button>
+                        <button type="button" class="btn btn-primary" @click="pay">Subscribe</button>
                     </div>
                 </div>
             </div>
@@ -142,19 +118,71 @@
 
 export default {
     name: "singleVendorComponent",
+    props: ['slug'],
     data() {
         return {
             isCustomOpt: false,
             currentUser: '',
             orderID: '',
             grandTotal: '',
-            cart: ''
+            vendor: [],
+            vendorDistance: null,
+            cart: '',
+            currentLocation: [],
+            products: [],
         };
+    },
+    mounted() {
+        this.showPreloader()
+        console.log(this.slug)
+        this.getVendorById()
     },
     created() {
         this.getOrderID();
     },
     methods: {
+        getVendorById() {
+            const localData = localStorage.getItem('currentLocation')
+            if (localData) {
+                this.currentLocation = JSON.parse(localData)
+            } else {
+                this.currentLocation.place_id = 'ChIJGVGzCG6zDjkRcgq9XsJdj3k'
+            }
+            let lat = this.currentLocation.geometry.location.lat
+            let lng = this.currentLocation.geometry.location.lng
+            axios('/getVendorById/' + this.slug).then((res) => {
+                this.vendor = res.data[0]
+                this.getProductById()
+                this.getKmDistance(res.data[0], lat, lng).then((inp) => {
+                    console.log(inp)
+                    this.vendorDistance = inp
+                })
+            })
+        },
+        getProductById() {
+            axios('/getProductById/' + this.slug).then((res) => {
+                this.products = res.data
+                console.log('product data ', res.data)
+                this.loader.hide()
+            })
+        },
+        showPreloader() {
+            this.loader = this.$loading.show({
+                canCancel: true,
+                onCancel: this.onCancel,
+                color: '#ffffff',
+                loader: 'dots',
+                backgroundColor: '#000000',
+            });
+        },
+        async getKmDistance(data, lat, lng) {
+            const geocoder = new google.maps.Geocoder();
+            const from = new google.maps.LatLng(lat, lng);
+            const to = new google.maps.LatLng(data.lat, data.lng);
+            const dist = google.maps.geometry.spherical.computeDistanceBetween(from, to);
+            const km = (dist / 1000).toFixed(1);
+            return km
+        },
         getOrderID() {
             axios.get('/paytest')
                 .then(res => {
@@ -207,7 +235,8 @@ export default {
                 alert(response.error.metadata.payment_id);
             });
             rzp1.open();
-        }
+        },
+
     }
 }
 </script>

@@ -96,6 +96,7 @@ export default {
         }
     },
     mounted() {
+        this.showPreloader()
         if (this.auth_info['auth_token']) {
             this.isCurrentUser = true
         }

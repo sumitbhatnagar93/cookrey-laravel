@@ -105,9 +105,9 @@ class AddFoodService extends Controller
         return view('/vendors-web');
     }
 
-    public function viewSingleVendorsOnFront()
+    public function viewSingleVendorsOnFront($id)
     {
-        return view('/vendor-single');
+        return view('/vendor-single', ['action' => $id]);
     }
 
     public function getVendorById($providerId)
