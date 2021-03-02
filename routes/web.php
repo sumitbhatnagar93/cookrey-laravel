@@ -31,6 +31,7 @@ Route::get('getProductById/{providerId}', 'Api\v1\vendor\Product@getProductById'
 Route::get('getSubsProductById/{providerId}', 'Api\v1\vendor\Product@getSubsProductById');
 Route::get('getSingleProductById/{productId}', 'Api\v1\vendor\Product@getSingleProductById');
 Route::post('/upload-product', 'Api\v1\vendor\Product@onProductSubmit');
+Route::post('/upload-tiffin', 'Api\v1\vendor\Product@onTiffinProductSubmit');
 Route::post('byApp', 'HomeController@registerByApp');
 
 Auth::routes();
@@ -55,6 +56,7 @@ Route::get('vendors', 'Api\v1\vendor\AddFoodService@viewVendors');
 Route::get('getVendors', 'Api\v1\vendor\AddFoodService@getVendors');
 Route::get('getOtherVendors', 'Api\v1\vendor\AddFoodService@getOtherVendors');
 Route::get('getVendorById/{id}', 'Api\v1\vendor\AddFoodService@getVendorById');
+Route::get('getVendorByIdWithFeed/{id}', 'Api\v1\vendor\AddFoodService@getVendorByIdWithFeed');
 Route::get('getUserSubscriptionById/{id}', 'Api\v1\Auth\Users@getUserSubscriptionById');
 Route::post('add-rating','Api\v1\vendor\AddFoodService@addVendorRating');
 

@@ -10,20 +10,9 @@
                                 <label>Title</label>
                                 <input type="text" name="title" placeholder="Product Title" class="form-control">
                             </div>
-                            <div class="form-group col-12">
-                                <label>Image</label>
-                                <input type="file" name="image" class="form-control" ref="fileInput"
-                                       @input="onFileSelect">
-                                <div
-                                    v-if="image"
-                                    class="imagePreviewWrapper"
-                                    :style="{ 'background-image': `url(${image})` }"
-                                    @click="selectImage">
-                                </div>
-                            </div>
                             <div class="form-group col-md-6">
                                 <label>Select Vendor</label>
-                                <select name="provider_id" class="form-control">
+                                <select name="vendor_id" class="form-control">
                                     <option value="none">Select type..</option>
                                     <option v-for="(vendor,index) of vendors" v-bind:value="vendor.provider_id">
                                         {{ vendor.business_name }}
@@ -32,7 +21,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label>Food Type</label>
-                                <select name="food_type" class="form-control">
+                                <select name="veg_non_veg" class="form-control">
                                     <option value="none">Select type..</option>
                                     <option value="veg">Veg</option>
                                     <option value="non-veg">Non Veg</option>
@@ -49,7 +38,7 @@
                                     <div class="row" v-for="(v,i) in productItem">
                                         <div class="col-md-6 form-group">
                                             <input type="text" class="form-control" placeholder="item name"
-                                                   name="productItem[]">
+                                                   name="in_the_box[]">
                                         </div>
                                         <div class="col-md-6 form-group">
                                                 <span>
@@ -89,7 +78,6 @@ export default {
             productType: 'simple',
             successMsg: '',
             errorMsg: '',
-            image: '',
             vendors: [],
             productItem: [{}],
         };
@@ -111,26 +99,9 @@ export default {
                     console.log(res.data);
                 })
         },
-        selectImage() {
-            this.$refs.fileInput.click()
-        },
-        onFileSelect(e) {
-            let input = this.$refs.fileInput
-            let file = input.files
-            if (file && file[0]) {
-                let reader = new FileReader
-                reader.onload = e => {
-                    this.image = e.target.result
-                }
-                reader.readAsDataURL(file[0])
-                this.$emit('input', file[0])
-            }
-            console.log(this.image);
-        },
         onSubmit() {
             let formData = new FormData(document.getElementById('productForm'));
-            formData.append('image', this.image);
-            axios.post('upload-product', formData)
+            axios.post('upload-tiffin', formData)
                 .then(res => {
                     console.log(res.data);
                     this.errorMsg = '';

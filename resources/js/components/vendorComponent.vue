@@ -25,10 +25,10 @@
                         <hr>
                         <a v-bind:href="'vendor/'+vendor.provider_id" class="btn btn-outline-success">Subscribe Now</a>
                         <div class="CKLST-submeta float-right">
-                            <span class="CK-distance">{{ vendor.feedback_rating }} ratings</span>
+                            <span class="CK-distance">{{ vendor.rating }} ratings</span>
                             <div class="stars" data-toggle="modal"
                                  v-bind:data-target="'#ratingModal'+vendor.provider_id">
-                                <star-rating v-bind:increment="0.5" v-model="vendor.feedback_rating"
+                                <star-rating v-bind:increment="0.5" v-model="vendor.rating"
                                              v-bind:showRating="false"
                                              v-bind:star-size="20" style="pointer-events: none;">
                                 </star-rating>
@@ -41,12 +41,12 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div v-if="isCurrentUser" class="modal-body">
-                                    <form @submit.prevent="addRating(vendor.provider_id,vendor.feedback_rating)"
+                                    <form @submit.prevent="addRating(vendor.provider_id,vendor.rating)"
                                           v-bind:id="'ratingForm'+vendor.provider_id">
                                         <div class="form-group">
                                             <h4>Add your valuable rating</h4>
                                             <div class="rating-system text-center">
-                                                <star-rating v-model="vendor.feedback_rating"
+                                                <star-rating v-model="vendor.rating"
                                                              :increment="0.5"></star-rating>
                                             </div>
                                         </div>
@@ -76,6 +76,7 @@ import StarRating from 'vue-star-rating';
 import Vue from 'vue';
 import VueToast from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
+
 Vue.use(VueToast);
 export default {
     name: "vendorComponent",
@@ -160,8 +161,12 @@ export default {
                 const to = new google.maps.LatLng(value.lat, value.lng);
                 const dist = google.maps.geometry.spherical.computeDistanceBetween(from, to);
                 const km = (dist / 1000).toFixed(1);
+                if (value.avg_rating.length === 1) {
+                    value.rating = value.avg_rating[0].rating
+                } else {
+                    value.rating = 0
+                }
                 if (parseInt(km) <= 5) {
-                    //value.vendorRating = value.rating ? JSON.parse(value.rating) : 0
                     this.cookreyVendors.push(value)
                 }
             })

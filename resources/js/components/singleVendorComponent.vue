@@ -9,29 +9,61 @@
             </div>
         </div>
         <div class="container CK-vendor-single">
-            <h2 class="CK-center-title m-4">Select Your favorite tiffin box</h2>
             <div class="row">
-                <div v-for="product of products" class="card font-weight-bolder mb-3 text-muted text-white">
-                    <div class="card-header">Rs. {{ product.price }}/ per
-                        tiffin
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">In the Box</h5>
-                        <div class="row">
-                            <div class="col-md-8">
-                                <p class="card-text">{{ product.product_meal }}</p>
-                            </div>
-                            <div class="col-md-4">
-                                <button class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModal"
-                                        data-whatever="@getbootstrap">Subscribe now
-                                </button>
+                <div class="col-md-3">
+                    <div class="main-sidebar">
+                        <div class="rating-area">
+                            <div class="card" style="width: 100%;text-align: center;margin-top: 85px;height: 100px;">
+                                <div class="inner-row">
+                                    <span>{{ vendor.feedback_rating }} Ratings</span>
+                                    <star-rating style="pointer-events: none;"
+                                                 v-bind:showRating="false"
+                                                 v-bind:increment="0.5"
+                                                 v-bind:star-size="40" v-model="ratings">
+                                    </star-rating>
+                                </div>
+                                <div class="CKmnt-area">
+                                    <ul>
+                                        <li></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="col-md-9">
+                    <h2 class="CK-center-title m-4">Select Your favorite tiffin box</h2>
+                    <div class="row">
+                        <div v-for="product of products" class="card font-weight-bolder mb-3 text-muted text-white">
+                            <div class="card-header">
+                                Rs. {{ product.price }}/ per tiffin
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">In the Box</h5>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <p class="card-text">{{ product.in_the_box }}</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button class="btn btn-outline-info" data-toggle="modal"
+                                                data-target="#exampleModal"
+                                                data-whatever="@getbootstrap">Subscribe now
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="sampleData text-center">
+                        <h2 class="CK-center-title">Our Menu</h2>
+                        <a href="/images/sample-services.jpg" data-fancybox data-caption="Our Daily Menu">
+                            <img src="/images/sample-services.jpg" alt="sample"/>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
-
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
              aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -115,9 +147,14 @@
 </template>
 
 <script>
+import fancybox from "@fancyapps/fancybox"
+import StarRating from 'vue-star-rating';
 
 export default {
     name: "singleVendorComponent",
+    components: {
+        StarRating,
+    },
     props: ['slug'],
     data() {
         return {
@@ -130,6 +167,7 @@ export default {
             cart: '',
             currentLocation: [],
             products: [],
+            ratings: 0
         };
     },
     mounted() {
@@ -150,20 +188,16 @@ export default {
             }
             let lat = this.currentLocation.geometry.location.lat
             let lng = this.currentLocation.geometry.location.lng
-            axios('/getVendorById/' + this.slug).then((res) => {
+            axios('/getVendorByIdWithFeed/' + this.slug).then((res) => {
+                console.log(res.data[0])
                 this.vendor = res.data[0]
-                this.getProductById()
+                this.products = res.data[0].services_product
+                let rating = res.data[0].avg_rating;
+                this.ratings = rating.length ? rating[0].rating : 0
                 this.getKmDistance(res.data[0], lat, lng).then((inp) => {
-                    console.log(inp)
                     this.vendorDistance = inp
+                    this.loader.hide()
                 })
-            })
-        },
-        getProductById() {
-            axios('/getProductById/' + this.slug).then((res) => {
-                this.products = res.data
-                console.log('product data ', res.data)
-                this.loader.hide()
             })
         },
         showPreloader() {

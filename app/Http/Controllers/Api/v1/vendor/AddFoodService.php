@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\v1\vendor;
 
+use App\Models\Service;
 use Razorpay\Api\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -82,10 +83,9 @@ class AddFoodService extends Controller
 
     public function getVendors()
     {
-        $data = DB::table('services')
-            ->leftJoin('users_feedback', 'services.provider_id', '=', 'users_feedback.vendor_id')
+        $data = Service::with('avgRating')
             ->where('business_type', 'tiffin_service')
-            ->get();
+            ->get()->toArray();
         return response()->json($data);
     }
 
@@ -112,13 +112,18 @@ class AddFoodService extends Controller
 
     public function getVendorById($providerId)
     {
-        $data = DB::table('services')->where('provider_id', $providerId)->get();
+        $data = Service::where('provider_id', $providerId)->with('usersFeedback')->get()->toArray();
+        return response()->json($data);
+    }
+
+    public function getVendorByIdWithFeed($providerId)
+    {
+        $data = Service::where('provider_id', $providerId)->with('usersFeedback','avgRating','servicesProduct')->get()->toArray();
         return response()->json($data);
     }
 
     public function updateVendorController(Request $request)
     {
-
         $data = $request->all();
         $providerID = $data['provider_id'];
         $uploadPath = public_path('/images/restaurants/' . $providerID);

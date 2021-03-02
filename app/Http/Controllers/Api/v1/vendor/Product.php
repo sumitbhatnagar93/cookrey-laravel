@@ -127,4 +127,18 @@ class Product extends Controller
             return response()->json(["message" => "Something went wrong"], 500);
         }
     }
+
+
+    public function onTiffinProductSubmit(Request $request)
+    {
+            $data = $request->all();
+            $data['in_the_box'] = json_encode($data['in_the_box']);
+            $postedData = DB::table('tiffins')->insert($data);
+            if ($postedData) {
+                return response()->json($data);
+            } else {
+                return response()->json(["message" => "Something went wrong"], 500);
+            }
+    }
+
 }

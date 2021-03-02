@@ -1,0 +1,17 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Tiffin extends Model
+{
+    protected $guarded = [
+        'id', 'created_at', 'updated_at'
+    ];
+
+    public function services()
+    {
+        return $this->belongsTo(Service::class, 'vendor_id', 'provider_id');
+    }
+}

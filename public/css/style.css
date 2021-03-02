@@ -724,6 +724,14 @@ Bootstrap modal enhancement
     color: #fff;
 }
 
+.CK-vendor-single .inner-row{
+    margin-top: 15px;
+    font-weight: bold;
+}
+.CK-vendor-single .vue-star-rating{
+    display: block!important;
+}
+
 /* Small devices (landscape phones, 576px and up) */
 @media (max-width: 768px) {
 

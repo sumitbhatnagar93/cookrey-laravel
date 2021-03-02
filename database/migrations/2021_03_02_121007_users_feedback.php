@@ -14,21 +14,16 @@ class UsersFeedback extends Migration
     public function up()
     {
         /*
-         * Check if table already exist
-         */
-        Schema::dropIfExists('users_feedback');
-
-        /*
          * Create table and add columns
          */
         Schema::create('users_feedback', function (Blueprint $table) {
             $table->bigIncrements('feedback_id');
             $table->longText('feedback_msg')->nullable(true);
             $table->float('feedback_rating');
-            $table->text('vendor_id');
-            $table->text('user_id');
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrent();
+            $table->string('vendor_id', 255)->index();
+            $table->foreign('vendor_id')->references('provider_id')->on('services')->onDelete('cascade');
+            $table->string('user_id');
+            $table->timestamps();
         });
     }
 

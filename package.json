@@ -24,6 +24,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "@fancyapps/fancybox": "^3.5.7",
         "@types/googlemaps": "^3.39.13",
         "bootstrap-vue-datatable": "^1.0.7",
         "laravel-vue-datatable": "^0.5.13",
