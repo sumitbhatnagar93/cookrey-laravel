@@ -26,42 +26,11 @@
                         <a v-bind:href="'vendor/'+vendor.provider_id" class="btn btn-outline-success">Subscribe Now</a>
                         <div class="CKLST-submeta float-right">
                             <span class="CK-distance">{{ vendor.rating }} ratings</span>
-                            <div class="stars" data-toggle="modal"
-                                 v-bind:data-target="'#ratingModal'+vendor.provider_id">
+                            <div class="stars">
                                 <star-rating v-bind:increment="0.5" v-model="vendor.rating"
                                              v-bind:showRating="false"
                                              v-bind:star-size="20" style="pointer-events: none;">
                                 </star-rating>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal fade" v-bind:id="'ratingModal'+vendor.provider_id" tabindex="-1" role="dialog"
-                         aria-labelledby="ratingModalLabel"
-                         aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div v-if="isCurrentUser" class="modal-body">
-                                    <form @submit.prevent="addRating(vendor.provider_id,vendor.rating)"
-                                          v-bind:id="'ratingForm'+vendor.provider_id">
-                                        <div class="form-group">
-                                            <h4>Add your valuable rating</h4>
-                                            <div class="rating-system text-center">
-                                                <star-rating v-model="vendor.rating"
-                                                             :increment="0.5"></star-rating>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                <textarea name="feedback_msg" placeholder="Feedback"
-                                          v-bind:id="'feedbackMsg'+vendor.provider_id" cols="50"
-                                          rows="4"></textarea>
-                                        </div>
-                                        <button class="btn btn-dark">Cancel</button>
-                                        <button class="btn btn-success">Submit</button>
-                                    </form>
-                                </div>
-                                <div v-if="!isCurrentUser" class="modal-body text-center">
-                                    <a v-bind:href="loginUri" class="btn btn-info">Login now</a>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -173,24 +142,6 @@ export default {
             console.log(this.cookreyVendors)
         },
 
-        addRating(vendorID, rating) {
-            this.showPreloader()
-            let formData = new FormData(document.getElementById('ratingForm' + vendorID));
-            formData.append('feedback_rating', rating)
-            formData.append('vendor_id', vendorID)
-            axios.post('/add-rating', formData)
-                .then(res => {
-                    console.log(res.data);
-                    $('#ratingModal' + vendorID).modal('hide')
-                    this.loader.hide()
-                    let instance = Vue.$toast.open({
-                        message: res.data.message,
-                        type: res.data.responseType,
-                    });
-                }).catch(er => {
-                console.log(er.data);
-            })
-        }
     }
 }
 </script>

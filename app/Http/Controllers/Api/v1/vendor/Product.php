@@ -132,7 +132,10 @@ class Product extends Controller
     public function onTiffinProductSubmit(Request $request)
     {
             $data = $request->all();
-            $data['in_the_box'] = json_encode($data['in_the_box']);
+            $temp = $data['in_the_box'];
+            unset($data['in_the_box']);
+            $data['in_the_box'] = json_encode($temp);
+            dd($data);
             $postedData = DB::table('tiffins')->insert($data);
             if ($postedData) {
                 return response()->json($data);

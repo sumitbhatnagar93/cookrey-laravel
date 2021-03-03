@@ -8,6 +8,6 @@
     }
     ?>
     <div id="app">
-        <single-vendor-web :slug="{{ json_encode($data) }}"></single-vendor-web>
+        <single-vendor-web :auth_info="{{ json_encode(['vendor_id'=>$data,'auth_token'=>Auth::id(),'login_uri'=>route('login')]) }}"></single-vendor-web>
     </div>
 @endsection

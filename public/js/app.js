@@ -8062,6 +8062,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fancyapps_fancybox__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_fancyapps_fancybox__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var vue_star_rating__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-star-rating */ "./node_modules/vue-star-rating/dist/VueStarRating.common.js");
 /* harmony import */ var vue_star_rating__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_star_rating__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_3__);
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -8216,6 +8218,46 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -8223,9 +8265,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   components: {
     StarRating: vue_star_rating__WEBPACK_IMPORTED_MODULE_2___default.a
   },
-  props: ['slug'],
+  props: ['auth_info'],
   data: function data() {
     return {
+      loginUri: null,
+      isCurrentUser: false,
       isCustomOpt: false,
       currentUser: '',
       orderID: '',
@@ -8235,12 +8279,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       cart: '',
       currentLocation: [],
       products: [],
-      ratings: 0
+      ratings: 0,
+      slug: ''
     };
   },
   mounted: function mounted() {
     this.showPreloader();
-    console.log(this.slug);
+    console.log(this.auth_info);
+
+    if (this.auth_info['auth_token']) {
+      this.isCurrentUser = true;
+    }
+
+    this.slug = this.auth_info['vendor_id'];
+    this.loginUri = this.auth_info['login_uri'];
     this.getVendorById();
   },
   created: function created() {
@@ -8261,7 +8313,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var lat = this.currentLocation.geometry.location.lat;
       var lng = this.currentLocation.geometry.location.lng;
       axios('/getVendorByIdWithFeed/' + this.slug).then(function (res) {
-        console.log(res.data[0]);
+        console.log(JSON.parse(res.data[0].services_product[0].in_the_box));
         _this.vendor = res.data[0];
         _this.products = res.data[0].services_product;
         var rating = res.data[0].avg_rating;
@@ -8361,6 +8413,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         alert(response.error.metadata.payment_id);
       });
       rzp1.open();
+    },
+    addRating: function addRating(vendorID, rating) {
+      var _this3 = this;
+
+      this.showPreloader();
+      var formData = new FormData(document.getElementById('ratingForm' + vendorID));
+      formData.append('feedback_rating', rating);
+      formData.append('vendor_id', vendorID);
+      axios.post('/add-rating', formData).then(function (res) {
+        console.log(res.data);
+        $('#ratingModal' + vendorID).modal('hide');
+
+        _this3.loader.hide();
+
+        var instance = vue__WEBPACK_IMPORTED_MODULE_3___default.a.$toast.open({
+          message: res.data.message,
+          type: res.data.responseType
+        });
+      })["catch"](function (er) {
+        console.log(er.data);
+      });
     }
   }
 });
@@ -9319,37 +9392,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -9511,27 +9553,6 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
           }
         }, _callee3);
       }))();
-    },
-    addRating: function addRating(vendorID, rating) {
-      var _this5 = this;
-
-      this.showPreloader();
-      var formData = new FormData(document.getElementById('ratingForm' + vendorID));
-      formData.append('feedback_rating', rating);
-      formData.append('vendor_id', vendorID);
-      axios.post('/add-rating', formData).then(function (res) {
-        console.log(res.data);
-        $('#ratingModal' + vendorID).modal('hide');
-
-        _this5.loader.hide();
-
-        var instance = vue__WEBPACK_IMPORTED_MODULE_2___default.a.$toast.open({
-          message: res.data.message,
-          type: res.data.responseType
-        });
-      })["catch"](function (er) {
-        console.log(er.data);
-      });
     }
   }
 });
@@ -56339,32 +56360,39 @@ var render = function() {
                   }
                 },
                 [
-                  _c(
-                    "div",
-                    { staticClass: "inner-row" },
-                    [
-                      _c("span", [
-                        _vm._v(_vm._s(_vm.vendor.feedback_rating) + " Ratings")
-                      ]),
-                      _vm._v(" "),
-                      _c("star-rating", {
-                        staticStyle: { "pointer-events": "none" },
+                  _c("div", { staticClass: "inner-row" }, [
+                    _c("span", [
+                      _vm._v(_vm._s(_vm.vendor.feedback_rating) + " Ratings")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
                         attrs: {
-                          showRating: false,
-                          increment: 0.5,
-                          "star-size": 40
-                        },
-                        model: {
-                          value: _vm.ratings,
-                          callback: function($$v) {
-                            _vm.ratings = $$v
-                          },
-                          expression: "ratings"
+                          "data-toggle": "modal",
+                          "data-target": "#ratingModal" + _vm.slug
                         }
-                      })
-                    ],
-                    1
-                  ),
+                      },
+                      [
+                        _c("star-rating", {
+                          staticStyle: { "pointer-events": "none" },
+                          attrs: {
+                            showRating: false,
+                            increment: 0.5,
+                            "star-size": 40
+                          },
+                          model: {
+                            value: _vm.ratings,
+                            callback: function($$v) {
+                              _vm.ratings = $$v
+                            },
+                            expression: "ratings"
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ]),
                   _vm._v(" "),
                   _vm._m(0)
                 ]
@@ -56404,8 +56432,17 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", { staticClass: "row" }, [
                       _c("div", { staticClass: "col-md-8" }, [
-                        _c("p", { staticClass: "card-text" }, [
-                          _vm._v(_vm._s(product.in_the_box))
+                        _c("div", { staticClass: "card-text" }, [
+                          _c(
+                            "ul",
+                            { staticClass: "box-items" },
+                            _vm._l(JSON.parse(product.in_the_box), function(
+                              items
+                            ) {
+                              return _c("li", [_vm._v(_vm._s(items))])
+                            }),
+                            0
+                          )
                         ])
                       ]),
                       _vm._v(" "),
@@ -56424,6 +56461,102 @@ var render = function() {
         ])
       ])
     ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "ratingModal" + _vm.slug,
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "ratingModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm.isCurrentUser
+                ? _c("div", { staticClass: "modal-body" }, [
+                    _c(
+                      "form",
+                      {
+                        attrs: { id: "ratingForm" + _vm.vendor.provider_id },
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            return _vm.addRating(_vm.slug, _vm.ratings)
+                          }
+                        }
+                      },
+                      [
+                        _c("div", { staticClass: "form-group" }, [
+                          _c("h4", [_vm._v("Add your valuable rating")]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "rating-system text-center" },
+                            [
+                              _c("star-rating", {
+                                attrs: { increment: 0.5 },
+                                model: {
+                                  value: _vm.ratings,
+                                  callback: function($$v) {
+                                    _vm.ratings = $$v
+                                  },
+                                  expression: "ratings"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group" }, [
+                          _c("textarea", {
+                            attrs: {
+                              name: "feedback_msg",
+                              placeholder: "Feedback",
+                              id: "feedbackMsg" + _vm.slug,
+                              cols: "50",
+                              rows: "4"
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("button", { staticClass: "btn btn-dark" }, [
+                          _vm._v("Cancel")
+                        ]),
+                        _vm._v(" "),
+                        _c("button", { staticClass: "btn btn-success" }, [
+                          _vm._v("Submit")
+                        ])
+                      ]
+                    )
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              !_vm.isCurrentUser
+                ? _c("div", { staticClass: "modal-body text-center" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-info",
+                        attrs: { href: _vm.loginUri }
+                      },
+                      [_vm._v("Login now")]
+                    )
+                  ])
+                : _vm._e()
+            ])
+          ]
+        )
+      ]
+    ),
     _vm._v(" "),
     _c(
       "div",
@@ -58554,13 +58687,7 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "div",
-                    {
-                      staticClass: "stars",
-                      attrs: {
-                        "data-toggle": "modal",
-                        "data-target": "#ratingModal" + vendor.provider_id
-                      }
-                    },
+                    { staticClass: "stars" },
                     [
                       _c("star-rating", {
                         staticStyle: { "pointer-events": "none" },
@@ -58581,123 +58708,7 @@ var render = function() {
                     1
                   )
                 ])
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "modal fade",
-                  attrs: {
-                    id: "ratingModal" + vendor.provider_id,
-                    tabindex: "-1",
-                    role: "dialog",
-                    "aria-labelledby": "ratingModalLabel",
-                    "aria-hidden": "true"
-                  }
-                },
-                [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "modal-dialog",
-                      attrs: { role: "document" }
-                    },
-                    [
-                      _c("div", { staticClass: "modal-content" }, [
-                        _vm.isCurrentUser
-                          ? _c("div", { staticClass: "modal-body" }, [
-                              _c(
-                                "form",
-                                {
-                                  attrs: {
-                                    id: "ratingForm" + vendor.provider_id
-                                  },
-                                  on: {
-                                    submit: function($event) {
-                                      $event.preventDefault()
-                                      return _vm.addRating(
-                                        vendor.provider_id,
-                                        vendor.rating
-                                      )
-                                    }
-                                  }
-                                },
-                                [
-                                  _c("div", { staticClass: "form-group" }, [
-                                    _c("h4", [
-                                      _vm._v("Add your valuable rating")
-                                    ]),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass: "rating-system text-center"
-                                      },
-                                      [
-                                        _c("star-rating", {
-                                          attrs: { increment: 0.5 },
-                                          model: {
-                                            value: vendor.rating,
-                                            callback: function($$v) {
-                                              _vm.$set(vendor, "rating", $$v)
-                                            },
-                                            expression: "vendor.rating"
-                                          }
-                                        })
-                                      ],
-                                      1
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "form-group" }, [
-                                    _c("textarea", {
-                                      attrs: {
-                                        name: "feedback_msg",
-                                        placeholder: "Feedback",
-                                        id: "feedbackMsg" + vendor.provider_id,
-                                        cols: "50",
-                                        rows: "4"
-                                      }
-                                    })
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "button",
-                                    { staticClass: "btn btn-dark" },
-                                    [_vm._v("Cancel")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "button",
-                                    { staticClass: "btn btn-success" },
-                                    [_vm._v("Submit")]
-                                  )
-                                ]
-                              )
-                            ])
-                          : _vm._e(),
-                        _vm._v(" "),
-                        !_vm.isCurrentUser
-                          ? _c(
-                              "div",
-                              { staticClass: "modal-body text-center" },
-                              [
-                                _c(
-                                  "a",
-                                  {
-                                    staticClass: "btn btn-info",
-                                    attrs: { href: _vm.loginUri }
-                                  },
-                                  [_vm._v("Login now")]
-                                )
-                              ]
-                            )
-                          : _vm._e()
-                      ])
-                    ]
-                  )
-                ]
-              )
+              ])
             ])
           }),
           0

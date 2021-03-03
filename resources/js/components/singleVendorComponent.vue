@@ -16,11 +16,13 @@
                             <div class="card" style="width: 100%;text-align: center;margin-top: 85px;height: 100px;">
                                 <div class="inner-row">
                                     <span>{{ vendor.feedback_rating }} Ratings</span>
-                                    <star-rating style="pointer-events: none;"
-                                                 v-bind:showRating="false"
-                                                 v-bind:increment="0.5"
-                                                 v-bind:star-size="40" v-model="ratings">
-                                    </star-rating>
+                                    <div data-toggle="modal" v-bind:data-target="'#ratingModal'+slug">
+                                        <star-rating style="pointer-events: none;"
+                                                     v-bind:showRating="false"
+                                                     v-bind:increment="0.5"
+                                                     v-bind:star-size="40" v-model="ratings">
+                                        </star-rating>
+                                    </div>
                                 </div>
                                 <div class="CKmnt-area">
                                     <ul>
@@ -42,7 +44,11 @@
                                 <h5 class="card-title">In the Box</h5>
                                 <div class="row">
                                     <div class="col-md-8">
-                                        <p class="card-text">{{ product.in_the_box }}</p>
+                                        <div class="card-text">
+                                        <ul class="box-items">
+                                            <li v-for="items of (JSON.parse(product.in_the_box))">{{items}}</li>
+                                        </ul>
+                                        </div>
                                     </div>
                                     <div class="col-md-4">
                                         <button class="btn btn-outline-info" data-toggle="modal"
@@ -64,6 +70,39 @@
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" v-bind:id="'ratingModal'+slug" tabindex="-1" role="dialog"
+             aria-labelledby="ratingModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div v-if="isCurrentUser" class="modal-body">
+                        <form @submit.prevent="addRating(slug,ratings)"
+                              v-bind:id="'ratingForm'+vendor.provider_id">
+                            <div class="form-group">
+                                <h4>Add your valuable rating</h4>
+                                <div class="rating-system text-center">
+                                    <star-rating v-model="ratings"
+                                                 :increment="0.5"></star-rating>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <textarea name="feedback_msg" placeholder="Feedback"
+                                          v-bind:id="'feedbackMsg'+slug" cols="50"
+                                          rows="4"></textarea>
+                            </div>
+                            <button class="btn btn-dark">Cancel</button>
+                            <button class="btn btn-success">Submit</button>
+                        </form>
+                    </div>
+                    <div v-if="!isCurrentUser" class="modal-body text-center">
+                        <a v-bind:href="loginUri" class="btn btn-info">Login now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
              aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -149,15 +188,18 @@
 <script>
 import fancybox from "@fancyapps/fancybox"
 import StarRating from 'vue-star-rating';
+import Vue from "vue";
 
 export default {
     name: "singleVendorComponent",
     components: {
         StarRating,
     },
-    props: ['slug'],
+    props: ['auth_info'],
     data() {
         return {
+            loginUri: null,
+            isCurrentUser: false,
             isCustomOpt: false,
             currentUser: '',
             orderID: '',
@@ -167,12 +209,18 @@ export default {
             cart: '',
             currentLocation: [],
             products: [],
-            ratings: 0
+            ratings: 0,
+            slug: ''
         };
     },
     mounted() {
         this.showPreloader()
-        console.log(this.slug)
+        console.log(this.auth_info)
+        if (this.auth_info['auth_token']) {
+            this.isCurrentUser = true
+        }
+        this.slug = this.auth_info['vendor_id']
+        this.loginUri = this.auth_info['login_uri']
         this.getVendorById()
     },
     created() {
@@ -189,7 +237,7 @@ export default {
             let lat = this.currentLocation.geometry.location.lat
             let lng = this.currentLocation.geometry.location.lng
             axios('/getVendorByIdWithFeed/' + this.slug).then((res) => {
-                console.log(res.data[0])
+                console.log(JSON.parse(res.data[0].services_product[0].in_the_box))
                 this.vendor = res.data[0]
                 this.products = res.data[0].services_product
                 let rating = res.data[0].avg_rating;
@@ -271,6 +319,24 @@ export default {
             rzp1.open();
         },
 
+        addRating(vendorID, rating) {
+            this.showPreloader()
+            let formData = new FormData(document.getElementById('ratingForm' + vendorID));
+            formData.append('feedback_rating', rating)
+            formData.append('vendor_id', vendorID)
+            axios.post('/add-rating', formData)
+                .then(res => {
+                    console.log(res.data);
+                    $('#ratingModal' + vendorID).modal('hide')
+                    this.loader.hide()
+                    let instance = Vue.$toast.open({
+                        message: res.data.message,
+                        type: res.data.responseType,
+                    });
+                }).catch(er => {
+                console.log(er.data);
+            })
+        }
     }
 }
 </script>
