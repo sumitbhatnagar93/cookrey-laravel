@@ -8257,6 +8257,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -8280,7 +8290,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       currentLocation: [],
       products: [],
       ratings: 0,
-      slug: ''
+      slug: '',
+      usersFeedback: []
     };
   },
   mounted: function mounted() {
@@ -8313,9 +8324,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var lat = this.currentLocation.geometry.location.lat;
       var lng = this.currentLocation.geometry.location.lng;
       axios('/getVendorByIdWithFeed/' + this.slug).then(function (res) {
-        console.log(JSON.parse(res.data[0].services_product[0].in_the_box));
+        console.log(res.data[0]);
         _this.vendor = res.data[0];
         _this.products = res.data[0].services_product;
+        _this.usersFeedback = _this.vendor.users_feedback;
         var rating = res.data[0].avg_rating;
         _this.ratings = rating.length ? rating[0].rating : 0;
 
@@ -9540,7 +9552,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_toast_notification__WEBPACK_I
                     value.rating = 0;
                   }
 
-                  if (parseInt(km) <= 5) {
+                  if (parseInt(km) <= 5 && value.services_product.length) {
                     _this4.cookreyVendors.push(value);
                   }
                 });
@@ -56361,9 +56373,7 @@ var render = function() {
                 },
                 [
                   _c("div", { staticClass: "inner-row" }, [
-                    _c("span", [
-                      _vm._v(_vm._s(_vm.vendor.feedback_rating) + " Ratings")
-                    ]),
+                    _c("span", [_vm._v(_vm._s(_vm.ratings) + " Ratings")]),
                     _vm._v(" "),
                     _c(
                       "div",
@@ -56392,11 +56402,48 @@ var render = function() {
                       ],
                       1
                     )
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(0)
+                  ])
                 ]
-              )
+              ),
+              _vm._v(" "),
+              _c("h2", { staticClass: "CK-center-title mt-5" }, [
+                _vm._v("Our Valuable Feedback")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "CKmnt-area" }, [
+                _c(
+                  "ul",
+                  _vm._l(_vm.usersFeedback, function(feedback) {
+                    return _c("li", { staticClass: " CK-card" }, [
+                      _c(
+                        "div",
+                        { staticClass: "CK-usr-cmnt-star" },
+                        [
+                          _c("star-rating", {
+                            staticStyle: { "pointer-events": "none" },
+                            attrs: {
+                              showRating: false,
+                              increment: 0.5,
+                              "star-size": 20
+                            },
+                            model: {
+                              value: feedback.feedback_rating,
+                              callback: function($$v) {
+                                _vm.$set(feedback, "feedback_rating", $$v)
+                              },
+                              expression: "feedback.feedback_rating"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("span", [_vm._v(_vm._s(feedback.feedback_msg))])
+                        ],
+                        1
+                      )
+                    ])
+                  }),
+                  0
+                )
+              ])
             ])
           ])
         ]),
@@ -56446,7 +56493,7 @@ var render = function() {
                         ])
                       ]),
                       _vm._v(" "),
-                      _vm._m(1, true)
+                      _vm._m(0, true)
                     ])
                   ])
                 ]
@@ -56457,7 +56504,7 @@ var render = function() {
           _vm._v(" "),
           _c("hr"),
           _vm._v(" "),
-          _vm._m(2)
+          _vm._m(1)
         ])
       ])
     ]),
@@ -56576,7 +56623,7 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(3),
+              _vm._m(2),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("form", [
@@ -56613,16 +56660,16 @@ var render = function() {
                     _vm._v(" "),
                     _vm.isCustomOpt
                       ? _c("div", { staticClass: "custom-opt" }, [
-                          _vm._m(4),
+                          _vm._m(3),
                           _vm._v(" "),
-                          _vm._m(5)
+                          _vm._m(4)
                         ])
                       : _vm._e()
                   ]),
                   _vm._v(" "),
-                  _vm._m(6),
+                  _vm._m(5),
                   _vm._v(" "),
-                  _vm._m(7)
+                  _vm._m(6)
                 ])
               ]),
               _vm._v(" "),
@@ -56654,12 +56701,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "CKmnt-area" }, [_c("ul", [_c("li")])])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

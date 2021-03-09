@@ -135,7 +135,7 @@ export default {
                 } else {
                     value.rating = 0
                 }
-                if (parseInt(km) <= 5) {
+                if (parseInt(km) <= 5 && value.services_product.length) {
                     this.cookreyVendors.push(value)
                 }
             })

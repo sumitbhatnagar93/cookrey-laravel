@@ -15,7 +15,7 @@
                         <div class="rating-area">
                             <div class="card" style="width: 100%;text-align: center;margin-top: 85px;height: 100px;">
                                 <div class="inner-row">
-                                    <span>{{ vendor.feedback_rating }} Ratings</span>
+                                    <span>{{ ratings }} Ratings</span>
                                     <div data-toggle="modal" v-bind:data-target="'#ratingModal'+slug">
                                         <star-rating style="pointer-events: none;"
                                                      v-bind:showRating="false"
@@ -24,11 +24,21 @@
                                         </star-rating>
                                     </div>
                                 </div>
-                                <div class="CKmnt-area">
-                                    <ul>
-                                        <li></li>
-                                    </ul>
-                                </div>
+                            </div>
+                            <h2 class="CK-center-title mt-5">Our Valuable Feedback</h2>
+                            <div class="CKmnt-area">
+                                <ul>
+                                    <li class=" CK-card" v-for="feedback of usersFeedback">
+                                        <div class="CK-usr-cmnt-star">
+                                            <star-rating style="pointer-events: none;"
+                                                         v-bind:showRating="false"
+                                                         v-bind:increment="0.5"
+                                                         v-bind:star-size="20" v-model="feedback.feedback_rating">
+                                            </star-rating>
+                                            <span >{{feedback.feedback_msg}}</span>
+                                        </div>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -45,9 +55,9 @@
                                 <div class="row">
                                     <div class="col-md-8">
                                         <div class="card-text">
-                                        <ul class="box-items">
-                                            <li v-for="items of (JSON.parse(product.in_the_box))">{{items}}</li>
-                                        </ul>
+                                            <ul class="box-items">
+                                                <li v-for="items of (JSON.parse(product.in_the_box))">{{ items }}</li>
+                                            </ul>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -210,7 +220,8 @@ export default {
             currentLocation: [],
             products: [],
             ratings: 0,
-            slug: ''
+            slug: '',
+            usersFeedback: []
         };
     },
     mounted() {
@@ -237,9 +248,10 @@ export default {
             let lat = this.currentLocation.geometry.location.lat
             let lng = this.currentLocation.geometry.location.lng
             axios('/getVendorByIdWithFeed/' + this.slug).then((res) => {
-                console.log(JSON.parse(res.data[0].services_product[0].in_the_box))
+                console.log(res.data[0])
                 this.vendor = res.data[0]
                 this.products = res.data[0].services_product
+                this.usersFeedback = this.vendor.users_feedback
                 let rating = res.data[0].avg_rating;
                 this.ratings = rating.length ? rating[0].rating : 0
                 this.getKmDistance(res.data[0], lat, lng).then((inp) => {

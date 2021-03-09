@@ -83,7 +83,7 @@ class AddFoodService extends Controller
 
     public function getVendors()
     {
-        $data = Service::with('avgRating')
+        $data = Service::with('avgRating','servicesProduct')
             ->where('business_type', 'tiffin_service')
             ->get()->toArray();
         return response()->json($data);
