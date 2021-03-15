@@ -42,6 +42,7 @@ Vue.component('home-component', require('./components/homeComponent.vue').defaul
 Vue.component('home-banner',require('./components/global/home-banner.vue').default);
 Vue.component('footer-component',require('./components/global/footerComponent.vue').default);
 Vue.component('search-component',require('./components/global/searchComponent.vue').default);
+Vue.component('tab-menu',require('./components/global/tabMenu.vue').default);
 /**
  * Vendor related templates
  */

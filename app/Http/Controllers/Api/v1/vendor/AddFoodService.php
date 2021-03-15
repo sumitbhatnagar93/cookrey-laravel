@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api\v1\vendor;
 
 use App\Models\Service;
+use App\Models\UserSubscription;
+use Illuminate\Support\Facades\Date;
 use Razorpay\Api\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -83,7 +85,7 @@ class AddFoodService extends Controller
 
     public function getVendors()
     {
-        $data = Service::with('avgRating','servicesProduct')
+        $data = Service::with('avgRating', 'servicesProduct')
             ->where('business_type', 'tiffin_service')
             ->get()->toArray();
         return response()->json($data);
@@ -118,7 +120,7 @@ class AddFoodService extends Controller
 
     public function getVendorByIdWithFeed($providerId)
     {
-        $data = Service::where('provider_id', $providerId)->with('usersFeedback','avgRating','servicesProduct')->get()->toArray();
+        $data = Service::where('provider_id', $providerId)->with('usersFeedback', 'avgRating', 'servicesProduct')->get()->toArray();
         return response()->json($data);
     }
 
@@ -188,11 +190,33 @@ class AddFoodService extends Controller
     public function addSubscription(Request $request)
     {
         $data = $request->all();
-        $postedData = DB::table('user_subscribtion')->insert($data);
-        if ($postedData) {
-            return response()->json($data);
+        $checkIfAlreadyExist = UserSubscription::where([['userId', '=', $data['userId']], ['vendorId', '=', $data['vendorId']], ['productId', $data['productId']]])->get()->toArray();
+        if ($checkIfAlreadyExist) return response()->json(['responseType' => 'error', 'message' => 'You already subscribed to this plan!']);
+        $postedData = new UserSubscription();
+        $postedData->vendorId = $data['vendorId'];
+        $postedData->userId = $data['userId'];
+        $postedData->productId = $data['productId'];
+        $postedData->validity = $data['validity'];
+        $postedData->serve_time = implode(',', $data['serve_time']);
+        $postedData->addon = implode(',', $data['addon']);
+        $startDate = date("Y-m-d");;
+        $endDate = null;
+        if ($data['validity'] == 'week') {
+            $endDate = date("Y-m-d", strtotime("+1 week"));
+        } elseif ($data['validity'] == 'month') {
+            $endDate = date("Y-m-d", strtotime("+1 month"));
         } else {
-            return response()->json(["message" => "Something went wrong"]);
+            $startDate = $data['start_date'];
+            $endDate = $data['end_date'];
+        }
+        $postedData->start_date = $startDate;
+        $postedData->end_date = $endDate;
+        $postedData->save($data);
+        //$postedData = DB::table('user_subscribtion')->insert($data);
+        if ($postedData) {
+            return response()->json(['responseType' => 'success', 'message' => 'Your Subscription Done!']);
+        } else {
+            return response()->json(['responseType' => 'error', 'message' => 'Something went wrong!']);
         }
     }
 
@@ -275,10 +299,12 @@ class AddFoodService extends Controller
     /**
      * Rozapay payment
      */
-    public function payment()
+    public function payment($vendorID, $userID, $productID)
     {
         //get API Configuration
         $api = new Api('rzp_test_fVUykSh2DqZuiy', 'sZWTk5zifNBlMX3Sc16jdrVO');
+        $checkIfAlreadyExist = UserSubscription::where([['userId', '=', $userID], ['vendorId', '=', $vendorID], ['productId', $productID]])->get()->toArray();
+        if ($checkIfAlreadyExist) return response()->json(['responseType' => 'error', 'message' => 'You already subscribed to this plan!']);
         $orderData = [
             'receipt' => 3456,
             'amount' => 5000,

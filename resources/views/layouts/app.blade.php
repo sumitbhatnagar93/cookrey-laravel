@@ -96,6 +96,7 @@
     <main class="">
         @yield('content')
     </main>
+    <tab-menu></tab-menu>
     <footer>
         <footer-component></footer-component>
     </footer>

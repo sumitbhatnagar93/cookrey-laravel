@@ -54,7 +54,7 @@ div.front-banner {
     background-size: cover;
     background-position: center;
     position: relative;
-    padding: 9rem;
+    padding: 5rem;
 }
 
 /*div.front-banner:after {*/
@@ -721,7 +721,12 @@ Bootstrap modal enhancement
     opacity: 1;
 }
 
-
+.CK-vendor-single .main-sidebar .rating-area .card {
+    width: 100%;
+    text-align: center;
+    margin-top: 85px;
+    height: 100px;
+}
 
 .CK-vendor-single .card .card-header {
     background-color: rgb(166 31 31 / 75%);
@@ -762,6 +767,7 @@ ul.box-items li:not(:last-of-type):after {
 .CKmnt-area {
     padding: 25px;
     margin-top: 30px;
+    margin-bottom: 50px;
     box-shadow: rgb(204, 204, 204) 2px 2px 23px 11px;
     border: 1px solid rgba(0, 0, 0, 0.125);
     border-radius: 0.25rem;
@@ -794,6 +800,10 @@ ul.box-items li:not(:last-of-type):after {
     border-color: transparent rgb(166 31 31 / 75%) transparent transparent;
 }
 
+.CK-tab-menu .bottom {
+    display: none;
+}
+
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 1200px) {
     .CK-vendor-single.container {
@@ -803,6 +813,9 @@ ul.box-items li:not(:last-of-type):after {
 
 @media (max-width: 768px) {
 
+    h2{
+        font-size: 1.2rem;
+    }
     .CK-vendor-single .sampleData img {
         width: 100%;
     }
@@ -810,6 +823,57 @@ ul.box-items li:not(:last-of-type):after {
     .CK-vendor-single .card {
         text-align: center;
     }
+
+    /** hide desktop menu **/
+    nav.navbar.navbar-expand-md.navbar-light.shadow-sm.CK-main-nav, footer {
+        display: none;
+    }
+
+    /** Show mobile menu **/
+    .CK-tab-menu-outer.container-fluid {
+        margin-top: 25px;
+    }
+    .CK-vendor-single .main-sidebar .rating-area .card {
+        margin-top: 25px;
+    }
+    .CK-tab-menu .bottom {
+        display: block;
+        background: #fff;
+        display: block;
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        margin: 10px auto 0 auto;
+        height: 56px;
+        border-top: 1px solid #e2e2e2;
+    }
+
+    .CK-tab-menu .bottom .tab {
+        width: 32%;
+        text-decoration: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        font-size: 11px;
+        line-height: 11px;
+        color: #a1a1a1;
+        height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column-reverse;
+        float: left;
+        text-transform: uppercase;
+        transition: all 0.25s;
+    }
+
+    .CK-tab-menu .bottom i {
+        margin-bottom: 5px;
+    }
+
 }
 
 @media (min-width: 300px) {
