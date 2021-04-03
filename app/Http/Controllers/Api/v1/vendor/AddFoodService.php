@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\v1\vendor;
 
+use App\Models\Order;
 use App\Models\Service;
 use App\Models\UserSubscription;
 use Illuminate\Support\Facades\Date;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
+use Razorpay\Api\Payment;
 
 
 class AddFoodService extends Controller
@@ -192,29 +194,35 @@ class AddFoodService extends Controller
         $data = $request->all();
         $checkIfAlreadyExist = UserSubscription::where([['userId', '=', $data['userId']], ['vendorId', '=', $data['vendorId']], ['productId', $data['productId']]])->get()->toArray();
         if ($checkIfAlreadyExist) return response()->json(['responseType' => 'error', 'message' => 'You already subscribed to this plan!']);
+
+        //   if (!$isOrdered) return response()->json(['responseType' => 'error', 'message' => 'Unable to add your subscription!']);
         $postedData = new UserSubscription();
         $postedData->vendorId = $data['vendorId'];
         $postedData->userId = $data['userId'];
         $postedData->productId = $data['productId'];
-        $postedData->validity = $data['validity'];
-        $postedData->serve_time = implode(',', $data['serve_time']);
-        $postedData->addon = implode(',', $data['addon']);
+        $postedData->validity = $data['formData']['validity'];
+        $postedData->serve_time = implode(',', $data['formData']['serve_time']);
+        $postedData->addon = implode(',', $data['formData']['addon']);
         $startDate = date("Y-m-d");;
         $endDate = null;
-        if ($data['validity'] == 'week') {
+        if ($data['formData']['validity'] == 'week') {
             $endDate = date("Y-m-d", strtotime("+1 week"));
-        } elseif ($data['validity'] == 'month') {
+        } elseif ($data['formData']['validity'] == 'month') {
             $endDate = date("Y-m-d", strtotime("+1 month"));
         } else {
-            $startDate = $data['start_date'];
-            $endDate = $data['end_date'];
+            $startDate = $data['formData']['start_date'];
+            $endDate = $data['formData']['end_date'];
         }
         $postedData->start_date = $startDate;
         $postedData->end_date = $endDate;
         $postedData->save($data);
         //$postedData = DB::table('user_subscribtion')->insert($data);
         if ($postedData) {
-            return response()->json(['responseType' => 'success', 'message' => 'Your Subscription Done!']);
+            $data['subId'] = $postedData->id;
+            $isOrdered = $this->createOrder($data);
+            if ($isOrdered) {
+                return response()->json(['responseType' => 'success', 'message' => 'Your Subscription Done!']);
+            }
         } else {
             return response()->json(['responseType' => 'error', 'message' => 'Something went wrong!']);
         }
@@ -231,16 +239,33 @@ class AddFoodService extends Controller
         }
     }
 
-    public function createOrder(Request $request)
+    public function createOrder($data)
     {
-        $data = $request->all();
-        $data['order_id'] = $this->createOrderID(10);
-        $postedData = DB::table('orders')->insert($data);
-        if ($postedData) {
-            return response()->json($data);
-        } else {
-            return response()->json(["message" => "Something went wrong"]);
-        }
+        $payment = $this->fetchPayment($data['pay_id']);
+        $order = new Order();
+        $order->order_id = $data['order_id'];
+        $order->userId = $data['userId'];
+        $order->vendorId = $data['vendorId'];
+        $order->productId = $data['productId'];
+        $order->subId = $data['subId'];
+        $order->payment_mode = $payment->method;
+        $order->product_amount = $data['product_amount'];
+        $order->gst_rate = $data['gst_rate'];
+        $order->discount_amount = $data['discount_amount'];
+        $order->coupon_code = $data['coupon_code'];
+        $order->delivery_address = $data['delivery_address'];
+        $order->agreed_policy = $data['agreed_policy'];
+        $order->order_total = $data['order_total'];
+        $order->save();
+//        $data = $request->all();
+//        $data['order_id'] = $this->createOrderID(10);
+//        $postedData = DB::table('orders')->insert($data);
+//        if ($postedData) {
+//            return response()->json($data);
+//        } else {
+//            return response()->json(["message" => "Something went wrong"]);
+//        }
+        return $order;
     }
 
     public function createOrderID($n)
@@ -258,11 +283,12 @@ class AddFoodService extends Controller
 
     public function getOrderById($id)
     {
-        $data = DB::table('orders')->where('order_id', $id)->get();
+        $data = Order::where([['order_id', '=', $id]])->with('subscription')->get()->toArray();
+        //  $data = DB::table('orders')->where('order_id', $id)->get();
         if (!empty($data)) {
-            $vendorData = DB::table('services')->where('provider_id', $data[0]->vendor_id)->get();
-            $data[0]->vendor_name = $vendorData[0]->business_name;
-            $data[0]->vendor_address = $vendorData[0]->business_address;
+            $vendorData = Service::where([['provider_id','=', $data[0]['vendorId']]])->get()->toArray();
+            $data[0]['vendor_name'] = $vendorData[0]['business_name'];
+            $data[0]['vendor_address'] = $vendorData[0]['business_address'];
             return response()->json($data);
         } else {
             return response()->json(["message" => "Something went wrong"]);
@@ -345,4 +371,21 @@ class AddFoodService extends Controller
         return response()->json(['responseType' => $msgType, 'message' => $message]);
     }
 
+    public function orderDetail($orderID)
+    {
+        return view('pages/orders', ['orderId' => $orderID]);
+    }
+
+    public function orderConfirm()
+    {
+        return view('pages/order-confirmation');
+    }
+
+    public function fetchPayment($paymentID)
+    {
+        //get API Configuration
+        $api = new Api('rzp_test_fVUykSh2DqZuiy', 'sZWTk5zifNBlMX3Sc16jdrVO');
+        $payment = $api->payment->fetch($paymentID);
+        return $payment;
+    }
 }

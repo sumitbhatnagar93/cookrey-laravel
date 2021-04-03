@@ -65,4 +65,10 @@ Route::get('services', 'Api\v1\vendor\AddFoodService@viewVendorsOnFront');
 Route::get('vendor/{id}', 'Api\v1\vendor\AddFoodService@viewSingleVendorsOnFront');
 
 Route::post('test-upload', 'Api\v1\vendor\AddFoodService@testUpload');
-Route::get('paytest/{vendorID}/{userID}/{productID}', 'Api\v1\vendor\AddFoodService@payment');
+Route::get('paytest/{vendorID}/{userID}/{productID}', 'Api\v1\vendor\AddFoodService@payment')->middleware('auth');
+
+Route::get('order-detail/{orderID}/', 'Api\v1\vendor\AddFoodService@orderDetail')->middleware('auth');
+Route::get('order-confirm', 'Api\v1\vendor\AddFoodService@orderConfirm')->middleware('auth');
+Route::get('fetch-payment/{paymentID}', 'Api\v1\vendor\AddFoodService@fetchPayment')->middleware('auth');
+
+Route::get('account', 'Api\v1\Auth\Users@userAccount');

@@ -28,7 +28,8 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
-                                        <button @click="passProductID(product.id)" class="btn btn-outline-info" data-toggle="modal"
+                                        <button @click="passProductID(product.id)" class="btn btn-outline-info"
+                                                data-toggle="modal"
                                                 data-target="#subscribtionModal">Subscribe now
                                         </button>
                                     </div>
@@ -117,7 +118,7 @@
              aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <form id="subscribtionForm" @submit.prevent="getOrderID()">
+                    <form id="subscribtionForm" @submit.prevent="addSubscribtion()">
                         <div class="modal-header">
                             <h5 class="modal-title" id="subscribtionModalLabel">Subscribe</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -128,23 +129,30 @@
                             <div class="form-group">
                                 <h4>Select you subscription period</h4>
                                 <label class="radio-inline">
-                                    <input type="radio" value="week" name="validity" checked @click="isDefaultOption">Week
+                                    <input type="radio" v-model="formModel.validity" value="week" name="validity"
+                                           checked @click="isDefaultOption">Week
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" value="month" name="validity" @click="isDefaultOption">Month
+                                    <input type="radio" v-model="formModel.validity" value="month" name="validity"
+                                           @click="isDefaultOption">Month
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" value="custom" id="custom-option" name="validity"
+                                    <input type="radio" v-model="formModel.validity" value="custom" id="custom-option"
+                                           name="validity"
                                            @click="isCustomOption">Custom
                                 </label>
                                 <div class="custom-opt" v-if="isCustomOpt">
                                     <label for="from">
                                         <span>From:</span>
-                                        <input type="date" name="start_date" class="form-control" id="from">
+                                        <input type="date"
+                                               v-model="formModel.start_date"
+                                               name="start_date" class="form-control" id="from">
                                     </label>
                                     <label for="to">
                                         <span>To:</span>
-                                        <input type="date" name="end_date" class="form-control" id="to">
+                                        <input type="date"
+                                               v-model="formModel.end_date"
+                                               name="end_date" class="form-control" id="to">
                                     </label>
                                 </div>
                             </div>
@@ -152,12 +160,14 @@
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" name="serve_time[]" type="checkbox"
                                            id="inlineCheckbox1"
+                                           v-model="formModel.serve_time"
                                            value="lunch">
                                     <label class="form-check-label" for="inlineCheckbox1">Lunch</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" name="serve_time[]" type="checkbox"
                                            id="inlineCheckbox2"
+                                           v-model="formModel.serve_time"
                                            value="dinner">
                                     <label class="form-check-label" for="inlineCheckbox2">Dinner</label>
                                 </div>
@@ -166,21 +176,25 @@
                                 <h4>Choose Addons</h4>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" name="addon[]" type="checkbox" id="inlineCheckbox3"
+                                           v-model="formModel.addon"
                                            value="dhahi">
                                     <label class="form-check-label" for="inlineCheckbox3">Dhahi</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" name="addon[]" type="checkbox" id="inlineCheckbox4"
+                                           v-model="formModel.addon"
                                            value="salad">
                                     <label class="form-check-label" for="inlineCheckbox4">Salad</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" name="addon[]" type="checkbox" id="inlineCheckbox5"
+                                           v-model="formModel.addon"
                                            value="rayta">
                                     <label class="form-check-label" for="inlineCheckbox5">Rayta</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" name="addon[]" type="checkbox" id="inlineCheckbox6"
+                                           v-model="formModel.addon"
                                            value="sajbdj">
                                     <label class="form-check-label" for="inlineCheckbox6">Oshbfj</label>
                                 </div>
@@ -228,7 +242,8 @@ export default {
             ratings: 0,
             slug: '',
             usersFeedback: [],
-            activeProductID: null
+            activeProductID: null,
+            formModel: {validity: '', start_date: '', end_date: '', serve_time: [], addon: []}
         };
     },
     mounted() {
@@ -272,6 +287,7 @@ export default {
                 })
             })
         },
+
         showPreloader() {
             this.loader = this.$loading.show({
                 canCancel: true,
@@ -281,6 +297,7 @@ export default {
                 backgroundColor: '#000000',
             });
         },
+
         async getKmDistance(data, lat, lng) {
             const geocoder = new google.maps.Geocoder();
             const from = new google.maps.LatLng(lat, lng);
@@ -289,33 +306,43 @@ export default {
             const km = (dist / 1000).toFixed(1);
             return km
         },
+
         passProductID(ID) {
             this.activeProductID = ID
         },
+
         addSubscribtion() {
             this.showPreloader()
-            let formData = new FormData(document.getElementById('subscribtionForm'));
-            formData.append('vendorId', this.slug)
-            formData.append('productId', this.activeProductID)
-            formData.append('userId', this.auth_info['auth_token'])
-            axios.post('/addSubscription', formData)
-                .then(res => {
-                    console.log(res.data);
-                    this.loader.hide()
-                    $('.modal').modal('hide')
-                    let instance = Vue.$toast.open({
-                        message: res.data.message,
-                        type: res.data.responseType,
-                    });
-                }).catch(er => {
-                console.log(er);
-            })
+            let $data = {
+                vendorId: this.slug,
+                productId: this.activeProductID,
+                userId: this.auth_info['auth_token'],
+                formData: this.formModel,
+                product_amount:150,
+            }
+            console.log($data)
+             let isAdded = localStorage.setItem('order-cart', JSON.stringify($data))
+             window.location.href = '/order-confirm'
+
+            // axios.post('/addSubscription', formData)
+            //     .then(res => {
+            //         console.log(res.data);
+            //         this.loader.hide()
+            //         $('.modal').modal('hide')
+            //         let instance = Vue.$toast.open({
+            //             message: res.data.message,
+            //             type: res.data.responseType,
+            //         });
+            //     }).catch(er => {
+            //     console.log(er);
+            // })
         },
+
         getOrderID() {
-            axios.get('/paytest/'+this.slug+'/'+this.auth_info['auth_token']+'/'+this.activeProductID)
+            axios.get('/paytest/' + this.slug + '/' + this.auth_info['auth_token'] + '/' + this.activeProductID)
                 .then(res => {
                     console.log(res.data);
-                    if(res.data.responseType) {
+                    if (res.data.responseType) {
                         let instance = Vue.$toast.open({
                             message: res.data.message,
                             type: res.data.responseType,
@@ -330,12 +357,15 @@ export default {
                 console.log(er);
             })
         },
+
         isDefaultOption() {
             this.isCustomOpt = false
         },
+
         isCustomOption() {
             this.isCustomOpt = true
         },
+
         pay(orderID) {
             var options = {
                 "key": "rzp_test_fVUykSh2DqZuiy", // Enter the Key ID generated from the Dashboard
@@ -378,6 +408,7 @@ export default {
             });
             rzp1.open();
         },
+
         addRating(vendorID, rating) {
             this.showPreloader()
             let formData = new FormData(document.getElementById('ratingForm' + vendorID));
@@ -396,6 +427,7 @@ export default {
                 console.log(er.data);
             })
         }
+
     }
 }
 </script>

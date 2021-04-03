@@ -26,4 +26,9 @@ class Users extends Controller
         $userSubscription = DB::table('user_subscribtion')->where('userId', $id)->first();
         return response()->json($userSubscription, 200);
     }
+
+    public function userAccount()
+    {
+        return view('pages/account');
+    }
 }

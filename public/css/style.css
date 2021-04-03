@@ -910,3 +910,33 @@ ul.box-items li:not(:last-of-type):after {
         box-shadow: rgb(204, 204, 204) 2px 2px 23px 11px;
     }
 }
+
+.CK-order-receipt .card{
+    padding: 22px;
+}
+.CK-payment-summary.card ul{
+    padding: 0;
+}
+.CK-payment-summary.card ul li{
+    display: block;
+    padding: 6px;
+}
+.CK-payment-summary.card ul li span:nth-child(2){
+    float: right;
+}
+.CK-payment-summary.card ul li:nth-child(4){
+    border: 1px solid #ccc;
+    background: #2196f3;
+    padding: 6px;
+    color: #fff;
+    font-weight: 700;
+}
+.CK-user-account .profile-card{
+    width: 700px;
+    margin:0 auto;
+    padding: 25px;
+}
+.CK-user-account .profile-card textarea{
+    width: 100%;
+    border-color: #ccc;
+}

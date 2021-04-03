@@ -14,7 +14,7 @@ class UserSubscriptions extends Migration
     public function up()
     {
         Schema::create('user_subscriptions', function (Blueprint $table) {
-            $table->id();
+            $table->id()->unique();
             $table->string('userId')->nullable(true);
             $table->string('vendorId')->nullable(true);
             $table->string('productId')->nullable(true);

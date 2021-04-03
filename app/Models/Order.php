@@ -4,13 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class UserSubscription extends Model
+class Order extends Model
 {
     protected $guarded = [
         'id', 'created_at', 'updated_at'
     ];
 
-    public function Order(){
-        $this->hasOne(Order::class,'subId','id');
+    public function subscription()
+    {
+        return $this->belongsTo(UserSubscription::class, 'subId', 'id');
     }
 }

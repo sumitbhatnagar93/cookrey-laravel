@@ -43,6 +43,9 @@ Vue.component('home-banner',require('./components/global/home-banner.vue').defau
 Vue.component('footer-component',require('./components/global/footerComponent.vue').default);
 Vue.component('search-component',require('./components/global/searchComponent.vue').default);
 Vue.component('tab-menu',require('./components/global/tabMenu.vue').default);
+Vue.component('order-receipt',require('./components/global/order-receipt').default);
+Vue.component('order-confirm',require('./components/order-confirmation').default);
+Vue.component('user-account',require('./components/Account').default);
 /**
  * Vendor related templates
  */
