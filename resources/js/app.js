@@ -42,10 +42,15 @@ Vue.component('home-component', require('./components/homeComponent.vue').defaul
 Vue.component('home-banner',require('./components/global/home-banner.vue').default);
 Vue.component('footer-component',require('./components/global/footerComponent.vue').default);
 Vue.component('search-component',require('./components/global/searchComponent.vue').default);
+Vue.component('account-sidebar',require('./components/global/account-sidebar').default);
 Vue.component('tab-menu',require('./components/global/tabMenu.vue').default);
 Vue.component('order-receipt',require('./components/global/order-receipt').default);
 Vue.component('order-confirm',require('./components/order-confirmation').default);
-Vue.component('user-account',require('./components/Account').default);
+Vue.component('account',require('./components/Account').default);
+Vue.component('account-profile',require('./components/account-profile').default);
+Vue.component('account-order',require('./components/account-order').default);
+Vue.component('account-subscription',require('./components/account-subscription').default);
+Vue.component('single-subscription',require('./components/single-subscription').default);
 /**
  * Vendor related templates
  */
@@ -65,3 +70,10 @@ Vue.component('single-vendor-web', require('./components/singleVendorComponent.v
 const app = new Vue({
     el: '#app',
 });
+
+import moment from 'moment';
+Vue.filter('formatDate', function(value) {
+    if (value) {
+        return moment(String(value)).format('LL')
+    }
+})

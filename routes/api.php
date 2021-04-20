@@ -20,10 +20,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('users/{email}', 'Api\v1\Auth\Users@getUser');
 Route::post('oauth/login', 'Api\v1\Auth\LoginController@login');
-Route::post('oauth/register', 'Api\v1\Auth\RegisterController@register');
+Route::post('oauth/register', 'Api\v1\Auth\RegisterController@register')->name('apiRegister');
 Route::post('oauth/social-register', 'Api\v1\Auth\RegisterController@socialRegister');
 Route::post('oauth/update', 'Api\v1\Auth\RegisterController@update');
 Route::post('oauth/updateImage', 'Api\v1\Auth\RegisterController@updateImage');
+Route::post('oauth/updateUser', 'Api\v1\Auth\RegisterController@updateUser');
 Route::group(['middleware' => 'auth:api'], function () {
     Route::post('details', 'Api\UserController@details');
 });

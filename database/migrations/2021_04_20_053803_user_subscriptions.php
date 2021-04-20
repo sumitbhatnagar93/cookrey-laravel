@@ -22,6 +22,7 @@ class UserSubscriptions extends Migration
             $table->string('start_date')->nullable(true);
             $table->string('end_date')->nullable(true);
             $table->text('serve_time')->nullable(true);
+            $table->text('cancel_dates')->nullable(true);
             $table->longText('addon')->nullable(true);
             $table->timestamps();
         });

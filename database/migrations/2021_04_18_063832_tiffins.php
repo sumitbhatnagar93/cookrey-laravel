@@ -22,7 +22,7 @@ class Tiffins extends Migration
          * Create table and add columns
          */
         Schema::create('tiffins', function (Blueprint $table) {
-            $table->id();
+            $table->id()->index();
             $table->string('title')->nullable(true);
             $table->text('description')->nullable(true);
             $table->string('price')->nullable(true);

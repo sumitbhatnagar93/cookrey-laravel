@@ -14,4 +14,7 @@ class Order extends Model
     {
         return $this->belongsTo(UserSubscription::class, 'subId', 'id');
     }
+    public function product(){
+        return $this->belongsTo(Tiffin::class, 'productId','id');
+    }
 }

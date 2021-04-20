@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\v1\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\UserSubscription;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -23,12 +24,24 @@ class Users extends Controller
 
     public function getUserSubscriptionById($id)
     {
-        $userSubscription = DB::table('user_subscribtion')->where('userId', $id)->first();
+        $userSubscription = UserSubscription::where('userId', $id)->with('product')->get();
         return response()->json($userSubscription, 200);
     }
 
-    public function userAccount()
+    public function getSingleSubscriptionById($userId, $subId)
     {
-        return view('pages/account');
+        $userSubscription = UserSubscription::where(['userId'=>$userId,'id'=>$subId])->first();
+        return response()->json($userSubscription, 200);
+    }
+
+    public function userAccount($slug, $subId = '')
+    {
+        return view('pages/account', ['slug' => $slug, 'subId' => $subId]);
+    }
+
+    public function getUserById($id)
+    {
+        $user = User::where('id', $id)->with('usersMeta')->first();
+        return response()->json($user, 200);
     }
 }

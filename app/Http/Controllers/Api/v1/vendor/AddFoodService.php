@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\v1\vendor;
 
 use App\Models\Order;
 use App\Models\Service;
+use App\Models\Tiffin;
 use App\Models\UserSubscription;
 use Illuminate\Support\Facades\Date;
 use Razorpay\Api\Api;
@@ -231,7 +232,7 @@ class AddFoodService extends Controller
     public function cancelSubsDate(Request $request)
     {
         $data = $request->all();
-        $postedData = DB::table('user_subscribtion')->where('userId', $data['userId'])->update($data);
+        $postedData = UserSubscription::where('userId', $data['userId'])->update($data);
         if ($postedData) {
             return response()->json($data);
         } else {
@@ -297,11 +298,8 @@ class AddFoodService extends Controller
 
     public function getOrderByUserId($id)
     {
-        $data = DB::table('orders')->where('user_id', $id)->get();
+        $data = Order::where([['userId', '=', $id]])->with('product')->get();
         if (!empty($data)) {
-            $vendorData = DB::table('services')->where('provider_id', $data[0]->vendor_id)->get();
-            $data[0]->vendor_name = $vendorData[0]->business_name;
-            $data[0]->vendor_address = $vendorData[0]->business_address;
             return response()->json($data);
         } else {
             return response()->json(["message" => "Something went wrong"]);

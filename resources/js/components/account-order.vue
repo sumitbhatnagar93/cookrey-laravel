@@ -1,0 +1,102 @@
+<template>
+    <div>
+        <div class="container">
+            <h2 class="CK-center-title">My Orders</h2>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>
+                        Order ID
+                    </th>
+                    <th>
+                        Order Item
+                    </th>
+                    <th>
+                        Order Date
+                    </th>
+                    <th>
+                        View
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="order of orders">
+                    <td>
+                        #{{ order.order_id }}
+                    </td>
+                    <td>
+                        {{ order.product.title }}
+                    </td>
+                    <td>
+                        {{ order.created_at | formatDate }}
+                    </td>
+                    <td>
+                        <a v-bind:href="/order-detail/+order.order_id" class="btn btn-outline-info">View Order</a>
+                    </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th>
+                        Order ID
+                    </th>
+                    <th>
+                        Order Item
+                    </th>
+                    <th>
+                        Order Date
+                    </th>
+                    <th>
+                        View
+                    </th>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</template>
+
+<script>
+import Vue from "vue";
+
+export default {
+    name: "account-order",
+    props: ['userId'],
+    data() {
+        return {
+            orders: [],
+        };
+    },
+    mounted() {
+        this.showPreloader()
+    },
+    created() {
+        this.getOrderInfo()
+    },
+    methods: {
+        showPreloader() {
+            this.loader = this.$loading.show({
+                canCancel: true,
+                onCancel: this.onCancel,
+                color: '#ffffff',
+                loader: 'dots',
+                backgroundColor: '#000000',
+            });
+        },
+        getOrderInfo() {
+            axios.get('/getOrderByUserId/' + this.userId).then((rp) => {
+                    console.log(rp.data)
+                    this.orders = rp.data
+                    this.loader.hide()
+                },
+                (er) => {
+                    console.log(er)
+                })
+        },
+    }
+}
+</script>
+
+<style scoped>
+
+</style>

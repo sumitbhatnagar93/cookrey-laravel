@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\v1\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\UserMeta;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -141,5 +142,23 @@ class RegisterController extends Controller
         }
         curl_close($ch);
         return $status;
+    }
+
+
+    public function updateUser(Request $request)
+    {
+        $data = $request->all();
+        $user = User::where('email', $data['email'])->first();
+        $user->phone = $data['phone'];
+        if ($user->save()){
+            $userMeta  = UserMeta::where('user_email', $data['email'])->first();
+            $userMeta->firstName = $data['users_meta']['firstName'];
+            $userMeta->lastName = $data['users_meta']['lastName'];
+            $userMeta->address = $data['users_meta']['address'];
+            $userMeta->save();
+            return response()->json(['message'=>'Account has been updated!','type'=>'success']);
+        }else{
+            return response()->json(['message'=>'Something went wrong!','type'=>'error']);
+        }
     }
 }

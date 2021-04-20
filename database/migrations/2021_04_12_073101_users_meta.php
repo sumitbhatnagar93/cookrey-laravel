@@ -23,6 +23,7 @@ class UsersMeta extends Migration
          */
         Schema::create('users_meta', function (Blueprint $table) {
             $table->id();
+            $table->string('user_email')->index();
             $table->text('username')->nullable(true);
             $table->text('firstName')->nullable(true);
             $table->text('lastName')->nullable(true);

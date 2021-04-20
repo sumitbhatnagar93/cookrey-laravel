@@ -58,6 +58,7 @@ Route::get('getOtherVendors', 'Api\v1\vendor\AddFoodService@getOtherVendors');
 Route::get('getVendorById/{id}', 'Api\v1\vendor\AddFoodService@getVendorById');
 Route::get('getVendorByIdWithFeed/{id}', 'Api\v1\vendor\AddFoodService@getVendorByIdWithFeed');
 Route::get('getUserSubscriptionById/{id}', 'Api\v1\Auth\Users@getUserSubscriptionById');
+Route::get('getSingleSubscriptionById/{userId}/{subId}', 'Api\v1\Auth\Users@getSingleSubscriptionById');
 Route::post('add-rating','Api\v1\vendor\AddFoodService@addVendorRating');
 
 // web pages front-end
@@ -71,4 +72,7 @@ Route::get('order-detail/{orderID}/', 'Api\v1\vendor\AddFoodService@orderDetail'
 Route::get('order-confirm', 'Api\v1\vendor\AddFoodService@orderConfirm')->middleware('auth');
 Route::get('fetch-payment/{paymentID}', 'Api\v1\vendor\AddFoodService@fetchPayment')->middleware('auth');
 
-Route::get('account', 'Api\v1\Auth\Users@userAccount');
+Route::get('account/{slug}/{subId}', 'Api\v1\Auth\Users@userAccount')->middleware('auth');
+Route::get('user/{id}', 'Api\v1\Auth\Users@getUserById')->middleware('auth');
+
+

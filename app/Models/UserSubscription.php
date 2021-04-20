@@ -10,7 +10,11 @@ class UserSubscription extends Model
         'id', 'created_at', 'updated_at'
     ];
 
-    public function Order(){
-        $this->hasOne(Order::class,'subId','id');
+    public function order(){
+        return $this->hasOne(Order::class,'subId','id');
+    }
+
+    public function product(){
+        return $this->belongsTo(Tiffin::class, 'productId','id');
     }
 }

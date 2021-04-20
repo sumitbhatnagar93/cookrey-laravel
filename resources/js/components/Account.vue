@@ -1,41 +1,36 @@
 <template>
     <div>
-        <div class="container CK-user-account mt-3">
-            <h2 class="text-center CK-center-title">My Account</h2>
-            <div class="row">
-                <div class="card profile-card">
-                    <form class="form-group container">
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label for="name">Name</label>
-                                <input type="text" id="name" name="name" class="form-control">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="email">Email</label>
-                                <input type="text" name="email" id="email" class="form-control">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="phone">Phone</label>
-                                <input type="text" name="phone" id="phone" class="form-control">
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label for="address">Address</label><br>
-                                <textarea name="address" id="address" cols="30" rows="5"></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <button class="btn btn-info" type="submit">Update Info</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+        <account-profile v-if="slug==='profile'" :userId="userId"></account-profile>
+        <account-order v-if="slug==='order'" :userId="userId"></account-order>
+        <account-subscription v-if="slug==='subscription'&& singleSubs === 'all'"
+                              :userId="userId"></account-subscription>
+        <single-subscription v-if="slug==='subscription' && singleSubs!=='all' " :userId="userId"
+                             :subId="singleSubs"></single-subscription>
     </div>
 </template>
 
 <script>
 export default {
-    name: "Account"
+    name: "Account",
+    props: ['param'],
+    data() {
+        return {
+            slug: null,
+            singleSubs: null,
+            userId: null,
+        };
+    },
+    mounted() {
+        // this.showPreloader()
+        console.log(this.param)
+        this.slug = this.param['slug']
+        this.singleSubs = this.param['subId']
+        this.userId = this.param['auth_token']
+    },
+    created() {
+        //
+    },
+    methods: {}
 }
 </script>
 

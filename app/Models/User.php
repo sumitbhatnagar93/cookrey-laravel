@@ -39,4 +39,9 @@ class User extends Model
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function usersMeta()
+    {
+        return $this->hasOne(UserMeta::class, 'user_email', 'email');
+    }
 }
