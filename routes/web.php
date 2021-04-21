@@ -72,7 +72,8 @@ Route::get('order-detail/{orderID}/', 'Api\v1\vendor\AddFoodService@orderDetail'
 Route::get('order-confirm', 'Api\v1\vendor\AddFoodService@orderConfirm')->middleware('auth');
 Route::get('fetch-payment/{paymentID}', 'Api\v1\vendor\AddFoodService@fetchPayment')->middleware('auth');
 
-Route::get('account/{slug}/{subId}', 'Api\v1\Auth\Users@userAccount')->middleware('auth');
+Route::get('account/{slug}/{subId?}', 'Api\v1\Auth\Users@userAccount')
+    ->middleware('auth')->name('account');
 Route::get('user/{id}', 'Api\v1\Auth\Users@getUserById')->middleware('auth');
 
 

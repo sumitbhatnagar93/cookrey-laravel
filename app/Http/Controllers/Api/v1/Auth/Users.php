@@ -30,13 +30,28 @@ class Users extends Controller
 
     public function getSingleSubscriptionById($userId, $subId)
     {
-        $userSubscription = UserSubscription::where(['userId'=>$userId,'id'=>$subId])->first();
-        return response()->json($userSubscription, 200);
+        $userSubscription = UserSubscription::where(['userId' => $userId, 'id' => $subId])->first();
+        if ($userSubscription) {
+            return response()->json($userSubscription, 200);
+        } else {
+            return response()->json(['invalid data'], 500);
+        }
     }
 
     public function userAccount($slug, $subId = '')
     {
-        return view('pages/account', ['slug' => $slug, 'subId' => $subId]);
+        $menu = [
+            ['url' => route('account', 'profile'),
+                'slug' => 'profile',
+                'name' => 'Profile'],
+            ['url' => route('account', 'order'),
+                'slug' => 'order',
+                'name' => 'Orders'],
+            ['url' => route('account', ['subscription', 'all']),
+                'slug' => 'subscription',
+                'name' => 'Your Subscription'],
+        ];
+        return view('pages/account', ['slug' => $slug, 'subId' => $subId, 'menu' => $menu]);
     }
 
     public function getUserById($id)

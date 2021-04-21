@@ -7810,7 +7810,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "account-profile",
@@ -7998,13 +7997,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "account-sidebar"
+  name: "account-sidebar",
+  props: ['menu', 'slug'],
+  data: function data() {
+    return {};
+  },
+  mounted: function mounted() {
+    // this.showPreloader()
+    console.log(this.menu);
+  },
+  created: function created() {//
+  },
+  methods: {}
 });
 
 /***/ }),
@@ -9016,6 +9021,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         _this.loader.hide();
 
         console.log(er);
+        window.location = '/';
       });
     },
     getMiddleDates: function getMiddleDates(startDate, endDate) {
@@ -78001,7 +78007,7 @@ var render = function() {
     _c("div", { staticClass: "container" }, [
       _c("h2", { staticClass: "CK-center-title" }, [_vm._v("My Orders")]),
       _vm._v(" "),
-      _c("table", { staticClass: "table table-bordered" }, [
+      _c("table", { staticClass: "bg-light shadow-lg table table-bordered" }, [
         _vm._m(0),
         _vm._v(" "),
         _c(
@@ -78116,9 +78122,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("h1", [_vm._v("profile vue")]),
-    _vm._v(" "),
-    _c("div", { staticClass: "container CK-user-account mt-3" }, [
+    _c("div", { staticClass: "container CK-user-account" }, [
       _c("h2", { staticClass: "text-center CK-center-title" }, [
         _vm._v("My Account")
       ]),
@@ -78335,7 +78339,7 @@ var render = function() {
         _vm._v("My All Subscriptions")
       ]),
       _vm._v(" "),
-      _c("table", { staticClass: "table table-bordered" }, [
+      _c("table", { staticClass: "bg-light shadow-lg table table-bordered" }, [
         _vm._m(0),
         _vm._v(" "),
         _c(
@@ -78435,67 +78439,55 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", { staticClass: "container" }, [
-        _c("div", { staticClass: "card" }, [
-          _c(
-            "nav",
-            { staticClass: "navbar navbar-expand-lg navbar-light bg-light" },
-            [
-              _c(
-                "div",
-                {
-                  staticClass: "collapse navbar-collapse",
-                  attrs: { id: "navbarSupportedContent" }
-                },
-                [
-                  _c("ul", { staticClass: "nav flex-column" }, [
-                    _c("li", { staticClass: "nav-item" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "nav-link active",
-                          attrs: { href: "profile" }
-                        },
-                        [_vm._v("Profile")]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "nav-item" }, [
-                      _c(
-                        "a",
-                        { staticClass: "nav-link", attrs: { href: "order" } },
-                        [_vm._v("Orders")]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "nav-item" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "nav-link",
-                          attrs: { href: "/account/subscription/all" }
-                        },
-                        [_vm._v("Your Subscriptions")]
-                      )
-                    ])
-                  ])
-                ]
-              )
-            ]
-          )
-        ])
+  return _c("div", [
+    _c("div", { staticClass: "container CK-acc-menu" }, [
+      _c("div", { staticClass: "card" }, [
+        _c(
+          "nav",
+          { staticClass: "navbar navbar-expand-lg navbar-light bg-dark" },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "collapse navbar-collapse",
+                attrs: { id: "navbarSupportedContent" }
+              },
+              [
+                _c(
+                  "ul",
+                  { staticClass: "nav flex-column" },
+                  _vm._l(_vm.menu, function(item) {
+                    return _c(
+                      "li",
+                      {
+                        class:
+                          item.slug === _vm.slug
+                            ? "nav-item active"
+                            : "nav-item"
+                      },
+                      [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "nav-link",
+                            attrs: { href: item.url }
+                          },
+                          [_vm._v(_vm._s(item.name))]
+                        )
+                      ]
+                    )
+                  }),
+                  0
+                )
+              ]
+            )
+          ]
+        )
       ])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 

@@ -103,6 +103,7 @@ export default {
                 (er) => {
                     this.loader.hide()
                     console.log(er)
+                    window.location = '/'
                 })
         },
 

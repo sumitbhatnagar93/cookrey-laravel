@@ -1,7 +1,6 @@
 <template>
     <div>
-        <h1>profile vue</h1>
-        <div class="container CK-user-account mt-3">
+        <div class="container CK-user-account">
             <h2 class="text-center CK-center-title">My Account</h2>
             <div class="row">
                 <div class="card profile-card">

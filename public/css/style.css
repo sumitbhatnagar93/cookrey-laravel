@@ -298,6 +298,7 @@ section .CKHM-areas a.inline-list {
 h2.CK-center-title {
     position: relative;
     text-align: center;
+    margin-bottom: 25px;
 }
 
 h2.CK-center-title:after {
@@ -932,11 +933,28 @@ ul.box-items li:not(:last-of-type):after {
     font-weight: 700;
 }
 .CK-user-account .profile-card{
-    width: 700px;
-    margin:0 auto;
     padding: 25px;
 }
 .CK-user-account .profile-card textarea{
     width: 100%;
     border-color: #ccc;
+}
+
+.CK-acc-menu .card{
+    margin-top: 57px;
+}
+.CK-acc-menu ul.nav.flex-column{
+    width: 100%;
+}
+.CK-acc-menu ul.nav.flex-column li.nav-item.active {
+    background-color: #3f9ae5;
+}
+.CK-acc-menu ul.nav.flex-column li.nav-item a{
+    color:#fff;
+    font-weight: 700;
+}
+
+.container.mw-100{
+    max-width: 100% !important;
+    padding: 40px;
 }

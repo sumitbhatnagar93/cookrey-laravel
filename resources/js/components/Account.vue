@@ -2,7 +2,7 @@
     <div>
         <account-profile v-if="slug==='profile'" :userId="userId"></account-profile>
         <account-order v-if="slug==='order'" :userId="userId"></account-order>
-        <account-subscription v-if="slug==='subscription'&& singleSubs === 'all'"
+        <account-subscription v-if="slug==='subscription' && singleSubs === 'all'"
                               :userId="userId"></account-subscription>
         <single-subscription v-if="slug==='subscription' && singleSubs!=='all' " :userId="userId"
                              :subId="singleSubs"></single-subscription>

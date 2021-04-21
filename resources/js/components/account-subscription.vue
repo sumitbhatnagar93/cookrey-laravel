@@ -2,7 +2,7 @@
     <div>
         <div class="container">
             <h2 class="CK-center-title">My All Subscriptions</h2>
-            <table class="table table-bordered">
+            <table class="bg-light shadow-lg table table-bordered">
                 <thead>
                 <tr>
                     <th>Sub ID</th>
