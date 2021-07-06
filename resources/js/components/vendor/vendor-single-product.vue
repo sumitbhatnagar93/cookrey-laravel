@@ -72,7 +72,7 @@
 
 <script>
 export default {
-    name: "TiffinComponent",
+    name: "vendor-single-product",
     data() {
         return {
             productType: 'simple',

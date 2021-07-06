@@ -287,7 +287,7 @@ class AddFoodService extends Controller
         $data = Order::where([['order_id', '=', $id]])->with('subscription')->get()->toArray();
         //  $data = DB::table('orders')->where('order_id', $id)->get();
         if (!empty($data)) {
-            $vendorData = Service::where([['provider_id','=', $data[0]['vendorId']]])->get()->toArray();
+            $vendorData = Service::where([['provider_id', '=', $data[0]['vendorId']]])->get()->toArray();
             $data[0]['vendor_name'] = $vendorData[0]['business_name'];
             $data[0]['vendor_address'] = $vendorData[0]['business_address'];
             return response()->json($data);
@@ -299,6 +299,16 @@ class AddFoodService extends Controller
     public function getOrderByUserId($id)
     {
         $data = Order::where([['userId', '=', $id]])->with('product')->get();
+        if (!empty($data)) {
+            return response()->json($data);
+        } else {
+            return response()->json(["message" => "Something went wrong"]);
+        }
+    }
+
+    public function getOrderByVendorId($id)
+    {
+        $data = Order::where([['vendorId', '=', $id]])->with('product')->get();
         if (!empty($data)) {
             return response()->json($data);
         } else {
@@ -386,4 +396,53 @@ class AddFoodService extends Controller
         $payment = $api->payment->fetch($paymentID);
         return $payment;
     }
+
+    public function searchVendor($vendorLike)
+    {
+        $data = Service::where([['business_name', 'like', '%' . $vendorLike . '%']])->get();
+        if (!empty($data)) {
+            return response()->json($data);
+        } else {
+            return response()->json(["message" => "Something went wrong"]);
+        }
+    }
+
+
+    public function vendors($slug, $unique = '')
+    {
+        $menu = [
+            ['url' => route('vendor', 'profile'),
+                'slug' => 'profile',
+                'name' => 'Profile'],
+            ['url' => route('vendor', 'orders'),
+                'slug' => 'orders',
+                'name' => 'Orders'],
+            ['url' => route('vendor', ['products', 'all']),
+                'slug' => 'products',
+                'name' => 'Products'],
+            ['url' => route('vendor', 'subscriptions'),
+                'slug' => 'subscriptions',
+                'name' => 'Subscriptions'],
+        ];
+        return view('vendors/vendor', ['slug' => $slug, 'unique' => $unique, 'menu' => $menu]);
+    }
+
+    public function getVendorProfileById($id)
+    {
+        $data = Service::where([['user_id', '=', $id]])->get();
+        return response()->json($data);
+    }
+
+    public function getAllSubByVendorId($providerId)
+    {
+        $userSubscription = UserSubscription::where('vendorId', $providerId)->with('product')->get();
+        return response()->json($userSubscription, 200);
+    }
+
+    public function singleSubView($subId)
+    {
+        $userSubscription = UserSubscription::where('id', $subId)->with('product')->get();
+        return view('vendors/single-subscription', ['userSubscription' => $userSubscription]);
+    }
 }
+

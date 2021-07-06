@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Api\v1\vendor;
 
 use App\Http\Controllers\Controller;
+use App\Models\Service;
+use App\Models\Tiffin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use function Sodium\add;
 
@@ -17,7 +20,7 @@ class Product extends Controller
     public function __construct()
     {
         //Auth layer for product pages
-        //$this->middleware('auth');
+        $this->middleware('auth');
         $this->middleware('cors');
     }
 
@@ -28,9 +31,10 @@ class Product extends Controller
         return view('vendors/add-product', $data);
     }
 
-    public function addSubscriptionProductView()
+    public function updateProductView($productId)
     {
-        return view('vendors/add-product', ['productType' => 'subscription']);
+        $data = Service::where('user_id', Auth::id())->get()->toArray();
+        return view('vendors/add-product', ['productID' => $productId, 'vendorID' => $data[0]['provider_id']]);
     }
 
     public function onProductSubmit(Request $request)
@@ -98,9 +102,9 @@ class Product extends Controller
 //        return response()->json($extra);
     }
 
-    public function getProductById($providerId)
+    public function getProductByVendorId($providerId)
     {
-        $data = DB::table('product')->where('provider_id', $providerId)->get();
+        $data = Tiffin::where('vendor_id', $providerId)->get();
         if ($data) {
             return response()->json($data, 200);
         } else {
@@ -120,7 +124,7 @@ class Product extends Controller
 
     public function getSingleProductById($productID)
     {
-        $data = DB::table('product')->where('id', $productID)->get();
+        $data = DB::table('tiffins')->where('id', $productID)->get();
         if ($data) {
             return response()->json($data, 200);
         } else {
@@ -128,20 +132,31 @@ class Product extends Controller
         }
     }
 
+    public function updateProductInfo(Request $request)
+    {
+        $data = $request->all();
+        $updatedData = $data;
+        $updatedData['in_the_box'] = json_encode($data['in_the_box']);
+        $product = Tiffin::where(['id' => $data['id']])->update($updatedData);
+        if ($product) {
+            return response()->json(['responseType' => 'success', 'message' => 'product Updated!!']);
+        } else {
+            return response()->json(['responseType' => 'error', 'message' => 'Something went wrong!']);
+        }
+    }
 
     public function onTiffinProductSubmit(Request $request)
     {
-            $data = $request->all();
-            $temp = $data['in_the_box'];
-            unset($data['in_the_box']);
-            $data['in_the_box'] = json_encode($temp);
-            dd($data);
-            $postedData = DB::table('tiffins')->insert($data);
-            if ($postedData) {
-                return response()->json($data);
-            } else {
-                return response()->json(["message" => "Something went wrong"], 500);
-            }
+        $data = $request->all();
+        $temp = $data['in_the_box'];
+        unset($data['in_the_box']);
+        $data['in_the_box'] = json_encode($temp);
+        $postedData = DB::table('tiffins')->insert($data);
+        if ($postedData) {
+            return response()->json($data);
+        } else {
+            return response()->json(["message" => "Something went wrong"], 500);
+        }
     }
 
 }

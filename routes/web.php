@@ -25,10 +25,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 /**
  * Product Related Routes
  */
+Route::get('ck-vendor/subscription/{subId}', 'Api\v1\vendor\AddFoodService@singleSubView');
 Route::get('/add-product', 'Api\v1\vendor\Product@addProductView');
-Route::get('/add-subscription-product', 'Api\v1\vendor\Product@addSubscriptionProductView');
-Route::get('getProductById/{providerId}', 'Api\v1\vendor\Product@getProductById');
+Route::get('/update-product/{productID}', 'Api\v1\vendor\Product@updateProductView');
+Route::post('/update-product-info/', 'Api\v1\vendor\Product@updateProductInfo');
+Route::get('getProductByVendorId/{providerId}', 'Api\v1\vendor\Product@getProductByVendorId');
 Route::get('getSubsProductById/{providerId}', 'Api\v1\vendor\Product@getSubsProductById');
+Route::get('getAllSubByVendorId/{providerId}', 'Api\v1\vendor\AddFoodService@getAllSubByVendorId');
 Route::get('getSingleProductById/{productId}', 'Api\v1\vendor\Product@getSingleProductById');
 Route::post('/upload-product', 'Api\v1\vendor\Product@onProductSubmit');
 Route::post('/upload-tiffin', 'Api\v1\vendor\Product@onTiffinProductSubmit');
@@ -51,6 +54,7 @@ Route::post('cancelSubsDate', 'Api\v1\vendor\AddFoodService@cancelSubsDate');
 Route::post('addOrder', 'Api\v1\vendor\AddFoodService@createOrder');
 Route::get('getOrderById/{id}','Api\v1\vendor\AddFoodService@getOrderById');
 Route::get('getOrderByUserId/{id}','Api\v1\vendor\AddFoodService@getOrderByUserId');
+Route::get('getOrderByVendorId/{id}','Api\v1\vendor\AddFoodService@getOrderByVendorId');
 
 Route::get('vendors', 'Api\v1\vendor\AddFoodService@viewVendors');
 Route::get('getVendors', 'Api\v1\vendor\AddFoodService@getVendors');
@@ -62,7 +66,7 @@ Route::get('getSingleSubscriptionById/{userId}/{subId}', 'Api\v1\Auth\Users@getS
 Route::post('add-rating','Api\v1\vendor\AddFoodService@addVendorRating');
 
 // web pages front-end
-Route::get('services', 'Api\v1\vendor\AddFoodService@viewVendorsOnFront');
+Route::get('services', 'Api\v1\vendor\AddFoodService@viewVendorsOnFront')->name('service');
 Route::get('vendor/{id}', 'Api\v1\vendor\AddFoodService@viewSingleVendorsOnFront');
 
 Route::post('test-upload', 'Api\v1\vendor\AddFoodService@testUpload');
@@ -74,6 +78,14 @@ Route::get('fetch-payment/{paymentID}', 'Api\v1\vendor\AddFoodService@fetchPayme
 
 Route::get('account/{slug}/{subId?}', 'Api\v1\Auth\Users@userAccount')
     ->middleware('auth')->name('account');
+
+Route::get('ck-vendor/{slug}/{unique?}', 'Api\v1\vendor\AddFoodService@vendors')
+    ->middleware('auth')->name('vendor');
+
+
 Route::get('user/{id}', 'Api\v1\Auth\Users@getUserById')->middleware('auth');
 
+Route::get('searchVendor/{vendorLike}', 'Api\v1\vendor\AddFoodService@searchVendor');
+
+Route::get('vendor/getVendorById/{id}', 'Api\v1\vendor\AddFoodService@getVendorProfileById');
 

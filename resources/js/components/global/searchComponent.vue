@@ -17,13 +17,19 @@
                 </div>
                 <div class="sc-VJcYb dtzfDv"></div>
                 <div class="sc-18n4g8v-0 gAhmYY sc-kUaPvJ dPcESM">
-                    <input value=""
+                    <input v-model="vendorLike" @keyup="onSearch"
                            placeholder="Search for your favourite vendor.."
                            class="sc-fONwsr lbMFPq">
                     <div class="sc-jVODtj hjtbhk">
                         <i class="fa fa-search" style="font-size: 23px;color: dimgrey;"></i>
                     </div>
-                    <div class="sc-hGoxap ckBgCS"></div>
+                    <div class="sc-hGoxap ckBgCS" v-bind:class="showSearch">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item" v-for="vendor of vendors">
+                                <a v-bind:href="'/vendor/'+vendor.provider_id">{{ vendor.business_name }}</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -41,6 +47,9 @@ export default {
     name: "searchComponent",
     data() {
         return {
+            vendorLike: null,
+            vendors: [],
+            showSearch:null,
             address: '',
             location: [],
             autocomplete: {input: ''},
@@ -120,6 +129,22 @@ export default {
         //             // });
         //         });
         // }
+        onSearch() {
+            axios.get('searchVendor/' + this.vendorLike).then((res) => {
+                console.log(res.data.length)
+                if(res.data.length){
+                    this.vendors = res.data
+                    this.showSearch = 'd-block'
+                }else{
+                    this.vendors = []
+                    this.showSearch = 'd-none'
+                }
+            }, (er) => {
+                console.log(er)
+                this.vendors = []
+                this.showSearch = 'd-none'
+            })
+        }
     },
 }
 </script>

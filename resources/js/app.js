@@ -51,15 +51,24 @@ Vue.component('account-profile',require('./components/account-profile').default)
 Vue.component('account-order',require('./components/account-order').default);
 Vue.component('account-subscription',require('./components/account-subscription').default);
 Vue.component('single-subscription',require('./components/single-subscription').default);
+Vue.component('vendor-single-subscription',require('./components/vendor/single-subscription').default);
 /**
  * Vendor related templates
  */
-Vue.component('add-product', require('./components/vendor/AddProductComponent.vue').default);
-Vue.component('add-subscription-product', require('./components/vendor/TiffinComponent.vue').default);
+Vue.component('update-product', require('./components/vendor/update-product.vue').default);
 Vue.component('add-service', require('./components/vendor/AddFoodService.vue').default);
 Vue.component('cookrey-vendors', require('./components/vendor/AllVendors.vue').default);
 Vue.component('cookrey-vendors-web', require('./components/vendorComponent.vue').default);
 Vue.component('single-vendor-web', require('./components/singleVendorComponent.vue').default);
+
+//vendor account components
+Vue.component('vendor',require('./components/vendor/Vendor').default);
+Vue.component('vendor-sidebar', require('./components/vendor/vendor-sidebar.vue').default);
+Vue.component('vendor-single-product', require('./components/vendor/vendor-single-product.vue').default);
+Vue.component('vendor-profile', require('./components/vendor/vendor-profile.vue').default);
+Vue.component('vendor-products', require('./components/vendor/vendor-products.vue').default);
+Vue.component('vendor-orders', require('./components/vendor/vendor-orders.vue').default);
+Vue.component('vendor-subscriptions', require('./components/vendor/vendor-subscriptions.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

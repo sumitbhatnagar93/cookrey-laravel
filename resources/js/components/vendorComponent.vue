@@ -9,8 +9,10 @@
             <div class="row">
                 <div v-for="(vendor,index) of cookreyVendors" class="card CKRW-item">
                     <div class="mad-entity-media">
+                        <img v-bind:src="'/images/'+vendor.business_image"
+                             alt="restaurant-placeholder" v-if="vendor.business_image === 'placeholder.jpg'">
                         <img v-bind:src="'/images/restaurants/'+vendor.provider_id+'/'+vendor.business_image"
-                             alt="restaurant">
+                             alt="restaurant" v-if="vendor.business_image !== 'placeholder.jpg'">
                     </div>
                     <div class="meta-info m-3">
                         <h3>{{ vendor.business_name }}</h3>

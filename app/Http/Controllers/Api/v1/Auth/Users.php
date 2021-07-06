@@ -50,6 +50,9 @@ class Users extends Controller
             ['url' => route('account', ['subscription', 'all']),
                 'slug' => 'subscription',
                 'name' => 'Your Subscription'],
+            ['url' => route('account', 'favorite'),
+                'slug' => 'favorite',
+                'name' => 'Your Favorites'],
         ];
         return view('pages/account', ['slug' => $slug, 'subId' => $subId, 'menu' => $menu]);
     }

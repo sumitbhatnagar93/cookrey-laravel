@@ -17,6 +17,7 @@ google search
     position: relative;
     z-index: 999;
     color: #fff;
+    background: #cab871;
 }
 
 /**
@@ -37,8 +38,9 @@ google search
 inner pages menu link css
  */
 .CK-main-nav.navbar-light .navbar-nav .nav-link {
-    color: rgb(125 122 122 / 90%);
+    color: rgb(253 253 253 / 90%);
     font-weight: 700;
+    font-size: 17px;
 }
 
 .CK-main-nav.navbar-light .navbar-nav .nav-link:hover,
@@ -338,6 +340,7 @@ div.CKSV-main .card .mad-entity-media img {
 
 div.CKSV-main .card {
     max-width: 417px;
+    position: inherit;
 }
 
 @media (min-width: 1200px) {
@@ -497,13 +500,13 @@ Search component css
     }
 
     .ckBgCS {
+        display: none;
         max-height: 60rem;
         border-radius: 0.8rem;
         position: absolute;
         overflow: auto;
-        top: 3rem;
-        visibility: hidden;
-        opacity: 0;
+        top: 4rem;
+        opacity: 9999;
         border: 1px solid rgb(207, 207, 207);
         box-shadow: rgba(28, 28, 28, 0.08) 0px 2px 8px;
         transition: opacity 0.25s ease 0s, top 0.25s ease 0s;

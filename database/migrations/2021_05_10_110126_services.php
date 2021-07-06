@@ -19,6 +19,7 @@ class Services extends Migration
         Schema::create('services', function (Blueprint $table) {
             $table->id();
             $table->string('provider_id', 255)->unique();
+            $table->integer('user_id')->index();
             $table->string('business_name')->nullable(true);
             $table->string('business_owner_name')->nullable(true);
             $table->string('business_owner_email')->nullable(true);

@@ -1,11 +1,11 @@
 @extends('layouts.app')
 @section('content')
     <div id="app">
-        @if(isset($productType))
-            <add-subscription-product></add-subscription-product>
+        @if(isset($productID))
+            <update-product
+                :param="{{ json_encode( ['productID' => $productID, 'vendorID' => $vendorID]) }}"></update-product>
         @else
-            <add-product></add-product>
+            <vendor-single-product></vendor-single-product>
         @endif
     </div>
 @endsection
-

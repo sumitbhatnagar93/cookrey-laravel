@@ -50,7 +50,7 @@
                         <a href="#" class="nav-link"><i class="fas fa-map-marker-alt"></i></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="services">{{ __('Vendors') }}</a>
+                        <a class="nav-link" href="{{route('service')}}">{{ __('Vendors') }}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#about">{{ __('About Us') }}</a>
